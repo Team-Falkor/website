@@ -20,7 +20,7 @@ const HeroComponent = () => {
         <HeroButtons />
       </div>
 
-      <Tilt tiltReverse={true} tiltMaxAngleX={5} tiltMaxAngleY={5}>
+      <Tilt tiltReverse={true} tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.02}>
         <div className="flex max-w-2xl mx-auto mt-16 sm:mt-20 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
           <div className="flex-none max-w-3xl sm:max-w-5xl lg:max-w-none">
             <img
