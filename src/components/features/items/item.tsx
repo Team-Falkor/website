@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC } from "react";
 
 type FeatureItemProps = {
   title: string;
@@ -9,19 +9,25 @@ type FeatureItemProps = {
   link?: string;
 };
 
-const FeatureItem: FC<FeatureItemProps> = ({ children, icon, title, isAvailable, link }) => {
+const FeatureItem: FC<FeatureItemProps> = ({
+  children,
+  icon,
+  title,
+  isAvailable,
+  link,
+}) => {
   return (
-    <div className="relative flex gap-4 pl-9">
+    <div className="relative flex gap-4 p-6 hover:bg-secondary-foreground/5 rounded-">
       <div className="text-purple-400">{icon}</div>
       <div className="flex flex-col gap-2">
         <div className="inline text-lg font-semibold text-white">{title}</div>
         <dd className="h-24 text-muted-foreground">{children}</dd>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 mt-2.5 sm:mt-0">
           {isAvailable ? (
             <a
               href={link}
-              target={'_blank'}
+              target={"_blank"}
               rel="noopener noreferrer"
               className="inline-flex items-center px-2 py-1 mt-2 text-xs font-medium text-purple-400 rounded-md bg-purple-500/10 ring-purple-500/20 ring-1 ring-inset"
             >
