@@ -49,9 +49,9 @@ npm run lint
 ## Project Structure
 
 - `src/`: Main source code.
-  - `components/`: Reusable React components.
-  - `pages/`: Page components for each route.
   - `assets/`: Static files like images and fonts.
+  - `components/`: Reusable React components.
+  - `routes/`: Route components for each route.
   - `styles/`: Tailwind configuration and global CSS files.
   
 - `public/`: Public static assets.
