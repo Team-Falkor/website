@@ -12,7 +12,7 @@ This repository contains the source code for the Falkor website, built using **R
 
 ### Prerequisites
 - Node.js v16+
-- npm or yarn
+- npm, yarn, or bun (my personal pick)
 
 ### Installation
 
