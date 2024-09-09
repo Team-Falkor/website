@@ -1,30 +1,68 @@
-# React + TypeScript + Vite
+# Falkor Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the source code for the Falkor website, built using **React** and **TypeScript**, with **Vite** for development and build processes.
 
-Currently, two official plugins are available:
+## Features
+- **Vite** for fast, efficient development.
+- **TypeScript** for static typing and improved developer experience.
+- **TailwindCSS** for styling.
+- **ESLint** for code quality and consistency.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
 
-## Expanding the ESLint configuration
+### Prerequisites
+- Node.js v16+
+- npm or yarn
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Installation
 
-- Configure the top-level `parserOptions` property like this:
+Clone the repository and install dependencies:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+git clone https://github.com/Team-Falkor/website
+cd website
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Running the Project
+
+To start the development server:
+
+```bash
+npm run dev
+```
+
+To build for production:
+
+```bash
+npm run build
+```
+
+### Linting
+
+Run ESLint to ensure code consistency:
+
+```bash
+npm run lint
+```
+
+## Project Structure
+
+- `src/`: Main source code.
+  - `components/`: Reusable React components.
+  - `pages/`: Page components for each route.
+  - `assets/`: Static files like images and fonts.
+  - `styles/`: Tailwind configuration and global CSS files.
+  
+- `public/`: Public static assets.
+- `vite.config.ts`: Vite configuration for build and development.
+- `tsconfig.json`: TypeScript configuration.
+- `tailwind.config.js`: TailwindCSS configuration.
+
+## Contributing
+
+We welcome contributions! Please create an issue or open a pull request.
+
+## License
+
+This project is licensed under the MIT License.
