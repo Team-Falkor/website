@@ -6,7 +6,7 @@ const HeroComponent = () => {
   return (
     <div className="px-6 pt-10 pb-24 mx-auto max-w-7xl sm:pb-40 lg:flex lg:px-8 lg:pt-32">
       <div className="flex-shrink-0 max-w-2xl mx-auto lg:mx-0 lg:max-w-xl lg:pt-8">
-        <img src="/icon.png" className="mb-6 size-12" />
+        <img src="/icon.png" className="mb-6 size-16" />
 
         <HeroBadges />
         <h1 className="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">
