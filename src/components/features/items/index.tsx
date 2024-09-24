@@ -10,7 +10,7 @@ import {
 
 const FeaturesItems = () => {
   return (
-    <div className="px-6 mx-auto mt-16 max-w-7xl sm:mt-20 md:mt-24 lg:px-8">
+    <div className="px-6 mx-auto mt-16 max-w-7xl sm:mt-24 lg:px-8">
       <dl className="grid max-w-2xl grid-cols-1 mx-auto text-base leading-7 text-gray-300 gap-x-6 gap-y-10 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
         <FeatureItem icon={<Users />} title="Plugins by Community." isAvailable>
           Enhance your gaming experience with plugins created by our community,
@@ -26,7 +26,7 @@ const FeaturesItems = () => {
           icon={<Code2 />}
           title="Open Source."
           isAvailable
-          link="https://github.com/team-falkor/AppV2"
+          link="https://github.com/team-falkor/App"
         >
           Dive into a platform that thrives on collaboration and innovation,
           powered by an open-source ethos.
