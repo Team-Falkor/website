@@ -16,7 +16,7 @@ const FeatureItem: FC<FeatureItemProps> = ({
   link,
 }) => {
   return (
-    <div className="relative flex flex-col h-full p-6 hover:bg-secondary-foreground/5 rounded-lg">
+    <div className="relative flex flex-col h-full p-6 hover:bg-muted-foreground/10 rounded-lg">
       <div className="flex items-start gap-4">
         <div className="text-purple-400">{icon}</div>
         <div className="text-lg font-semibold text-white">{title}</div>

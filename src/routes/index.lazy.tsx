@@ -1,23 +1,27 @@
-import Features from '@/components/features';
-import HeroComponent from '@/components/hero';
-import QuickInfo from '@/components/quickinfo';
-import SvgBG from '@/components/svgBG';
-import { createLazyFileRoute } from '@tanstack/react-router';
+import Features from "@/components/features";
+import Footer from "@/components/footer";
+import HeroComponent from "@/components/hero";
+import QuickInfo from "@/components/quickinfo";
+import SvgBG from "@/components/svgBG";
+import { createLazyFileRoute } from "@tanstack/react-router";
 
-export const Route = createLazyFileRoute('/')({
+export const Route = createLazyFileRoute("/")({
   component: Index,
 });
 
 function Index() {
   return (
-    <div className="p-2">
-      <SvgBG />
+    <div>
+      <div className="p-2">
+        <SvgBG />
 
-      <HeroComponent />
+        <HeroComponent />
 
-      <QuickInfo />
+        <QuickInfo />
 
-      <Features />
+        <Features />
+      </div>
+      <Footer />
     </div>
   );
 }
