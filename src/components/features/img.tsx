@@ -1,4 +1,4 @@
-import { cn } from "@/utils/utils.ts";
+import { cn } from "@/utils";
 import { HTMLAttributes } from "react";
 
 interface Props extends HTMLAttributes<HTMLImageElement> {

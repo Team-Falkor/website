@@ -14,7 +14,7 @@ const HeroButtons = () => {
           variant: "ghost",
           className: "items-center justify-center gap-2",
         })}
-        href="https://discord.gg/5cxfH6ak9h"
+        href={"/discord"}
       >
         Join The Discord
         <ChevronRight />

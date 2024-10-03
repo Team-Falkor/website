@@ -13,6 +13,8 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as DiscordImport } from './routes/discord'
+import { Route as GithubNameImport } from './routes/github/$name'
 
 // Create Virtual Routes
 
@@ -20,10 +22,20 @@ const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
+const DiscordRoute = DiscordImport.update({
+  path: '/discord',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const GithubNameRoute = GithubNameImport.update({
+  path: '/github/$name',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -36,6 +48,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/discord': {
+      id: '/discord'
+      path: '/discord'
+      fullPath: '/discord'
+      preLoaderRoute: typeof DiscordImport
+      parentRoute: typeof rootRoute
+    }
+    '/github/$name': {
+      id: '/github/$name'
+      path: '/github/$name'
+      fullPath: '/github/$name'
+      preLoaderRoute: typeof GithubNameImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -43,32 +69,42 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/discord': typeof DiscordRoute
+  '/github/$name': typeof GithubNameRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
+  '/discord': typeof DiscordRoute
+  '/github/$name': typeof GithubNameRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
+  '/discord': typeof DiscordRoute
+  '/github/$name': typeof GithubNameRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/discord' | '/github/$name'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/discord' | '/github/$name'
+  id: '__root__' | '/' | '/discord' | '/github/$name'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  DiscordRoute: typeof DiscordRoute
+  GithubNameRoute: typeof GithubNameRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  DiscordRoute: DiscordRoute,
+  GithubNameRoute: GithubNameRoute,
 }
 
 export const routeTree = rootRoute
@@ -83,11 +119,19 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/discord",
+        "/github/$name"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/discord": {
+      "filePath": "discord.tsx"
+    },
+    "/github/$name": {
+      "filePath": "github/$name.tsx"
     }
   }
 }

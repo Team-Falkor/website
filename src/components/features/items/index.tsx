@@ -26,7 +26,7 @@ const FeaturesItems = () => {
           icon={<Code2 />}
           title="Open Source."
           isAvailable
-          link="https://github.com/team-falkor/App"
+          link={"/github/app"}
         >
           Dive into a platform that thrives on collaboration and innovation,
           powered by an open-source ethos.

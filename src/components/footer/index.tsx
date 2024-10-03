@@ -19,7 +19,7 @@ const Footer = () => {
         <a
           className="size-5 transition-all hover:opacity-50"
           target="_blank"
-          href="https://github.com/team-falkor/website"
+          href={"/github/website"}
         >
           <FaGithub className="size-full" />
         </a>
@@ -27,7 +27,7 @@ const Footer = () => {
         <a
           className="size-5 transition-all hover:opacity-50"
           target="_blank"
-          href="https://discord.gg/5cxfH6ak9h"
+          href={"/discord"}
         >
           <FaDiscord className="size-full" />
         </a>
