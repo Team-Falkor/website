@@ -13,8 +13,9 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as DiscordImport } from './routes/discord'
+import { Route as DiscordIndexImport } from './routes/discord/index'
 import { Route as GithubNameImport } from './routes/github/$name'
+import { Route as DiscordFlwImport } from './routes/discord/flw'
 
 // Create Virtual Routes
 
@@ -22,18 +23,23 @@ const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
-const DiscordRoute = DiscordImport.update({
-  path: '/discord',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
+const DiscordIndexRoute = DiscordIndexImport.update({
+  path: '/discord/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const GithubNameRoute = GithubNameImport.update({
   path: '/github/$name',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DiscordFlwRoute = DiscordFlwImport.update({
+  path: '/discord/flw',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -48,11 +54,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/discord': {
-      id: '/discord'
-      path: '/discord'
-      fullPath: '/discord'
-      preLoaderRoute: typeof DiscordImport
+    '/discord/flw': {
+      id: '/discord/flw'
+      path: '/discord/flw'
+      fullPath: '/discord/flw'
+      preLoaderRoute: typeof DiscordFlwImport
       parentRoute: typeof rootRoute
     }
     '/github/$name': {
@@ -62,6 +68,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GithubNameImport
       parentRoute: typeof rootRoute
     }
+    '/discord/': {
+      id: '/discord/'
+      path: '/discord'
+      fullPath: '/discord'
+      preLoaderRoute: typeof DiscordIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,42 +82,47 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
-  '/discord': typeof DiscordRoute
+  '/discord/flw': typeof DiscordFlwRoute
   '/github/$name': typeof GithubNameRoute
+  '/discord': typeof DiscordIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
-  '/discord': typeof DiscordRoute
+  '/discord/flw': typeof DiscordFlwRoute
   '/github/$name': typeof GithubNameRoute
+  '/discord': typeof DiscordIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
-  '/discord': typeof DiscordRoute
+  '/discord/flw': typeof DiscordFlwRoute
   '/github/$name': typeof GithubNameRoute
+  '/discord/': typeof DiscordIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/discord' | '/github/$name'
+  fullPaths: '/' | '/discord/flw' | '/github/$name' | '/discord'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/discord' | '/github/$name'
-  id: '__root__' | '/' | '/discord' | '/github/$name'
+  to: '/' | '/discord/flw' | '/github/$name' | '/discord'
+  id: '__root__' | '/' | '/discord/flw' | '/github/$name' | '/discord/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  DiscordRoute: typeof DiscordRoute
+  DiscordFlwRoute: typeof DiscordFlwRoute
   GithubNameRoute: typeof GithubNameRoute
+  DiscordIndexRoute: typeof DiscordIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  DiscordRoute: DiscordRoute,
+  DiscordFlwRoute: DiscordFlwRoute,
   GithubNameRoute: GithubNameRoute,
+  DiscordIndexRoute: DiscordIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -120,18 +138,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/discord",
-        "/github/$name"
+        "/discord/flw",
+        "/github/$name",
+        "/discord/"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
     },
-    "/discord": {
-      "filePath": "discord.tsx"
+    "/discord/flw": {
+      "filePath": "discord/flw.tsx"
     },
     "/github/$name": {
       "filePath": "github/$name.tsx"
+    },
+    "/discord/": {
+      "filePath": "discord/index.tsx"
     }
   }
 }
