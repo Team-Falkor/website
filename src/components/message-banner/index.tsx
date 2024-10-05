@@ -6,22 +6,12 @@ const MessageBanner = () => {
   const { banner_message } = constants;
 
   useEffect(() => {
-    const alreadySeen = () => {
-      const message = localStorage.getItem("message-banner");
+    const message = localStorage.getItem("message-banner");
 
-      if (!banner_message) return setShowBanner(false);
-      if (!message) return setShowBanner(true);
-      if (message !== banner_message) {
-        setShowBanner(true);
-        localStorage.setItem("message-banner", banner_message);
-        return;
-      }
-      if (message === banner_message) return setShowBanner(false);
+    if (message === banner_message) return setShowBanner(false);
 
-      setShowBanner(true);
-    };
-
-    alreadySeen();
+    setShowBanner(!!banner_message);
+    if (banner_message) localStorage.setItem("message-banner", banner_message);
   }, [banner_message]);
 
   if (!showBanner) return null;

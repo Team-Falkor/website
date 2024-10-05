@@ -62,7 +62,7 @@ const Features = () => {
       >
         <CarouselContent>
           {images.map(({ src, alt }) => (
-            <CarouselItem>
+            <CarouselItem key={src}>
               <FeaturesImg key={src} src={src} alt={alt} />
             </CarouselItem>
           ))}
