@@ -95,7 +95,7 @@ const FaQ = () => {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="item-6">
+          <AccordionItem value="item-7">
             <AccordionTrigger>
               Do I need to be a developer to use Falkor?
             </AccordionTrigger>
