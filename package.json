@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-router": "^1.62.0",
     "@tanstack/router-devtools": "^1.62.0",

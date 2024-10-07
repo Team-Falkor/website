@@ -1,3 +1,4 @@
+import FaQ from "@/components/faq";
 import Features from "@/components/features";
 import Footer from "@/components/footer";
 import HeroComponent from "@/components/hero";
@@ -20,6 +21,8 @@ function Index() {
         <HeroComponent />
 
         <QuickInfo />
+
+        <FaQ />
 
         <Features />
       </div>
