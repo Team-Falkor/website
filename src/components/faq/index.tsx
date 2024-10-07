@@ -7,7 +7,7 @@ import {
 
 const FaQ = () => {
   return (
-    <div className="mt-24 sm:mt-40">
+    <div className="mt-24 sm:mt-40" id="frequently-asked-questions">
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
         <h1 className="text-2xl font-bold tracking-tight text-white sm:text-4xl mb-1.5">
           Frequently Asked Questions

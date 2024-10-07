@@ -37,7 +37,7 @@ const Features = () => {
   );
 
   return (
-    <div className="mt-24 sm:mt-40">
+    <div className="mt-24 sm:mt-40" id="features">
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
         <div className="max-w-2xl mx-auto sm:text-center">
           <h2 className="text-base font-semibold leading-7 text-purple-400">
