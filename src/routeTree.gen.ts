@@ -13,6 +13,8 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SignupImport } from './routes/signup'
+import { Route as LoginImport } from './routes/login'
 import { Route as DiscordIndexImport } from './routes/discord/index'
 import { Route as BlogIndexImport } from './routes/blog/index'
 import { Route as GithubNameImport } from './routes/github/$name'
@@ -25,6 +27,16 @@ import { Route as BlogIdImport } from './routes/blog/$id'
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const SignupRoute = SignupImport.update({
+  path: '/signup',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginRoute = LoginImport.update({
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
@@ -70,6 +82,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupImport
       parentRoute: typeof rootRoute
     }
     '/blog/$id': {
@@ -121,6 +147,8 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/blog/$id': typeof BlogIdRoute
   '/blog/new': typeof BlogNewRoute
   '/discord/flw': typeof DiscordFlwRoute
@@ -131,6 +159,8 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/blog/$id': typeof BlogIdRoute
   '/blog/new': typeof BlogNewRoute
   '/discord/flw': typeof DiscordFlwRoute
@@ -142,6 +172,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/blog/$id': typeof BlogIdRoute
   '/blog/new': typeof BlogNewRoute
   '/discord/flw': typeof DiscordFlwRoute
@@ -154,6 +186,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
+    | '/signup'
     | '/blog/$id'
     | '/blog/new'
     | '/discord/flw'
@@ -163,6 +197,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/login'
+    | '/signup'
     | '/blog/$id'
     | '/blog/new'
     | '/discord/flw'
@@ -172,6 +208,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/login'
+    | '/signup'
     | '/blog/$id'
     | '/blog/new'
     | '/discord/flw'
@@ -183,6 +221,8 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  LoginRoute: typeof LoginRoute
+  SignupRoute: typeof SignupRoute
   BlogIdRoute: typeof BlogIdRoute
   BlogNewRoute: typeof BlogNewRoute
   DiscordFlwRoute: typeof DiscordFlwRoute
@@ -193,6 +233,8 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  LoginRoute: LoginRoute,
+  SignupRoute: SignupRoute,
   BlogIdRoute: BlogIdRoute,
   BlogNewRoute: BlogNewRoute,
   DiscordFlwRoute: DiscordFlwRoute,
@@ -214,6 +256,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/login",
+        "/signup",
         "/blog/$id",
         "/blog/new",
         "/discord/flw",
@@ -224,6 +268,12 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/login": {
+      "filePath": "login.tsx"
+    },
+    "/signup": {
+      "filePath": "signup.tsx"
     },
     "/blog/$id": {
       "filePath": "blog/$id.tsx"
