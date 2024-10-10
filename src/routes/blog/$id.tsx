@@ -1,41 +1,27 @@
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import BlogContent from "@/features/blog/compoennts/blogContent";
+import BlogTitle from "@/features/blog/compoennts/title";
 import { createFileRoute } from "@tanstack/react-router";
+import { ThumbsDown, ThumbsUp } from "lucide-react";
 
 export const Route = createFileRoute("/blog/$id")({
   component: BlogId,
 });
 
-const code =
-  "```javascript\nconsole.log('hello world');\nconst foo = 'bar';\n```";
-
-const markdown = `A paragraph with *emphasis* and **strong importance**.
-
-> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-
-* Lists
-* [ ] todo
-* [x] done
-
-      
-![Alt text](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHZydnd6NG5ub3h3eDQ3ajQxb3NmeDJkZTcybzR3bWg5d3FkN3FoMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0ErCmOYrV5xEtfY4/giphy.webp)
-
-${code}
-
-A table:
-
-| a | b |
-| - | - |
-`;
-
+const markdown = `test`;
 function BlogId() {
   return (
-    <div className="px-4 mx-auto max-w-7xl lg:px-8 mt-20">
+    <div className="px-4 mx-auto max-w-7xl lg:px-8 mt-20 pb-10">
       {/* BLOG HEADER */}
-      <div className="flex flex-col mb-6 space-y-4 ">
-        <h1 className="text-4xl font-bold leading-tight text-primary mb-1 lg:text-5xl">
-          Blog Post Title
-        </h1>
+      <div className="flex flex-col mb-6 space-y-4 items-start">
+        {/* AUTHOR AND TIME */}
+        <div className="flex gap-2 items-center -mb-2">
+          <p className="text-sm text-gray-300">By flww at 2/2/2022</p>
+        </div>
+
+        <BlogTitle title="STEAM DECK PIRATES RETRODECK GUIDE" />
+
         {/* TAGS */}
         <div className="flex gap-3 mt-0.5">
           <Badge variant="secondary" className="bg-pink-500 text-white">
@@ -49,6 +35,22 @@ function BlogId() {
 
       {/* BLOG CONTENT */}
       <BlogContent content={markdown} />
+
+      <div className="flex justify-start py-5 gap-2">
+        <Button variant={"ghost"}>
+          <div className="flex gap-2 items-center">
+            <ThumbsUp />
+            <p>25</p>
+          </div>
+        </Button>
+
+        <Button variant={"ghost"}>
+          <div className="flex gap-2 items-center">
+            <ThumbsDown />
+            <p>1</p>
+          </div>
+        </Button>
+      </div>
     </div>
   );
 }

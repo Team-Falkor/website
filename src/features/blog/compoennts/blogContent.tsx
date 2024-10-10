@@ -1,7 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/utils";
 import Markdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
+import renarkReHyupe from "remark-rehype";
 
 interface Props {
   content: string;
@@ -14,7 +17,8 @@ const BlogContent = ({ content, className }: Props) => {
       <CardContent className={cn("py-3 min-h-24", className)}>
         <Markdown
           allowElement={() => true}
-          remarkPlugins={[remarkGfm]}
+          remarkPlugins={[remarkGfm, remarkBreaks, renarkReHyupe]}
+          rehypePlugins={[rehypeRaw]}
           components={{
             h1: ({ ...props }) => (
               <h1 className="text-3xl font-bold my-4 lg:my-6" {...props} />
@@ -23,7 +27,10 @@ const BlogContent = ({ content, className }: Props) => {
               <h2 className="text-2xl font-semibold my-3 lg:my-5" {...props} />
             ),
             p: ({ ...props }) => (
-              <p className="text-base leading-relaxed my-2" {...props} />
+              <p
+                className="text-base leading-relaxed my-2 whitespace-pre-wrap"
+                {...props}
+              />
             ),
             ul: ({ ...props }) => (
               <ul className="list-disc ml-6 space-y-1" {...props} />

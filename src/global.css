@@ -76,4 +76,20 @@
     @apply bg-background text-foreground;
     font-family: "Inter", sans-serif;
   }
+
+  ::-webkit-scrollbar {
+    @apply w-2.5 h-2.5;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted cursor-default;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/80 rounded-lg cursor-default;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground transition-all;
+  }
 }
