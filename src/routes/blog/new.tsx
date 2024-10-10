@@ -18,6 +18,8 @@ function BlogNew() {
   const [content, setContent] = useState("");
   const [tags, setTags] = useState<string[]>([]);
 
+  const maxTags = 4;
+
   // Function to handle adding a new empty tag
   const handleAddTag = () => {
     setTags([...tags, ""]); // Append a new empty tag
@@ -49,7 +51,12 @@ function BlogNew() {
           {/* NEW TAGS SECTION */}
           <div className="w-full flex items-center gap-2">
             <NewTags tags={tags} onTagChange={handleTagChange} />
-            <Button onClick={handleAddTag} variant="ghost" size="icon">
+            <Button
+              onClick={handleAddTag}
+              variant="ghost"
+              size="icon"
+              disabled={tags.length >= maxTags}
+            >
               <PlusIcon />
             </Button>
           </div>
