@@ -69,7 +69,13 @@ const BlogContent = ({ content, className }: Props) => {
               <blockquote className="mt-6 border-l-2 pl-6 italic" {...props} />
             ),
             code: ({ ...props }) => (
-              <code className="px-1 py-0.5 rounded" {...props} />
+              <code className="px-1 py-0.5 rounded bg-muted" {...props} />
+            ),
+            pre: ({ ...props }) => (
+              <pre
+                className="overflow-x-auto rounded bg-muted my-1.5 px-1 py-0.5"
+                {...props}
+              />
             ),
             table: ({ ...props }) => (
               <table className="my-6 w-full overflow-y-auto" {...props} />
