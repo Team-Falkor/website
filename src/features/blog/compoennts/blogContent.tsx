@@ -1,3 +1,9 @@
+import H1 from "@/components/typography/h1";
+import H2 from "@/components/typography/h2";
+import H3 from "@/components/typography/h3";
+import H4 from "@/components/typography/h4";
+import H5 from "@/components/typography/h5";
+import H6 from "@/components/typography/h6";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/utils";
 import Markdown from "react-markdown";
@@ -20,50 +26,20 @@ const BlogContent = ({ content, className }: Props) => {
           remarkPlugins={[remarkGfm, remarkBreaks, renarkReHyupe]}
           rehypePlugins={[rehypeRaw]}
           components={{
-            h1: ({ ...props }) => (
-              <h1
-                className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
-                {...props}
-              />
-            ),
-            h2: ({ ...props }) => (
-              <h2
-                className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0"
-                {...props}
-              />
-            ),
-            h3: ({ ...props }) => (
-              <h3
-                className="scroll-m-20 text-2xl font-semibold tracking-tight"
-                {...props}
-              />
-            ),
-            h4: ({ ...props }) => (
-              <h4
-                className="scroll-m-20 text-xl font-semibold tracking-tight"
-                {...props}
-              />
-            ),
-            h5: ({ ...props }) => (
-              <h5
-                className="scroll-m-20 text-lg font-semibold tracking-tight"
-                {...props}
-              />
-            ),
-            h6: ({ ...props }) => (
-              <h6
-                className="scroll-m-20 text-base font-semibold tracking-tight"
-                {...props}
-              />
-            ),
+            h1: ({ ...props }) => <H1 {...props} />,
+            h2: ({ ...props }) => <H2 {...props} />,
+            h3: ({ ...props }) => <H3 {...props} />,
+            h4: ({ ...props }) => <H4 {...props} />,
+            h5: ({ ...props }) => <H5 {...props} />,
+            h6: ({ ...props }) => <H6 {...props} />,
             p: ({ ...props }) => (
               <p className="leading-7 [&:not(:first-child)]:mt-6" {...props} />
             ),
             ul: ({ ...props }) => (
-              <ul className="ml-6 list-disc [&>li]:mt-2" {...props} />
+              <ul className="ml-6 list-disc [&>li]:mt-0.5" {...props} />
             ),
             ol: ({ ...props }) => (
-              <ol className="list-decimal ml-6 space-y-1" {...props} />
+              <ol className="ml-6 list-decimal [&>li]:mt-0.5" {...props} />
             ),
             blockquote: ({ ...props }) => (
               <blockquote className="mt-6 border-l-2 pl-6 italic" {...props} />
