@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import BlogContent from "@/features/blog/compoennts/blogContent";
+import MarkdownToolbar from "@/features/blog/compoennts/mdToolbar";
 import NewTags from "@/features/blog/compoennts/newTags/index";
 import BlogTitle from "@/features/blog/compoennts/title";
 import { createFileRoute } from "@tanstack/react-router";
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/blog/new")({
 });
 
 function BlogNew() {
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [title, setTitle] = useState("Post Title");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState<string[]>([]);
@@ -45,6 +46,7 @@ function BlogNew() {
             title={title}
             onChange={(e) => setTitle(e.currentTarget.innerHTML)}
             contentEditable={true}
+            suppressContentEditableWarning={true}
             className="w-full focus-visible:outline-none"
           />
 
@@ -63,11 +65,13 @@ function BlogNew() {
         </div>
 
         <TabsContent value="edit">
+          <MarkdownToolbar textareaRef={textareaRef} />
+
           <Textarea
-            ref={textAreaRef}
+            ref={textareaRef}
             className="size-full min-h-[40rem] resize-y focus-visible:ring-0 p-3"
-            onChange={(e) => setContent(e.target.value)}
             value={content}
+            onChange={(e) => setContent(e.target.value)}
           />
         </TabsContent>
 
