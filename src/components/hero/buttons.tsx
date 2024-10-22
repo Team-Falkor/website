@@ -1,13 +1,23 @@
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/utils";
+import { Link } from "@tanstack/react-router";
 
 import { ChevronRight } from "lucide-react";
 
 const HeroButtons = () => {
   return (
     <div className="flex items-center mt-10 gap-x-6">
-      <Button variant={"secondary"} className="bg-purple-700" disabled>
-        Download Soon
-      </Button>
+      <Link
+        className={cn(
+          buttonVariants({
+            variant: "secondary",
+          }),
+          "bg-purple-700"
+        )}
+        to="/download"
+      >
+        Download Test Build
+      </Link>
 
       <a
         className={buttonVariants({

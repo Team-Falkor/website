@@ -17,11 +17,8 @@ import { Route as SignupImport } from './routes/signup'
 import { Route as LoginImport } from './routes/login'
 import { Route as DownloadIndexImport } from './routes/download/index'
 import { Route as DiscordIndexImport } from './routes/discord/index'
-import { Route as BlogIndexImport } from './routes/blog/index'
 import { Route as GithubNameImport } from './routes/github/$name'
 import { Route as DiscordFlwImport } from './routes/discord/flw'
-import { Route as BlogNewImport } from './routes/blog/new'
-import { Route as BlogIdImport } from './routes/blog/$id'
 
 // Create Virtual Routes
 
@@ -54,11 +51,6 @@ const DiscordIndexRoute = DiscordIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const BlogIndexRoute = BlogIndexImport.update({
-  path: '/blog/',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const GithubNameRoute = GithubNameImport.update({
   path: '/github/$name',
   getParentRoute: () => rootRoute,
@@ -66,16 +58,6 @@ const GithubNameRoute = GithubNameImport.update({
 
 const DiscordFlwRoute = DiscordFlwImport.update({
   path: '/discord/flw',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const BlogNewRoute = BlogNewImport.update({
-  path: '/blog/new',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const BlogIdRoute = BlogIdImport.update({
-  path: '/blog/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -104,20 +86,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupImport
       parentRoute: typeof rootRoute
     }
-    '/blog/$id': {
-      id: '/blog/$id'
-      path: '/blog/$id'
-      fullPath: '/blog/$id'
-      preLoaderRoute: typeof BlogIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/blog/new': {
-      id: '/blog/new'
-      path: '/blog/new'
-      fullPath: '/blog/new'
-      preLoaderRoute: typeof BlogNewImport
-      parentRoute: typeof rootRoute
-    }
     '/discord/flw': {
       id: '/discord/flw'
       path: '/discord/flw'
@@ -130,13 +98,6 @@ declare module '@tanstack/react-router' {
       path: '/github/$name'
       fullPath: '/github/$name'
       preLoaderRoute: typeof GithubNameImport
-      parentRoute: typeof rootRoute
-    }
-    '/blog/': {
-      id: '/blog/'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogIndexImport
       parentRoute: typeof rootRoute
     }
     '/discord/': {
@@ -162,11 +123,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
-  '/blog/$id': typeof BlogIdRoute
-  '/blog/new': typeof BlogNewRoute
   '/discord/flw': typeof DiscordFlwRoute
   '/github/$name': typeof GithubNameRoute
-  '/blog': typeof BlogIndexRoute
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
 }
@@ -175,11 +133,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
-  '/blog/$id': typeof BlogIdRoute
-  '/blog/new': typeof BlogNewRoute
   '/discord/flw': typeof DiscordFlwRoute
   '/github/$name': typeof GithubNameRoute
-  '/blog': typeof BlogIndexRoute
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
 }
@@ -189,11 +144,8 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
-  '/blog/$id': typeof BlogIdRoute
-  '/blog/new': typeof BlogNewRoute
   '/discord/flw': typeof DiscordFlwRoute
   '/github/$name': typeof GithubNameRoute
-  '/blog/': typeof BlogIndexRoute
   '/discord/': typeof DiscordIndexRoute
   '/download/': typeof DownloadIndexRoute
 }
@@ -204,11 +156,8 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/signup'
-    | '/blog/$id'
-    | '/blog/new'
     | '/discord/flw'
     | '/github/$name'
-    | '/blog'
     | '/discord'
     | '/download'
   fileRoutesByTo: FileRoutesByTo
@@ -216,11 +165,8 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/signup'
-    | '/blog/$id'
-    | '/blog/new'
     | '/discord/flw'
     | '/github/$name'
-    | '/blog'
     | '/discord'
     | '/download'
   id:
@@ -228,11 +174,8 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/signup'
-    | '/blog/$id'
-    | '/blog/new'
     | '/discord/flw'
     | '/github/$name'
-    | '/blog/'
     | '/discord/'
     | '/download/'
   fileRoutesById: FileRoutesById
@@ -242,11 +185,8 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
-  BlogIdRoute: typeof BlogIdRoute
-  BlogNewRoute: typeof BlogNewRoute
   DiscordFlwRoute: typeof DiscordFlwRoute
   GithubNameRoute: typeof GithubNameRoute
-  BlogIndexRoute: typeof BlogIndexRoute
   DiscordIndexRoute: typeof DiscordIndexRoute
   DownloadIndexRoute: typeof DownloadIndexRoute
 }
@@ -255,11 +195,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
-  BlogIdRoute: BlogIdRoute,
-  BlogNewRoute: BlogNewRoute,
   DiscordFlwRoute: DiscordFlwRoute,
   GithubNameRoute: GithubNameRoute,
-  BlogIndexRoute: BlogIndexRoute,
   DiscordIndexRoute: DiscordIndexRoute,
   DownloadIndexRoute: DownloadIndexRoute,
 }
@@ -279,11 +216,8 @@ export const routeTree = rootRoute
         "/",
         "/login",
         "/signup",
-        "/blog/$id",
-        "/blog/new",
         "/discord/flw",
         "/github/$name",
-        "/blog/",
         "/discord/",
         "/download/"
       ]
@@ -297,20 +231,11 @@ export const routeTree = rootRoute
     "/signup": {
       "filePath": "signup.tsx"
     },
-    "/blog/$id": {
-      "filePath": "blog/$id.tsx"
-    },
-    "/blog/new": {
-      "filePath": "blog/new.tsx"
-    },
     "/discord/flw": {
       "filePath": "discord/flw.tsx"
     },
     "/github/$name": {
       "filePath": "github/$name.tsx"
-    },
-    "/blog/": {
-      "filePath": "blog/index.tsx"
     },
     "/discord/": {
       "filePath": "discord/index.tsx"
