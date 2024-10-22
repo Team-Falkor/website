@@ -15,6 +15,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as SignupImport } from './routes/signup'
 import { Route as LoginImport } from './routes/login'
+import { Route as DownloadIndexImport } from './routes/download/index'
 import { Route as DiscordIndexImport } from './routes/discord/index'
 import { Route as BlogIndexImport } from './routes/blog/index'
 import { Route as GithubNameImport } from './routes/github/$name'
@@ -42,6 +43,11 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const DownloadIndexRoute = DownloadIndexImport.update({
+  path: '/download/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DiscordIndexRoute = DiscordIndexImport.update({
   path: '/discord/',
@@ -140,6 +146,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiscordIndexImport
       parentRoute: typeof rootRoute
     }
+    '/download/': {
+      id: '/download/'
+      path: '/download'
+      fullPath: '/download'
+      preLoaderRoute: typeof DownloadIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -155,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/github/$name': typeof GithubNameRoute
   '/blog': typeof BlogIndexRoute
   '/discord': typeof DiscordIndexRoute
+  '/download': typeof DownloadIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -167,6 +181,7 @@ export interface FileRoutesByTo {
   '/github/$name': typeof GithubNameRoute
   '/blog': typeof BlogIndexRoute
   '/discord': typeof DiscordIndexRoute
+  '/download': typeof DownloadIndexRoute
 }
 
 export interface FileRoutesById {
@@ -180,6 +195,7 @@ export interface FileRoutesById {
   '/github/$name': typeof GithubNameRoute
   '/blog/': typeof BlogIndexRoute
   '/discord/': typeof DiscordIndexRoute
+  '/download/': typeof DownloadIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -194,6 +210,7 @@ export interface FileRouteTypes {
     | '/github/$name'
     | '/blog'
     | '/discord'
+    | '/download'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -205,6 +222,7 @@ export interface FileRouteTypes {
     | '/github/$name'
     | '/blog'
     | '/discord'
+    | '/download'
   id:
     | '__root__'
     | '/'
@@ -216,6 +234,7 @@ export interface FileRouteTypes {
     | '/github/$name'
     | '/blog/'
     | '/discord/'
+    | '/download/'
   fileRoutesById: FileRoutesById
 }
 
@@ -229,6 +248,7 @@ export interface RootRouteChildren {
   GithubNameRoute: typeof GithubNameRoute
   BlogIndexRoute: typeof BlogIndexRoute
   DiscordIndexRoute: typeof DiscordIndexRoute
+  DownloadIndexRoute: typeof DownloadIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   GithubNameRoute: GithubNameRoute,
   BlogIndexRoute: BlogIndexRoute,
   DiscordIndexRoute: DiscordIndexRoute,
+  DownloadIndexRoute: DownloadIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -263,7 +284,8 @@ export const routeTree = rootRoute
         "/discord/flw",
         "/github/$name",
         "/blog/",
-        "/discord/"
+        "/discord/",
+        "/download/"
       ]
     },
     "/": {
@@ -292,6 +314,9 @@ export const routeTree = rootRoute
     },
     "/discord/": {
       "filePath": "discord/index.tsx"
+    },
+    "/download/": {
+      "filePath": "download/index.tsx"
     }
   }
 }
