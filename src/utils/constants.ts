@@ -4,5 +4,6 @@ export const constants = {
   github_website_url: "https://github.com/team-falkor/website",
   github_app_url: "https://github.com/team-falkor/app",
   github_repos: ["app", "website", "sdk", "discord-bot", "plugin-template"],
-  banner_message: "Thank you!! everyone for 500+ discord members! 🎉🎉🎉",
+  banner_message:
+    "👻 Spooky days are ahead… Who knows, maybe there’s a little *trick* or **TREAT** coming your way soon!  🎃🕸️",
 };
