@@ -63,5 +63,3 @@ function Download() {
     </div>
   );
 }
-
-export default Download;
