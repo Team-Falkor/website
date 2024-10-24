@@ -3,7 +3,7 @@ import QuickInfoItems from "@/components/quickinfo/items";
 const QuickInfo = () => {
   return (
     <div
-      className="px-6 mx-auto mt-32 max-w-7xl sm:mt-24 lg:px-8"
+      className="px-6 mx-auto mt-36 max-w-7xl sm:mt-32 lg:px-8"
       id="streamline-your-play"
     >
       <div className="max-w-2xl mx-auto text-center">
