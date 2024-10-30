@@ -53,7 +53,7 @@ const FeaturesItems = () => {
         <FeatureItem
           icon={<HardDrive />}
           title="Inbuilt Torrent Client."
-          isAvailable={false}
+          isAvailable={true}
         >
           Experience seamless file sharing with our integrated torrent client,
           designed for fast and secure transfers.
