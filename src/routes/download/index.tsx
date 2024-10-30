@@ -38,7 +38,7 @@ function Download() {
           {/* LINUX DOWNLOAD SECTION */}
           <DownloadSection
             platform="linux"
-            version="V0.0.4"
+            version="V0.0.5"
             imgSrc="/linux.png"
             buttons={[
               {
@@ -72,7 +72,7 @@ function Download() {
           {/* WINDOWS DOWNLOAD SECTION */}
           <DownloadSection
             platform="windows"
-            version="V0.0.4"
+            version="V0.0.5"
             imgSrc="/windows.png"
             buttons={[
               {
