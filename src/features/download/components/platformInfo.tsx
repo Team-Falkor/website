@@ -17,7 +17,7 @@ export const PlatformInfo = ({
         alt={`${platform} logo`}
         className="aspect-square size-12 object-contain"
       />
-      <p className="text-xl font-bold">{`${version} Falkor for ${platform}`}</p>
+      <p className="text-xl font-bold capitalize">{`${version} Falkor for ${platform}`}</p>
     </div>
   );
 };

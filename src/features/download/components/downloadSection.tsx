@@ -1,9 +1,10 @@
+import { Platform, Version } from "@/@types";
 import { DownloadButton, DownloadButtonProps } from "./downloadButton";
 import { PlatformInfo } from "./platformInfo";
 
 interface DownloadSectionProps {
-  platform: string;
-  version: string;
+  platform: Platform;
+  version: Version;
   imgSrc: string;
   buttons: DownloadButtonProps[];
 }

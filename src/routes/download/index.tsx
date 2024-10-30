@@ -1,9 +1,11 @@
+import { Version } from "@/@types";
 import Footer from "@/components/footer";
 import SvgBG from "@/components/svgBG";
 import {
   BugReportSection,
   DownloadSection,
 } from "@/features/download/components";
+import { constants, downloadApp } from "@/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/download/")({
@@ -11,6 +13,8 @@ export const Route = createFileRoute("/download/")({
 });
 
 function Download() {
+  const version = constants.app_version as Version;
+
   return (
     <div>
       <div className="p-2 px-4 pb-16">
@@ -33,24 +37,50 @@ function Download() {
         <div className="px-4 pt-12 mx-auto max-w-4xl sm:px-6 lg:max-w-6xl lg:pt-16 space-y-16">
           {/* LINUX DOWNLOAD SECTION */}
           <DownloadSection
-            platform="Linux"
+            platform="linux"
             version="V0.0.4"
             imgSrc="/linux.png"
             buttons={[
-              { label: "AppImage", variant: "secondary" },
-              { label: "Debian", variant: "secondary" },
-              { label: "Snap", variant: "secondary" },
-              { label: "Pacman", variant: "secondary" },
-              { label: "RPM", variant: "secondary" },
+              {
+                label: "AppImage",
+                variant: "secondary",
+                href: downloadApp("appimage", version),
+              },
+              {
+                label: "Debian",
+                variant: "secondary",
+                href: downloadApp("debian", version),
+              },
+              {
+                label: "Snap",
+                variant: "secondary",
+                href: downloadApp("snap", version),
+              },
+              {
+                label: "Pacman",
+                variant: "secondary",
+                href: downloadApp("pacman", version),
+              },
+              {
+                label: "RPM",
+                variant: "secondary",
+                href: downloadApp("rpm", version),
+              },
             ]}
           />
 
           {/* WINDOWS DOWNLOAD SECTION */}
           <DownloadSection
-            platform="Windows"
+            platform="windows"
             version="V0.0.4"
             imgSrc="/windows.png"
-            buttons={[{ label: "Download for Windows", variant: "secondary" }]}
+            buttons={[
+              {
+                label: "Download for Windows",
+                variant: "secondary",
+                href: downloadApp("windows", version),
+              },
+            ]}
           />
         </div>
 
