@@ -6,9 +6,9 @@ const HeroBadges = () => {
       <span className="px-3 py-1 text-sm font-semibold leading-6 text-purple-400 rounded-full bg-purple-700/25 ring-1 ring-inset ring-purple-700/40">
         Testing release
       </span>
-      <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-gray-300">
-        Available now
-        <ChevronRight />
+      <span className="inline-flex items-center gap-1.5 text-sm font-medium leading-6 text-gray-300">
+        Coming soon
+        <ChevronRight strokeWidth={3} />
       </span>
     </div>
   );
