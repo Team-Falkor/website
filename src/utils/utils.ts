@@ -19,6 +19,10 @@ export const downloadApp = (pckgManager: PackageManager, version: Version) => {
       return `${baseUrl}/falkor.pacman`;
     case "rpm":
       return `${baseUrl}/falkor.rpm`;
+    case "snap":
+      return `${baseUrl}/falkor.snap`;
+    case "tar.gz":
+      return `${baseUrl}/falkor.tar.gz`;
     default:
       return null;
   }

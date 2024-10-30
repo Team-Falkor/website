@@ -10,4 +10,5 @@ export type PackageManager =
   | "snap"
   | "pacman"
   | "appimage"
-  | "rpm";
+  | "rpm"
+  | "tar.gz";
