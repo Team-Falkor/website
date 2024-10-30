@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 type FeatureItemProps = {
   title: string;
   children: string;
@@ -8,32 +6,32 @@ type FeatureItemProps = {
   link?: string;
 };
 
-const FeatureItem: FC<FeatureItemProps> = ({
+const FeatureItem = ({
   children,
   icon,
   title,
   isAvailable,
   link,
-}) => {
+}: FeatureItemProps) => {
   return (
-    <div className="relative flex flex-col h-full p-6 hover:bg-muted-foreground/10 rounded-lg">
+    <div className="relative flex flex-col h-full p-6 transition-all duration-300 ease-out bg-gray-800 rounded-lg hover:bg-purple-900/10 ring-2 ring-orange-500/20">
       <div className="flex items-start gap-4">
-        <div className="text-purple-400">{icon}</div>
-        <div className="text-lg font-semibold text-white">{title}</div>
+        <div className="text-orange-400 animate-pulse">{icon}</div>
+        <div className="text-lg font-semibold text-orange-300">{title}</div>
       </div>
-      <dd className="flex-grow mt-2 text-muted-foreground">{children}</dd>
+      <dd className="flex-grow mt-2 text-gray-400">{children}</dd>
       <div className="flex items-center gap-4 mt-4">
         {isAvailable ? (
           <a
             href={link}
             target={"_blank"}
             rel="noopener noreferrer"
-            className="inline-flex items-center px-2 py-1 text-xs font-medium text-purple-400 rounded-md bg-purple-500/10 ring-purple-500/20 ring-1 ring-inset"
+            className="inline-flex items-center px-2 py-1 text-xs font-medium text-orange-400 bg-orange-500/10 rounded-md animate-pulse ring-1 ring-inset ring-orange-500/20"
           >
             Available
           </a>
         ) : (
-          <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-yellow-400 rounded-md bg-yellow-500/10 ring-yellow-500/20 ring-1 ring-inset">
+          <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-yellow-400 bg-yellow-500/10 rounded-md animate-pulse ring-1 ring-inset ring-yellow-500/20">
             Coming Soon
           </span>
         )}

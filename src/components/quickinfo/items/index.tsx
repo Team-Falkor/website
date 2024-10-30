@@ -1,32 +1,33 @@
-import QuickInfoItem from '@/components/quickinfo/items/item';
-import { Code2, Users, Zap } from 'lucide-react';
+import QuickInfoItem from "@/components/quickinfo/items/item";
+import { Code2, Ghost } from "lucide-react";
+import { GiVampireDracula } from "react-icons/gi";
 
 const QuickInfoItems = () => {
   return (
     <div className="max-w-2xl mx-auto mt-16 sm:mt-20 lg:mt-24 lg:max-w-none">
       <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
         <QuickInfoItem
-          icon={<Users />}
-          title="Community-Driven Enhancements"
+          icon={<Ghost size={24} />}
+          title="Community-Driven Scares"
         >
-          Falkor harnesses community creativity, allowing gamers to personalize their experience with custom plugins and
-          feedback-driven improvements.
+          Falkor harnesses community creativity, letting gamers add a touch of
+          fright to their experience.
         </QuickInfoItem>
 
         <QuickInfoItem
-          icon={<Code2 />}
-          title="Open-Source Gaming Revolution"
+          icon={<Code2 size={24} />}
+          title="Open-Source Haunted Gaming"
         >
-          Discover Falkor, where open-source meets gaming, offering endless possibilities for exploration and innovation
-          in a universally accessible platform.
+          Discover Falkor, where open-source meets gaming thrills in a platform
+          of endless haunted possibilities.
         </QuickInfoItem>
 
         <QuickInfoItem
-          icon={<Zap fill="white" />}
-          title="Modern UI for Effortless Navigation"
+          icon={<GiVampireDracula size={24} />}
+          title="Spooky UI for Frightful Navigation"
         >
-          Dive into Falkor, where a modern, intuitive UI ensures effortless navigation through a vast gaming universe,
-          blending advanced security with peak performance for a seamless experience.
+          Dive into a modern UI with eerie ease through a vast, haunted
+          universe.
         </QuickInfoItem>
       </dl>
     </div>

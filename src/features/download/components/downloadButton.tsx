@@ -32,7 +32,7 @@ export const DownloadButton = ({
           variant,
           size: "lg",
         }),
-        "h-14 text-lg flex items-center gap-3 transition-all transform hover:scale-105 hover:shadow-lg focus-visible:scale-105 focus-visible:shadow-lg"
+        "h-14 text-lg flex items-center gap-3 transition-all transform hover:scale-105 focus-visible:scale-105"
       )}
       onClick={onClick}
       href={href ?? undefined}

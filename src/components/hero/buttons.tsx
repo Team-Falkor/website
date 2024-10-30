@@ -12,11 +12,11 @@ const HeroButtons = () => {
           buttonVariants({
             variant: "secondary",
           }),
-          "bg-purple-700"
+          "bg-orange-700"
         )}
         to="/download"
       >
-        Download Test Build
+        Download Haunted Build 🎃
       </Link>
 
       <a
@@ -26,7 +26,7 @@ const HeroButtons = () => {
         })}
         href={"/discord"}
       >
-        Join The Discord
+        Join The Haunted Discord 👻
         <div className="-translate-x-16 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100 group-hover:ml-2 overflow-hidden">
           <ChevronRight strokeWidth={3} />
         </div>
