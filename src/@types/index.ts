@@ -5,9 +5,10 @@ export type Platform = "windows" | "linux";
 export type Version = `V${string}` | "latest";
 
 export type PackageManager =
-  | `windows`
+  | "windows"
   | "debian"
   | "snap"
   | "pacman"
   | "appimage"
-  | "rpm";
+  | "rpm"
+  | "tar.gz";

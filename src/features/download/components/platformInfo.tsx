@@ -11,7 +11,7 @@ export const PlatformInfo = ({
   imgSrc,
 }: PlatformInfoProps) => {
   return (
-    <div className="flex gap-5 border-b pb-5 overflow-hidden items-center">
+    <div className="flex gap-5 border-b pb-5 items-center overflow-hidden bg-gray-800/30 p-4 rounded-md">
       <img
         src={imgSrc}
         alt={`${platform} logo`}
