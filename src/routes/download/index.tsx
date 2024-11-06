@@ -52,9 +52,9 @@ function Download() {
                 href: downloadApp("debian", version),
               },
               {
-                label: "Snap",
+                label: "Tar.gz",
                 variant: "secondary",
-                href: downloadApp("snap", version),
+                href: downloadApp("tar.gz", version),
               },
               {
                 label: "Pacman",
