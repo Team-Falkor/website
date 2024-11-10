@@ -7,7 +7,7 @@ const HeroBadges = () => {
         Testing release
       </span>
       <span className="inline-flex items-center gap-1.5 text-sm font-medium leading-6 text-gray-300">
-        Coming soon
+        Available now
         <ChevronRight strokeWidth={3} />
       </span>
     </div>
