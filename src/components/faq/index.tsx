@@ -31,11 +31,10 @@ const FaQ = () => {
               Is the app available for download?
             </AccordionTrigger>
             <AccordionContent>
-              Not yet! The app is currently in development and not available for
-              download. However, you can explore the source code{" "}
+              The app is currntly in testing phase and can be downloaded{" "}
               <a
-                href={"/github/app"}
-                className="underline hover:opacity-70 transition-all"
+                href={"/download"}
+                className="underline transition-all hover:opacity-70"
               >
                 here
               </a>
@@ -51,7 +50,7 @@ const FaQ = () => {
               check out the GitHub repository{" "}
               <a
                 href={"/github/app"}
-                className="underline hover:opacity-70 transition-all"
+                className="underline transition-all hover:opacity-70"
               >
                 here
               </a>{" "}
@@ -87,7 +86,7 @@ const FaQ = () => {
               You can follow our progress on GitHub or keep up with the{" "}
               <a
                 href="/discord"
-                className="underline hover:opacity-70 transition-all"
+                className="underline transition-all hover:opacity-70"
               >
                 Discord
               </a>{" "}

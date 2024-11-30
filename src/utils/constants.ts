@@ -4,8 +4,7 @@ export const constants = {
   github_website_url: "https://github.com/team-falkor/website",
   github_app_url: "https://github.com/team-falkor/app",
   ko_fi_url: "https://ko-fi.com/prostarz",
-  github_repos: ["app", "website", "sdk", "discord-bot", "plugin-template"],
-  app_version: "v0.0.91",
-  banner_message:
-    "Test Build V0.0.91",
+  github_repos: ["app", "website", "discord-bot"],
+  app_version: "v0.0.92",
+  banner_message: "Test Build V0.0.92",
 };

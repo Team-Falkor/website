@@ -41,7 +41,7 @@ export const featureItems: Array<{
     title: "Game Library Management",
     description:
       "Organize and manage your installed games effortlessly with our game library management tools.",
-    isAvailable: false,
+    isAvailable: true,
   },
   {
     icon: <Rocket />,
