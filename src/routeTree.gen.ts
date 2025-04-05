@@ -19,7 +19,8 @@ import { Route as DownloadIndexImport } from './routes/download/index'
 import { Route as DiscordIndexImport } from './routes/discord/index'
 import { Route as GithubNameImport } from './routes/github/$name'
 import { Route as DownloadPrivateImport } from './routes/download/private'
-import { Route as DiscordFlwImport } from './routes/discord/flw'
+import { Route as PluginsProvidersIndexImport } from './routes/plugins/providers/index'
+import { Route as PluginsProvidersAddIndexImport } from './routes/plugins/providers/add/index'
 
 // Create Virtual Routes
 
@@ -69,9 +70,15 @@ const DownloadPrivateRoute = DownloadPrivateImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const DiscordFlwRoute = DiscordFlwImport.update({
-  id: '/discord/flw',
-  path: '/discord/flw',
+const PluginsProvidersIndexRoute = PluginsProvidersIndexImport.update({
+  id: '/plugins/providers/',
+  path: '/plugins/providers/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PluginsProvidersAddIndexRoute = PluginsProvidersAddIndexImport.update({
+  id: '/plugins/providers/add/',
+  path: '/plugins/providers/add/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -98,13 +105,6 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupImport
-      parentRoute: typeof rootRoute
-    }
-    '/discord/flw': {
-      id: '/discord/flw'
-      path: '/discord/flw'
-      fullPath: '/discord/flw'
-      preLoaderRoute: typeof DiscordFlwImport
       parentRoute: typeof rootRoute
     }
     '/download/private': {
@@ -135,6 +135,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DownloadIndexImport
       parentRoute: typeof rootRoute
     }
+    '/plugins/providers/': {
+      id: '/plugins/providers/'
+      path: '/plugins/providers'
+      fullPath: '/plugins/providers'
+      preLoaderRoute: typeof PluginsProvidersIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/plugins/providers/add/': {
+      id: '/plugins/providers/add/'
+      path: '/plugins/providers/add'
+      fullPath: '/plugins/providers/add'
+      preLoaderRoute: typeof PluginsProvidersAddIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -144,22 +158,24 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
-  '/discord/flw': typeof DiscordFlwRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
+  '/plugins/providers': typeof PluginsProvidersIndexRoute
+  '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
-  '/discord/flw': typeof DiscordFlwRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
+  '/plugins/providers': typeof PluginsProvidersIndexRoute
+  '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
 
 export interface FileRoutesById {
@@ -167,11 +183,12 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
-  '/discord/flw': typeof DiscordFlwRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
   '/discord/': typeof DiscordIndexRoute
   '/download/': typeof DownloadIndexRoute
+  '/plugins/providers/': typeof PluginsProvidersIndexRoute
+  '/plugins/providers/add/': typeof PluginsProvidersAddIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -180,31 +197,34 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/signup'
-    | '/discord/flw'
     | '/download/private'
     | '/github/$name'
     | '/discord'
     | '/download'
+    | '/plugins/providers'
+    | '/plugins/providers/add'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/signup'
-    | '/discord/flw'
     | '/download/private'
     | '/github/$name'
     | '/discord'
     | '/download'
+    | '/plugins/providers'
+    | '/plugins/providers/add'
   id:
     | '__root__'
     | '/'
     | '/login'
     | '/signup'
-    | '/discord/flw'
     | '/download/private'
     | '/github/$name'
     | '/discord/'
     | '/download/'
+    | '/plugins/providers/'
+    | '/plugins/providers/add/'
   fileRoutesById: FileRoutesById
 }
 
@@ -212,22 +232,24 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
-  DiscordFlwRoute: typeof DiscordFlwRoute
   DownloadPrivateRoute: typeof DownloadPrivateRoute
   GithubNameRoute: typeof GithubNameRoute
   DiscordIndexRoute: typeof DiscordIndexRoute
   DownloadIndexRoute: typeof DownloadIndexRoute
+  PluginsProvidersIndexRoute: typeof PluginsProvidersIndexRoute
+  PluginsProvidersAddIndexRoute: typeof PluginsProvidersAddIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
-  DiscordFlwRoute: DiscordFlwRoute,
   DownloadPrivateRoute: DownloadPrivateRoute,
   GithubNameRoute: GithubNameRoute,
   DiscordIndexRoute: DiscordIndexRoute,
   DownloadIndexRoute: DownloadIndexRoute,
+  PluginsProvidersIndexRoute: PluginsProvidersIndexRoute,
+  PluginsProvidersAddIndexRoute: PluginsProvidersAddIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -243,11 +265,12 @@ export const routeTree = rootRoute
         "/",
         "/login",
         "/signup",
-        "/discord/flw",
         "/download/private",
         "/github/$name",
         "/discord/",
-        "/download/"
+        "/download/",
+        "/plugins/providers/",
+        "/plugins/providers/add/"
       ]
     },
     "/": {
@@ -258,9 +281,6 @@ export const routeTree = rootRoute
     },
     "/signup": {
       "filePath": "signup.tsx"
-    },
-    "/discord/flw": {
-      "filePath": "discord/flw.tsx"
     },
     "/download/private": {
       "filePath": "download/private.tsx"
@@ -273,6 +293,12 @@ export const routeTree = rootRoute
     },
     "/download/": {
       "filePath": "download/index.tsx"
+    },
+    "/plugins/providers/": {
+      "filePath": "plugins/providers/index.tsx"
+    },
+    "/plugins/providers/add/": {
+      "filePath": "plugins/providers/add/index.tsx"
     }
   }
 }

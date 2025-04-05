@@ -6,4 +6,17 @@ export const constants = {
   github_repos: ["app", "website", "discord-bot"],
   app_version: "v0.1.0-alpha",
   banner_message: "Test Build V0.0.1 W/ Achievements support",
+  example_setup_json: {
+    id: "my.awesome.plugin",
+    version: "1.0.0",
+    multiple_choice: false,
+    name: "my-plugin",
+    description: "My awesome Falkor plugin",
+    logo: "URL_ADDRESS_to_image.com",
+    banner: "URL_ADDRESS_to_image.com",
+    author: {
+      name: "team-falkor",
+      url: "https://falkor.moe",
+    },
+  },
 };

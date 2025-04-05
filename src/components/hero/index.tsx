@@ -5,7 +5,7 @@ import Tilt from "react-parallax-tilt";
 const HeroComponent = () => {
   return (
     <div className="px-6 pt-10 pb-24 mx-auto max-w-7xl sm:pb-40 lg:flex lg:px-8 lg:pt-32">
-      <div className="flex-shrink-0 max-w-2xl mx-auto lg:mx-0 lg:max-w-xl lg:pt-8">
+      <div className="shrink-0 max-w-2xl mx-auto lg:mx-0 lg:max-w-xl lg:pt-8">
         <img src="/icon.png" className="mb-6 size-16" />
 
         <HeroBadges />

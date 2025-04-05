@@ -21,7 +21,7 @@ const FeatureItem: FC<FeatureItemProps> = ({
         <div className="text-purple-400">{icon}</div>
         <div className="text-lg font-semibold text-white">{title}</div>
       </div>
-      <dd className="flex-grow mt-2 text-muted-foreground">{children}</dd>
+      <dd className="grow mt-2 text-muted-foreground">{children}</dd>
       <div className="flex items-center gap-4 mt-4">
         {isAvailable ? (
           <a

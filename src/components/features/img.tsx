@@ -19,7 +19,7 @@ const FeaturesImg = ({ src, alt, className, ...props }: Props) => {
           ])}
           {...props}
         />
-        <div className="absolute bottom-0 z-20 pointer-events-none opacity-65 bg-gradient-to-t from-background to-transparent size-full" />
+        <div className="absolute bottom-0 z-20 pointer-events-none opacity-65 bg-linear-to-t from-background to-transparent size-full" />
       </div>
     </div>
   );
