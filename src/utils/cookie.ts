@@ -1,6 +1,5 @@
 export const getCookie = (name: string): string | null => {
   const cookies = document.cookie.split(";");
-  console.log({ cookies: document.cookie });
   for (const cookie of cookies) {
     const [cookieName, cookieValue] = cookie.split("=").map((c) => c.trim());
     if (cookieName === name) {

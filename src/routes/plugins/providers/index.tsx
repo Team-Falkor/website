@@ -27,8 +27,6 @@ function RouteComponent() {
 
   const handleSearchClick = () => setSearchExpanded((prev) => !prev);
 
-  console.log({ providers: providers?.success });
-
   return (
     <div>
       <div className="p-2 px-4 pb-16">
