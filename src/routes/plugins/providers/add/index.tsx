@@ -8,8 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useAddProvider } from "@/features/providers/hooks/useAddProvider";
 import { cn, constants } from "@/utils";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { Loader2, Plus } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
@@ -21,6 +22,12 @@ export const Route = createFileRoute("/plugins/providers/add/")({
 function RouteComponent() {
   const [url, setUrl] = useState<string>("");
   const [isValidUrl, setIsValidUrl] = useState<boolean>(false);
+  const {
+    addProvider,
+    error: errorAddingProvider,
+    isError: isErrorAddingProvider,
+    isLoading: isAddingProviderLoading,
+  } = useAddProvider();
 
   const isValidUrlFn = useCallback((url: string) => {
     try {
@@ -38,24 +45,18 @@ function RouteComponent() {
       const res = await fetch(url);
       return await res.json();
     },
-  });
-
-  const { mutate, error: mutateError } = useMutation({
-    mutationFn: async (url: string) => {
-      return await fetch(url, {
-        method: "POST",
-        body: JSON.stringify({
-          setupUrl: url,
-          setupJson: data,
-        }),
-      });
-    },
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
   });
 
   useEffect(() => {
-    if (!mutateError) return;
-    alert(mutateError?.message);
-  }, [mutateError]);
+    if (!errorAddingProvider) return;
+    alert(errorAddingProvider?.message);
+  }, [errorAddingProvider, isErrorAddingProvider]);
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center min-h-screen py-8 px-4">
@@ -81,9 +82,12 @@ function RouteComponent() {
                 className={cn("transition-all duration-200")}
               />
               <Button
-                disabled={!isValidUrl}
+                disabled={!isValidUrl || isAddingProviderLoading}
                 onClick={() => {
-                  mutate(url);
+                  addProvider({
+                    setupJSON: data,
+                    setupUrl: url,
+                  });
                 }}
               >
                 <Plus /> Add Provider
