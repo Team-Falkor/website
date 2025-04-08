@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useProviders } from "@/features/providers/hooks/useProviders";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { format } from "date-fns";
 import { Download, Plus, Search } from "lucide-react";
 import { useState } from "react";
 
@@ -129,33 +130,39 @@ function RouteComponent() {
             </Card>
           ) : providers?.data?.length ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {providers?.data.map((provider) => (
-                <Card
-                  key={provider?.setupJSON.id}
-                  className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-                >
-                  <CardHeader>
-                    <CardTitle>{provider?.setupJSON?.name}</CardTitle>
-                    <CardDescription>{provider?.createdAt}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-300">
-                      {provider?.setupJSON?.description}
-                    </p>
-                  </CardContent>
-                  <CardFooter>
-                    <div className="flex justify-end items-end w-full">
-                      <a
-                        className={buttonVariants()}
-                        href={`falkor://install-plugin/${provider.setupUrl}`}
-                      >
-                        <Download />
-                        Install
-                      </a>
-                    </div>
-                  </CardFooter>
-                </Card>
-              ))}
+              {providers?.data.map((p) => {
+                const provider: (typeof p)["setupJSON"] = JSON.parse(
+                  p.setupJSON as unknown as string
+                );
+
+                return (
+                  <Card
+                    key={provider?.name}
+                    className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+                  >
+                    <CardHeader>
+                      <CardTitle>{provider?.name}</CardTitle>
+                      <CardDescription>
+                        {format(new Date(p.createdAt), "pppp")}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-300">{provider?.description}</p>
+                    </CardContent>
+                    <CardFooter>
+                      <div className="flex justify-end items-end w-full">
+                        <a
+                          className={buttonVariants()}
+                          href={`falkor://install-plugin/${p.setupUrl}`}
+                        >
+                          <Download />
+                          Install
+                        </a>
+                      </div>
+                    </CardFooter>
+                  </Card>
+                );
+              })}
             </div>
           ) : (
             <Card className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60">
