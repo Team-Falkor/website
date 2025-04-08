@@ -19,5 +19,5 @@ export const constants = {
       url: "https://falkor.moe",
     },
   },
-  API_URL: "http://api.falkor.moe",
+  API_URL: "https://api.falkor.moe",
 };
