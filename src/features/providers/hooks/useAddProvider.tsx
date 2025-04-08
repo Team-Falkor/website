@@ -13,14 +13,18 @@ export const useAddProvider = () => {
     mutationFn: (data: AddProviderParams) => providersApi.addProvider(data),
     onSuccess: (res) => {
       if (!res.success) {
-        toast.error("Failed to add provider");
+        toast.error("Failed to add provider", {
+          description: res.message,
+        });
         return;
       }
 
       toast.success("Provider added successfully");
     },
-    onError: () => {
-      toast.error("Failed to add provider");
+    onError: (error) => {
+      toast.error("Failed to add provider", {
+        description: error.message,
+      });
     },
   });
 

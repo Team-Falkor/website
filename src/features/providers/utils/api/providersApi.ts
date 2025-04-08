@@ -36,6 +36,8 @@ export const providersApi = {
       },
       body: JSON.stringify(setupData),
     });
-    return response.json();
+    const data: APIResponse<PluginSetupJSON> = await response.json();
+
+    return data;
   },
 };

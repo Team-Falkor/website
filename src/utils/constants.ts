@@ -19,5 +19,5 @@ export const constants = {
       url: "https://falkor.moe",
     },
   },
-  API_URL: "https://api.falkor.moe",
+  API_URL: import.meta.env?.PUBLIC_API_URL ?? "https://api.falkor.moe",
 };

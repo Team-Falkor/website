@@ -13,7 +13,7 @@ import { cn, constants } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { Loader2, Plus } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 export const Route = createFileRoute("/plugins/providers/add/")({
   component: RouteComponent,
@@ -22,12 +22,7 @@ export const Route = createFileRoute("/plugins/providers/add/")({
 function RouteComponent() {
   const [url, setUrl] = useState<string>("");
   const [isValidUrl, setIsValidUrl] = useState<boolean>(false);
-  const {
-    addProvider,
-    error: errorAddingProvider,
-    isError: isErrorAddingProvider,
-    isLoading: isAddingProviderLoading,
-  } = useAddProvider();
+  const { addProvider, isLoading: isAddingProviderLoading } = useAddProvider();
 
   const isValidUrlFn = useCallback((url: string) => {
     try {
@@ -52,11 +47,6 @@ function RouteComponent() {
     refetchInterval: false,
     refetchIntervalInBackground: false,
   });
-
-  useEffect(() => {
-    if (!errorAddingProvider) return;
-    alert(errorAddingProvider?.message);
-  }, [errorAddingProvider, isErrorAddingProvider]);
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center min-h-screen py-8 px-4">
