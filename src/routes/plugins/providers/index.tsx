@@ -127,7 +127,7 @@ function RouteComponent() {
                 <Button onClick={() => window.location.reload()}>Retry</Button>
               </CardContent>
             </Card>
-          ) : providers?.data ? (
+          ) : providers?.data?.length ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {providers?.data.map((provider) => (
                 <Card
