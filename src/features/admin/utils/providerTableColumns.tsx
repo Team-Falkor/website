@@ -1,9 +1,9 @@
-import { PendingProvider } from "@/@types/providers";
+import { Provider } from "@/@types/providers";
 import { Button } from "@/components/ui/button";
 import { providersAdminApi } from "@/features/providers/utils/api/providersAdminApi";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const providerColumns: ColumnDef<PendingProvider>[] = [
+export const providerColumns: ColumnDef<Provider>[] = [
   {
     accessorKey: "id",
     header: "ID",
