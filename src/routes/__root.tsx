@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createRootRoute({
@@ -6,6 +7,8 @@ export const Route = createRootRoute({
       {/* <div className="absolute inset-0 -z-9">
         <ParticleSystem />
       </div> */}
+
+      <Toaster />
 
       <Outlet />
       {/* <TanStackRouterDevtools /> */}

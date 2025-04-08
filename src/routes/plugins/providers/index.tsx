@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import SvgBG from "@/components/svgBG";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -9,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useQuery } from "@tanstack/react-query";
+import { useProviders } from "@/features/providers/hooks/useProviders";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Download, Plus, Search } from "lucide-react";
 import { useState } from "react";
@@ -20,21 +21,13 @@ export const Route = createFileRoute("/plugins/providers/")({
 
 function RouteComponent() {
   const [searchExpanded, setSearchExpanded] = useState(false);
-  const [query, setQuery] = useState<string>("");
+  // const [query, setQuery] = useState<string>("");
 
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["providers"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:3000/plugins/provider");
-      return await res.json();
-    },
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    refetchIntervalInBackground: false,
-  });
+  const { providers, error, isLoading } = useProviders();
 
   const handleSearchClick = () => setSearchExpanded((prev) => !prev);
+
+  console.log({ providers: providers?.success });
 
   return (
     <div>
@@ -44,18 +37,19 @@ function RouteComponent() {
         <div className="px-4 pt-8 pb-6 mx-auto max-w-4xl sm:px-6 sm:pt-10 sm:pb-8">
           <div className="text-center">
             <h1 className="mt-8 text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Providers
+              Comminuty Providers
             </h1>
             <p className="mt-4 text-base leading-7 text-gray-300 sm:mt-6 sm:text-lg lg:text-xl">
-              Explore a wide range of providers.
+              Explore a wide range of comminuty providers.
               <br />
               Connect to various sources to enhance your experience.
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Providers are run by third-party developers and are not affiliated
-              with Falkor.
+              Comminuty Providers are run by third-party developers and are not
+              affiliated with Falkor.
               <br />
-              Providers are not endorsed by Falkor or any of its affiliates.
+              Comminuty Providers are not endorsed by Falkor or any of its
+              affiliates.
             </p>
           </div>
         </div>
@@ -135,18 +129,16 @@ function RouteComponent() {
                 <Button onClick={() => window.location.reload()}>Retry</Button>
               </CardContent>
             </Card>
-          ) : data?.providers?.length > 0 ? (
+          ) : providers?.data ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {data?.providers.map((provider) => (
+              {providers?.data.map((provider) => (
                 <Card
                   key={provider?.setupJSON.id}
                   className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
                 >
                   <CardHeader>
                     <CardTitle>{provider?.setupJSON?.name}</CardTitle>
-                    <CardDescription>
-                      {provider?.setupJSON.type}
-                    </CardDescription>
+                    <CardDescription>{provider?.createdAt}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-300">
@@ -170,15 +162,16 @@ function RouteComponent() {
           ) : (
             <Card className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60">
               <CardHeader>
-                <CardTitle>No Providers</CardTitle>
+                <CardTitle>No Comminuty Providers</CardTitle>
                 <CardDescription>
-                  Get started by adding your first provider
+                  Get started by adding the first community provider.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Button asChild>
                   <Link to="/plugins/providers/add">
-                    <Plus className="mr-2 h-4 w-4" /> Add Provider
+                    <Plus />
+                    Add Provider
                   </Link>
                 </Button>
               </CardContent>

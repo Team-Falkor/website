@@ -13,10 +13,11 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as SignupImport } from './routes/signup'
-import { Route as LoginImport } from './routes/login'
+import { Route as SignUpIndexImport } from './routes/sign-up/index'
+import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as DownloadIndexImport } from './routes/download/index'
 import { Route as DiscordIndexImport } from './routes/discord/index'
+import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as GithubNameImport } from './routes/github/$name'
 import { Route as DownloadPrivateImport } from './routes/download/private'
 import { Route as PluginsProvidersIndexImport } from './routes/plugins/providers/index'
@@ -28,23 +29,23 @@ const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
-const SignupRoute = SignupImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LoginRoute = LoginImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const SignUpIndexRoute = SignUpIndexImport.update({
+  id: '/sign-up/',
+  path: '/sign-up/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginIndexRoute = LoginIndexImport.update({
+  id: '/login/',
+  path: '/login/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DownloadIndexRoute = DownloadIndexImport.update({
   id: '/download/',
@@ -55,6 +56,12 @@ const DownloadIndexRoute = DownloadIndexImport.update({
 const DiscordIndexRoute = DiscordIndexImport.update({
   id: '/discord/',
   path: '/discord/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminIndexRoute = AdminIndexImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -93,20 +100,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupImport
-      parentRoute: typeof rootRoute
-    }
     '/download/private': {
       id: '/download/private'
       path: '/download/private'
@@ -121,6 +114,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GithubNameImport
       parentRoute: typeof rootRoute
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/discord/': {
       id: '/discord/'
       path: '/discord'
@@ -133,6 +133,20 @@ declare module '@tanstack/react-router' {
       path: '/download'
       fullPath: '/download'
       preLoaderRoute: typeof DownloadIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/sign-up/': {
+      id: '/sign-up/'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SignUpIndexImport
       parentRoute: typeof rootRoute
     }
     '/plugins/providers/': {
@@ -156,24 +170,26 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
+  '/admin': typeof AdminIndexRoute
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/sign-up': typeof SignUpIndexRoute
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
+  '/admin': typeof AdminIndexRoute
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/sign-up': typeof SignUpIndexRoute
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
@@ -181,12 +197,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
+  '/admin/': typeof AdminIndexRoute
   '/discord/': typeof DiscordIndexRoute
   '/download/': typeof DownloadIndexRoute
+  '/login/': typeof LoginIndexRoute
+  '/sign-up/': typeof SignUpIndexRoute
   '/plugins/providers/': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add/': typeof PluginsProvidersAddIndexRoute
 }
@@ -195,34 +212,37 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/login'
-    | '/signup'
     | '/download/private'
     | '/github/$name'
+    | '/admin'
     | '/discord'
     | '/download'
+    | '/login'
+    | '/sign-up'
     | '/plugins/providers'
     | '/plugins/providers/add'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/login'
-    | '/signup'
     | '/download/private'
     | '/github/$name'
+    | '/admin'
     | '/discord'
     | '/download'
+    | '/login'
+    | '/sign-up'
     | '/plugins/providers'
     | '/plugins/providers/add'
   id:
     | '__root__'
     | '/'
-    | '/login'
-    | '/signup'
     | '/download/private'
     | '/github/$name'
+    | '/admin/'
     | '/discord/'
     | '/download/'
+    | '/login/'
+    | '/sign-up/'
     | '/plugins/providers/'
     | '/plugins/providers/add/'
   fileRoutesById: FileRoutesById
@@ -230,24 +250,26 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  LoginRoute: typeof LoginRoute
-  SignupRoute: typeof SignupRoute
   DownloadPrivateRoute: typeof DownloadPrivateRoute
   GithubNameRoute: typeof GithubNameRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   DiscordIndexRoute: typeof DiscordIndexRoute
   DownloadIndexRoute: typeof DownloadIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
+  SignUpIndexRoute: typeof SignUpIndexRoute
   PluginsProvidersIndexRoute: typeof PluginsProvidersIndexRoute
   PluginsProvidersAddIndexRoute: typeof PluginsProvidersAddIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  LoginRoute: LoginRoute,
-  SignupRoute: SignupRoute,
   DownloadPrivateRoute: DownloadPrivateRoute,
   GithubNameRoute: GithubNameRoute,
+  AdminIndexRoute: AdminIndexRoute,
   DiscordIndexRoute: DiscordIndexRoute,
   DownloadIndexRoute: DownloadIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
+  SignUpIndexRoute: SignUpIndexRoute,
   PluginsProvidersIndexRoute: PluginsProvidersIndexRoute,
   PluginsProvidersAddIndexRoute: PluginsProvidersAddIndexRoute,
 }
@@ -263,12 +285,13 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/login",
-        "/signup",
         "/download/private",
         "/github/$name",
+        "/admin/",
         "/discord/",
         "/download/",
+        "/login/",
+        "/sign-up/",
         "/plugins/providers/",
         "/plugins/providers/add/"
       ]
@@ -276,23 +299,26 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.lazy.tsx"
     },
-    "/login": {
-      "filePath": "login.tsx"
-    },
-    "/signup": {
-      "filePath": "signup.tsx"
-    },
     "/download/private": {
       "filePath": "download/private.tsx"
     },
     "/github/$name": {
       "filePath": "github/$name.tsx"
     },
+    "/admin/": {
+      "filePath": "admin/index.tsx"
+    },
     "/discord/": {
       "filePath": "discord/index.tsx"
     },
     "/download/": {
       "filePath": "download/index.tsx"
+    },
+    "/login/": {
+      "filePath": "login/index.tsx"
+    },
+    "/sign-up/": {
+      "filePath": "sign-up/index.tsx"
     },
     "/plugins/providers/": {
       "filePath": "plugins/providers/index.tsx"

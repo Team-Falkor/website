@@ -27,3 +27,7 @@ export const downloadApp = (pckgManager: PackageManager, version: Version) => {
       return null;
   }
 };
+
+export const isAdmin = (role: "USER" | "ADMIN") => {
+  return role === "ADMIN";
+};
