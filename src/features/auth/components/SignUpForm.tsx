@@ -28,7 +28,7 @@ export function SignUpForm() {
   };
 
   return (
-    <Card className="mx-auto max-w-sm backdrop-blur-sm bg-background/80 border-muted/30 shadow-lg">
+    <Card className="mx-auto backdrop-blur-sm bg-background/80 border-muted/30 shadow-lg w-sm">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl font-bold">Sign Up</CardTitle>
         <CardDescription className="text-balance">
