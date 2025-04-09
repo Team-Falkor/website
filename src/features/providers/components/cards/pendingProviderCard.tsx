@@ -1,4 +1,4 @@
-import { Provider } from "@/@types/providers";
+import { PluginSetupJSON, Provider } from "@/@types/providers";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,7 +19,7 @@ export function PendingProviderCard({
   setupUrl,
   createdAt,
   name,
-  setupJSON,
+  setupJSON: setupJSONString,
 }: Provider) {
   const {
     deleteError,
@@ -29,6 +29,8 @@ export function PendingProviderCard({
     approveProvider,
     isApprovingProvider,
   } = useAdminProviders();
+
+  const setupJSON: PluginSetupJSON = JSON.parse(setupJSONString);
 
   useEffect(() => {
     if (!deleteError) return;
@@ -59,7 +61,7 @@ export function PendingProviderCard({
         <CardDescription className="space-y-2">
           <div className="flex flex-col gap-2">
             <span className="text-sm text-muted-foreground">
-              {format(new Date(createdAt), "PPp")}
+              {format(new Date(createdAt), "PPP")}
             </span>
             <a
               href={setupUrl}

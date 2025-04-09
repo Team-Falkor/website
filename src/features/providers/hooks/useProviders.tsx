@@ -9,6 +9,11 @@ export const useProviders = (params?: {
   const { data, isLoading, error, isError, refetch } = useQuery({
     queryKey: ["providers", params],
     queryFn: () => providersApi.getProviders(params),
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchInterval: 1000 * 60 * 10, // 10 minutes
+    retry: 0,
   });
 
   return {

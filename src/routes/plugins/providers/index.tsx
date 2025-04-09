@@ -1,19 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import SvgBG from "@/components/svgBG";
-import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ProviderList } from "@/features/providers/components/ProviderList";
+import { SearchBar } from "@/features/providers/components/SearchBar";
 import { useProviders } from "@/features/providers/hooks/useProviders";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { format } from "date-fns";
-import { Download, Plus, Search } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/plugins/providers/")({
@@ -21,12 +12,17 @@ export const Route = createFileRoute("/plugins/providers/")({
 });
 
 function RouteComponent() {
-  const [searchExpanded, setSearchExpanded] = useState(false);
-  // const [query, setQuery] = useState<string>("");
-
+  const [searchQuery, setSearchQuery] = useState("");
   const { providers, error, isLoading } = useProviders();
 
-  const handleSearchClick = () => setSearchExpanded((prev) => !prev);
+  const filteredProviders = providers?.data?.filter((p) => {
+    if (!searchQuery) return true;
+    const provider = JSON.parse(p.setupJSON as unknown as string);
+    return (
+      provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      provider.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
 
   return (
     <div>
@@ -36,18 +32,18 @@ function RouteComponent() {
         <div className="px-4 pt-8 pb-6 mx-auto max-w-4xl sm:px-6 sm:pt-10 sm:pb-8">
           <div className="text-center">
             <h1 className="mt-8 text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Comminuty Providers
+              Community Providers
             </h1>
             <p className="mt-4 text-base leading-7 text-gray-300 sm:mt-6 sm:text-lg lg:text-xl">
-              Explore a wide range of comminuty providers.
+              Explore a wide range of community providers.
               <br />
               Connect to various sources to enhance your experience.
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Comminuty Providers are run by third-party developers and are not
+              Community Providers are run by third-party developers and are not
               affiliated with Falkor.
               <br />
-              Comminuty Providers are not endorsed by Falkor or any of its
+              Community Providers are not endorsed by Falkor or any of its
               affiliates.
             </p>
           </div>
@@ -61,127 +57,14 @@ function RouteComponent() {
               </Link>
             </Button>
 
-            <div className="ml-auto flex-1 sm:flex-initial relative">
-              <div className="flex items-center">
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  onClick={handleSearchClick}
-                  className="relative z-10"
-                >
-                  <Search />
-                  <span className="sr-only">Search Providers</span>
-                </Button>
-
-                <div
-                  className={`absolute right-0 top-0 flex items-center overflow-hidden transition-all duration-300 ${
-                    searchExpanded
-                      ? "w-full opacity-100 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-                      : "w-0 opacity-0"
-                  }`}
-                >
-                  <form className="w-full pl-8">
-                    <Input
-                      // ref={searchInputRef}
-                      type="search"
-                      placeholder="Search providers..."
-                      className="w-full !ring-0"
-                      // value={searchQuery}
-                      // onChange={(e) => setSearchQuery(e.target.value)}
-                      onBlur={() => setSearchExpanded(false)}
-                    />
-                  </form>
-                </div>
-              </div>
-            </div>
+            <SearchBar onSearch={setSearchQuery} />
           </div>
 
-          {isLoading ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[1, 2, 3].map((i) => (
-                <Card
-                  key={i}
-                  className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-                >
-                  <CardHeader>
-                    <div className="h-7 bg-gray-700 rounded w-3/4 animate-pulse" />
-                    <div className="h-4 bg-gray-700 rounded w-1/2 animate-pulse" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="h-4 bg-gray-700 rounded w-full animate-pulse mb-2" />
-                    <div className="h-4 bg-gray-700 rounded w-2/3 animate-pulse" />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : error ? (
-            <Card className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-              <CardHeader>
-                <CardTitle className="text-red-500">Error</CardTitle>
-                <CardDescription>Failed to load providers</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300 mb-4">
-                  There was an error loading the providers. Please try again
-                  later.
-                </p>
-                <Button onClick={() => window.location.reload()}>Retry</Button>
-              </CardContent>
-            </Card>
-          ) : providers?.data?.length ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {providers?.data.map((p) => {
-                const provider: (typeof p)["setupJSON"] = JSON.parse(
-                  p.setupJSON as unknown as string
-                );
-
-                return (
-                  <Card
-                    key={provider?.name}
-                    className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-                  >
-                    <CardHeader>
-                      <CardTitle>{provider?.name}</CardTitle>
-                      <CardDescription>
-                        {format(new Date(p.createdAt), "pppp")}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-300">{provider?.description}</p>
-                    </CardContent>
-                    <CardFooter>
-                      <div className="flex justify-end items-end w-full">
-                        <a
-                          className={buttonVariants()}
-                          href={`falkor://install-plugin/${p.setupUrl}`}
-                        >
-                          <Download />
-                          Install
-                        </a>
-                      </div>
-                    </CardFooter>
-                  </Card>
-                );
-              })}
-            </div>
-          ) : (
-            <Card className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-              <CardHeader>
-                <CardTitle>No Comminuty Providers</CardTitle>
-                <CardDescription>
-                  Get started by adding the first community provider.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button asChild>
-                  <Link to="/plugins/providers/add">
-                    <Plus />
-                    Add Provider
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          )}
+          <ProviderList
+            providers={filteredProviders || []}
+            isLoading={isLoading}
+            error={error}
+          />
         </div>
       </div>
     </div>

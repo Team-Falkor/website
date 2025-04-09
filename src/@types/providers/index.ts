@@ -1,12 +1,11 @@
 import { APIResponse } from "..";
-import { PluginSetupJSON } from "./setup";
 
 export * from "./setup";
 
 export interface Provider {
   id: string;
   setupUrl: string;
-  setupJSON: PluginSetupJSON;
+  setupJSON: string;
   name: string;
   offical: boolean;
   createdAt: string;
