@@ -1,6 +1,9 @@
-import { APIResponse } from "@/@types";
-import { PluginSetupJSON, Provider } from "@/@types/providers";
 import { constants } from "@/utils";
+import {
+  APIResponse,
+  PluginProvider,
+  PluginSetupJSON,
+} from "@team-falkor/shared-types";
 
 const { API_URL } = constants;
 
@@ -13,7 +16,7 @@ type GetProvidersParams = {
 export const providersApi = {
   getProviders: async (
     params?: GetProvidersParams
-  ): Promise<APIResponse<Array<Provider>>> => {
+  ): Promise<APIResponse<Array<PluginProvider>>> => {
     const searchParams = new URLSearchParams();
     if (params?.limit) searchParams.append("limit", params.limit.toString());
     if (params?.offset) searchParams.append("offset", params.offset.toString());

@@ -1,4 +1,3 @@
-import { Provider } from "@/@types/providers";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,11 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link } from "@tanstack/react-router";
+import { PluginProvider } from "@team-falkor/shared-types";
 import { Plus } from "lucide-react";
 import { ProviderCard } from "./cards/ProviderCard";
 
 interface ProviderListProps {
-  providers: Provider[];
+  providers: PluginProvider[];
   isLoading: boolean;
   error: Error | null;
 }

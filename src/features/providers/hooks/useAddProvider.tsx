@@ -1,5 +1,5 @@
-import { PluginSetupJSON } from "@/@types/providers";
 import { useMutation } from "@tanstack/react-query";
+import { PluginSetupJSON } from "@team-falkor/shared-types";
 import { toast } from "sonner";
 import { providersApi } from "../utils/api/providersApi";
 
