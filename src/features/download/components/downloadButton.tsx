@@ -1,5 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/utils";
+import { motion } from "framer-motion";
 import { DownloadIcon } from "lucide-react";
 
 export interface DownloadButtonProps {
@@ -26,19 +27,29 @@ export const DownloadButton = ({
   onClick,
 }: DownloadButtonProps) => {
   return (
-    <a
+    <motion.a
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
       className={cn(
         buttonVariants({
           variant,
           size: "lg",
         }),
-        "h-14 text-lg flex items-center gap-3 transition-all transform hover:scale-105 hover:shadow-lg focus-visible:scale-105 focus-visible:shadow-lg"
+        "h-14 text-lg flex items-center gap-3 transition-all shadow-md hover:shadow-xl focus-visible:shadow-xl backdrop-blur-sm"
       )}
       onClick={onClick}
       href={href ?? undefined}
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      {icon || <DownloadIcon className="w-5 h-5" />}
+      <motion.span
+        initial={{ rotate: 0 }}
+        animate={{ rotate: [0, 10, -10, 0] }}
+        transition={{ duration: 0.5, delay: 1, repeat: 0 }}
+      >
+        {icon || <DownloadIcon className="w-5 h-5" />}
+      </motion.span>
       {label}
-    </a>
+    </motion.a>
   );
 };

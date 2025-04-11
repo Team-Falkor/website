@@ -75,7 +75,7 @@ const MessageBanner = () => {
   if (!showBanner) return null;
 
   return (
-    <div className="relative w-full bg-purple-800/25 flex justify-center items-center p-1 py-2 sm:py-3 text-sm sm:text-base overflow-hidden">
+    <div className="relative w-full bg-purple-800/25 flex justify-center items-center p-1 py-2 sm:py-3 text-sm sm:text-base overflow-hidden z-50">
       <div
         ref={bannerRef}
         className={`whitespace-nowrap ${isOverflowing ? "animate-marquee" : ""}`}
