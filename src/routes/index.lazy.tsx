@@ -36,7 +36,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
       <SvgBG />
-      <div className="relative p-2 px-4 pb-16 overflow-hidden">
+      <div className="relative p-2 px-4 pb-16 overflow-hidden pt-16 sm:pt-2">
         <motion.div
           initial="hidden"
           animate="visible"

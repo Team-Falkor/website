@@ -30,7 +30,7 @@ function Login() {
   };
 
   return (
-    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px] h-screen bg-gradient-to-b from-gray-900 to-gray-950">
+    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px] h-screen bg-gradient-to-b from-gray-900 to-gray-950 pt-16 sm:pt-0">
       <SvgBG />
       <motion.div
         initial="hidden"
