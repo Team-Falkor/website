@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 type FeatureItemProps = {
   title: string;
   children: string;
@@ -8,13 +6,13 @@ type FeatureItemProps = {
   link?: string;
 };
 
-const FeatureItem: FC<FeatureItemProps> = ({
+const FeatureItem = ({
   children,
   icon,
   title,
   isAvailable,
   link,
-}) => {
+}: FeatureItemProps) => {
   return (
     <div className="relative flex flex-col h-full p-6 hover:bg-muted-foreground/10 rounded-lg">
       <div className="flex items-start gap-4">
