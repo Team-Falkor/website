@@ -1,4 +1,3 @@
-import { PluginSetupJSON, Provider } from "@/@types/providers";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { PluginProvider, PluginSetupJSON } from "@team-falkor/shared-types";
 import { format } from "date-fns";
 import { Check, Loader2, X } from "lucide-react";
 import { useEffect } from "react";
@@ -20,7 +20,7 @@ export function PendingProviderCard({
   createdAt,
   name,
   setupJSON: setupJSONString,
-}: Provider) {
+}: PluginProvider) {
   const {
     deleteError,
     deleteProvider,

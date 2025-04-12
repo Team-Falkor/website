@@ -1,6 +1,9 @@
 import { APIResponse } from "@/@types";
-import { Provider, ProvidersResponse } from "@/@types/providers";
 import { constants } from "@/utils";
+import {
+  PluginProvider,
+  PluginProviderResponse,
+} from "@team-falkor/shared-types";
 
 const { API_URL } = constants;
 
@@ -14,7 +17,7 @@ type GetPendingProvidersParams = {
 export const providersAdminApi = {
   getPendingProviders: async (
     params?: GetPendingProvidersParams
-  ): Promise<ProvidersResponse> => {
+  ): Promise<PluginProviderResponse> => {
     const searchParams = new URLSearchParams();
     if (params?.skip) searchParams.append("skip", params.skip.toString());
     if (params?.take) searchParams.append("take", params.take.toString());
@@ -30,7 +33,7 @@ export const providersAdminApi = {
     return response.json();
   },
 
-  deleteProvider: async (id: string): Promise<APIResponse<Provider>> => {
+  deleteProvider: async (id: string): Promise<APIResponse<PluginProvider>> => {
     const response = await fetch(`${API_URL}/providers/admin`, {
       method: "DELETE",
       headers: {
@@ -42,7 +45,7 @@ export const providersAdminApi = {
     return response.json();
   },
 
-  approveProvider: async (id: string): Promise<APIResponse<Provider>> => {
+  approveProvider: async (id: string): Promise<APIResponse<PluginProvider>> => {
     const response = await fetch(`${API_URL}/providers/admin/approve`, {
       method: "PATCH",
       headers: {

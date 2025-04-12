@@ -1,9 +1,9 @@
-import { Provider } from "@/@types/providers";
 import { Button } from "@/components/ui/button";
 import { providersAdminApi } from "@/features/providers/utils/api/providersAdminApi";
 import { ColumnDef } from "@tanstack/react-table";
+import { PluginProvider } from "@team-falkor/shared-types";
 
-export const providerColumns: ColumnDef<Provider>[] = [
+export const providerColumns: ColumnDef<PluginProvider>[] = [
   {
     accessorKey: "id",
     header: "ID",

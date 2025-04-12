@@ -1,4 +1,3 @@
-import { PluginSetupJSON, Provider } from "@/@types/providers";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -8,12 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { PluginProvider, PluginSetupJSON } from "@team-falkor/shared-types";
 import { format } from "date-fns";
 import { Download, UserIcon } from "lucide-react";
 import { useMemo } from "react";
 
 interface ProviderCardProps {
-  provider: Provider;
+  provider: PluginProvider;
 }
 
 export function ProviderCard({ provider }: ProviderCardProps) {
