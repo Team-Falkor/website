@@ -10,9 +10,11 @@ import { constants } from "@/utils/constants";
 import { SiKofi } from "react-icons/si";
 
 export const Navbar = () => {
+  const pathname = window.location.pathname;
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [shouldShowNavbar, setShouldShowNavbar] = useState(true);
 
   // Handle scroll effect
   useEffect(() => {
@@ -23,6 +25,12 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
 
+  useEffect(() => {
+    const pathnameSplit = pathname.split("/");
+    if (pathnameSplit.includes("admin")) setShouldShowNavbar(false);
+    else setShouldShowNavbar(true);
+  }, [pathname]);
+
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   const navLinks = [
@@ -31,6 +39,8 @@ export const Navbar = () => {
     { name: "Plugins", path: "/plugins/providers", openInNewTab: false },
     { name: "Discord", path: "/discord", openInNewTab: true },
   ];
+
+  if (!shouldShowNavbar) return null;
 
   return (
     <nav
