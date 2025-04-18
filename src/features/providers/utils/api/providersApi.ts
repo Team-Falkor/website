@@ -13,10 +13,12 @@ type GetProvidersParams = {
   search?: string;
 };
 
+type GetProvidersResponse = APIResponse<Array<PluginProvider>>;
+
 export const providersApi = {
   getProviders: async (
     params?: GetProvidersParams
-  ): Promise<APIResponse<Array<PluginProvider>>> => {
+  ): Promise<GetProvidersResponse> => {
     const searchParams = new URLSearchParams();
     if (params?.limit) searchParams.append("limit", params.limit.toString());
     if (params?.offset) searchParams.append("offset", params.offset.toString());
