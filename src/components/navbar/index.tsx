@@ -57,7 +57,7 @@ export const Navbar = () => {
           to="/"
           className="flex items-center gap-2 font-bold text-xl text-foreground"
         >
-          <img src="/icon.png" alt="Falkor" className="h-8 w-8" />
+          <img src="/icon.png" alt="Falkor" className="size-14" />
           <span className="hidden sm:inline">Falkor</span>
         </Link>
 

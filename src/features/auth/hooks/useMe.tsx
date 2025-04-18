@@ -1,6 +1,6 @@
-import { APIResponse } from "@/@types";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { APIResponse } from "@team-falkor/shared-types";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import type { MeResponse } from "../@types";

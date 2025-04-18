@@ -1,6 +1,6 @@
-import { APIResponse } from "@/@types";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { APIResponse } from "@team-falkor/shared-types";
 import { toast } from "sonner";
 import type { AuthResponse, LoginBody } from "../@types";
 import { authApi } from "../utils/api/authApi";

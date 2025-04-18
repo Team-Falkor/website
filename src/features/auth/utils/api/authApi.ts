@@ -1,5 +1,5 @@
-import { APIResponse } from "@/@types";
 import { constants } from "@/utils";
+import { APIResponse } from "@team-falkor/shared-types";
 import {
   AuthResponse,
   ErrorResponse,

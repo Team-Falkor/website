@@ -1,6 +1,6 @@
-import { APIResponse } from "@/@types";
 import { constants } from "@/utils";
 import {
+  APIResponse,
   PluginProvider,
   PluginProviderResponse,
 } from "@team-falkor/shared-types";

@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { APIResponse } from "@team-falkor/shared-types";
 import { toast } from "sonner";
 import type { AuthResponse } from "../@types";
 import { authApi } from "../utils/api/authApi";
 import { clearTokens, storeTokens } from "../utils/tokenManager";
-import { APIResponse } from "@/@types";
 
 export const useRefresh = () => {
   const navigate = useNavigate();
