@@ -1,0 +1,53 @@
+name: Deploy Falkor Website to VPS
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy to VPS
+        run: |
+          ssh -i ~/.ssh/id_rsa "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" 'bash -s' << 'EOF'
+            set -e
+
+            APP_DIR="$HOME/apps/falkor-website"
+            WEBROOT="/var/www/falkor"
+
+            echo "---------------------------"
+            echo "Starting deployment script."
+            echo "---------------------------"
+
+            cd "$APP_DIR" || { echo "Directory $APP_DIR not found! Exiting."; exit 1; }
+
+            echo "Pulling latest code..."
+            git pull origin release
+
+            echo "Installing dependencies..."
+            bun i
+
+            echo "Building the app..."
+            bun run build
+
+            echo "Deploying build files to $WEBROOT..."
+            sudo rm -rf "$WEBROOT"/*
+            sudo cp -r dist/* "$WEBROOT/"
+
+            echo "Reloading Nginx..."
+            sudo systemctl reload nginx
+
+            echo "---------------------------"
+            echo "Deployment successful!"
+            echo "---------------------------"
+          EOF
