@@ -13,7 +13,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Link } from "@tanstack/react-router";
-import { BoxesIcon, LayoutDashboardIcon } from "lucide-react";
+import { BoxesIcon, ChartArea, LayoutDashboardIcon } from "lucide-react";
 
 const data = {
   navMain: [
@@ -34,6 +34,17 @@ const data = {
         // title: "Reports",
         // url: "/admin/reports",
         // },
+      ],
+    },
+    {
+      title: "Analytics",
+      url: "/admin/analytics",
+      icon: ChartArea,
+      items: [
+        {
+          title: "Overview",
+          url: "/admin/analytics",
+        },
       ],
     },
     {
