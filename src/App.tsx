@@ -5,7 +5,17 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { ThemeProvider } from "./components/theme-provider";
 import { routeTree } from "./routeTree.gen";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: false,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+    },
+  },
+});
 
 // Create a new router instance
 const router = createRouter({

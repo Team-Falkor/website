@@ -49,7 +49,12 @@ export function useAdminMetrics(
   });
 
   return {
-    metrics: metricsQuery.data,
+    metrics: metricsQuery?.data?.map((metric) => ({
+      ...metric,
+      startTime: new Date(metric.startTime).toLocaleString(),
+      endTime: new Date(metric.endTime).toLocaleString(),
+      value: metric.value ?? 0,
+    })),
     isLoadingMetrics: metricsQuery.isLoading,
     isErrorMetrics: metricsQuery.isError,
     metricsError: metricsQuery.error,

@@ -1,79 +1,55 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { PageView } from "../hooks/admin/useAdminPageviews";
+"use client";
+
+import { DataTable } from "@/components/ui/data-table";
+import { ColumnDef } from "@tanstack/react-table";
+import type { PageView } from "../hooks/admin/useAdminPageviews";
 
 interface PageviewsTableProps {
-  pageviews: PageView[] | undefined | null;
+  pageviews: PageView[] | null | undefined;
 }
 
 export function PageviewsTable({ pageviews }: PageviewsTableProps) {
-  const formatTimestamp = (timestamp: string) => {
-    return new Date(timestamp).toLocaleString();
-  };
+  // Ensure we always pass an array
+  const data: PageView[] = pageviews ?? [];
+
+  // Define columns for DataTable with precise string types
+  const columns: ColumnDef<PageView, string>[] = [
+    {
+      accessorKey: "path",
+      header: "Path",
+      cell: (info) => <span className="font-medium">{info.getValue()}</span>,
+    },
+    {
+      accessorKey: "deviceType",
+      header: () => <span className="hidden sm:table-cell">Device</span>,
+      cell: (info) => (
+        <span className="hidden sm:table-cell">{info.getValue()}</span>
+      ),
+    },
+    {
+      accessorKey: "browser",
+      header: () => <span className="hidden md:table-cell">Browser</span>,
+      cell: (info) => (
+        <span className="hidden md:table-cell">{info.getValue()}</span>
+      ),
+    },
+    {
+      accessorKey: "country",
+      header: () => <span className="hidden lg:table-cell">Country</span>,
+      cell: (info) => (
+        <span className="hidden lg:table-cell">{info.getValue()}</span>
+      ),
+    },
+    {
+      accessorKey: "timestamp",
+      header: "Timestamp",
+      cell: (info) => <span>{new Date(info.getValue()).toLocaleString()}</span>,
+    },
+  ];
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Recent Pageviews</CardTitle>
-        <CardDescription>
-          A list of recent page views across the application.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Path</TableHead>
-                <TableHead className="hidden sm:table-cell">Device</TableHead>
-                <TableHead className="hidden md:table-cell">Browser</TableHead>
-                <TableHead className="hidden lg:table-cell">Country</TableHead>
-                <TableHead>Timestamp</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {pageviews?.length ? (
-                pageviews.map((pageview) => (
-                  <TableRow key={pageview.id}>
-                    <TableCell className="font-medium">
-                      {pageview.path}
-                    </TableCell>
-                    <TableCell className="hidden sm:table-cell">
-                      {pageview.deviceType}
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell">
-                      {pageview.browser}
-                    </TableCell>
-                    <TableCell className="hidden lg:table-cell">
-                      {pageview.country}
-                    </TableCell>
-                    <TableCell>{formatTimestamp(pageview.timestamp)}</TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={5} className="text-center">
-                    No pageviews found
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="p-4">
+      <DataTable columns={columns} data={data} />
+    </div>
   );
 }

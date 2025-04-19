@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "@tanstack/react-router";
@@ -7,9 +8,12 @@ import type { LoginBody } from "../@types";
 import { useLogin } from "../hooks/useLogin";
 
 export function LoginForm() {
-  const [formData, setFormData] = useState<LoginBody>({
+  const [formData, setFormData] = useState<
+    LoginBody & { keepLoggedIn: boolean }
+  >({
     email: "",
     password: "",
+    keepLoggedIn: false,
   });
 
   const { login, isLoading } = useLogin();
@@ -44,6 +48,18 @@ export function LoginForm() {
           value={formData.password}
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, password: e.target.value }))
+          }
+        />
+      </div>
+      <div className="flex items-center justify-end space-x-2">
+        <Label htmlFor="keepLoggedIn" className="text-sm font-normal">
+          Keep me logged in
+        </Label>
+        <Checkbox
+          id="keepLoggedIn"
+          checked={formData.keepLoggedIn}
+          onCheckedChange={(checked: boolean) =>
+            setFormData((prev) => ({ ...prev, keepLoggedIn: checked }))
           }
         />
       </div>

@@ -10,6 +10,8 @@ import { clearTokens, getAccessToken } from "../utils/tokenManager";
 export const useMe = () => {
   const navigate = useNavigate();
 
+  const keepLoggedIn = localStorage.getItem("keepLoggedIn") === "true";
+
   const query = useQuery<APIResponse<MeResponse>, Error>({
     queryKey: ["me"],
     queryFn: async () => {
@@ -22,8 +24,8 @@ export const useMe = () => {
     },
     retry: 1,
     enabled: true, // Always enabled, getAccessToken will handle token refreshing
-    refetchInterval: 5 * 60 * 1000, // Refetch every 5 minutes to ensure user data is fresh
-    refetchOnWindowFocus: true, // Refetch when window regains focus
+    refetchInterval: keepLoggedIn ? 30 * 60 * 1000 : 5 * 60 * 1000, // Refetch every 30 minutes for persistent sessions, 5 minutes for regular sessions
+    refetchOnWindowFocus: !keepLoggedIn, // Only refetch on window focus for non-persistent sessions
   });
 
   useEffect(() => {

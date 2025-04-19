@@ -5,13 +5,15 @@ import { authApi } from "./api/authApi";
 // Token expiration times in seconds
 const ACCESS_TOKEN_EXPIRY = 60 * 60; // 1 hour
 const REFRESH_TOKEN_EXPIRY = 60 * 60 * 24 * 30; // 30 days
+const PERSISTENT_REFRESH_TOKEN_EXPIRY = 60 * 60 * 24 * 365; // 1 year
 
 // Time before expiration to refresh token (in seconds)
 const REFRESH_THRESHOLD = 5 * 60; // 5 minutes
 
 // Store tokens with expiration timestamps
 export const storeTokens = (
-  tokens: Pick<AuthResponse, "accessToken" | "refreshToken">
+  tokens: Pick<AuthResponse, "accessToken" | "refreshToken">,
+  keepLoggedIn = false
 ) => {
   const now = Math.floor(Date.now() / 1000);
 
@@ -21,8 +23,12 @@ export const storeTokens = (
   localStorage.setItem("accessTokenExpiry", String(now + ACCESS_TOKEN_EXPIRY));
   localStorage.setItem(
     "refreshTokenExpiry",
-    String(now + REFRESH_TOKEN_EXPIRY)
+    String(
+      now +
+        (keepLoggedIn ? PERSISTENT_REFRESH_TOKEN_EXPIRY : REFRESH_TOKEN_EXPIRY)
+    )
   );
+  localStorage.setItem("keepLoggedIn", String(keepLoggedIn));
 
   // Also store access token in cookie for API requests
   setCookie("accessToken", tokens.accessToken, {
