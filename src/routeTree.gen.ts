@@ -21,6 +21,7 @@ import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as GithubNameImport } from './routes/github/$name'
 import { Route as DownloadPrivateImport } from './routes/download/private'
 import { Route as PluginsProvidersIndexImport } from './routes/plugins/providers/index'
+import { Route as AdminAnalyticsIndexImport } from './routes/admin/analytics/index'
 import { Route as PluginsProvidersAddIndexImport } from './routes/plugins/providers/add/index'
 
 // Create Virtual Routes
@@ -80,6 +81,12 @@ const DownloadPrivateRoute = DownloadPrivateImport.update({
 const PluginsProvidersIndexRoute = PluginsProvidersIndexImport.update({
   id: '/plugins/providers/',
   path: '/plugins/providers/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminAnalyticsIndexRoute = AdminAnalyticsIndexImport.update({
+  id: '/admin/analytics/',
+  path: '/admin/analytics/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -149,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignUpIndexImport
       parentRoute: typeof rootRoute
     }
+    '/admin/analytics/': {
+      id: '/admin/analytics/'
+      path: '/admin/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/plugins/providers/': {
       id: '/plugins/providers/'
       path: '/plugins/providers'
@@ -177,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/download': typeof DownloadIndexRoute
   '/login': typeof LoginIndexRoute
   '/sign-up': typeof SignUpIndexRoute
+  '/admin/analytics': typeof AdminAnalyticsIndexRoute
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
@@ -190,6 +205,7 @@ export interface FileRoutesByTo {
   '/download': typeof DownloadIndexRoute
   '/login': typeof LoginIndexRoute
   '/sign-up': typeof SignUpIndexRoute
+  '/admin/analytics': typeof AdminAnalyticsIndexRoute
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
@@ -204,6 +220,7 @@ export interface FileRoutesById {
   '/download/': typeof DownloadIndexRoute
   '/login/': typeof LoginIndexRoute
   '/sign-up/': typeof SignUpIndexRoute
+  '/admin/analytics/': typeof AdminAnalyticsIndexRoute
   '/plugins/providers/': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add/': typeof PluginsProvidersAddIndexRoute
 }
@@ -219,6 +236,7 @@ export interface FileRouteTypes {
     | '/download'
     | '/login'
     | '/sign-up'
+    | '/admin/analytics'
     | '/plugins/providers'
     | '/plugins/providers/add'
   fileRoutesByTo: FileRoutesByTo
@@ -231,6 +249,7 @@ export interface FileRouteTypes {
     | '/download'
     | '/login'
     | '/sign-up'
+    | '/admin/analytics'
     | '/plugins/providers'
     | '/plugins/providers/add'
   id:
@@ -243,6 +262,7 @@ export interface FileRouteTypes {
     | '/download/'
     | '/login/'
     | '/sign-up/'
+    | '/admin/analytics/'
     | '/plugins/providers/'
     | '/plugins/providers/add/'
   fileRoutesById: FileRoutesById
@@ -257,6 +277,7 @@ export interface RootRouteChildren {
   DownloadIndexRoute: typeof DownloadIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
   SignUpIndexRoute: typeof SignUpIndexRoute
+  AdminAnalyticsIndexRoute: typeof AdminAnalyticsIndexRoute
   PluginsProvidersIndexRoute: typeof PluginsProvidersIndexRoute
   PluginsProvidersAddIndexRoute: typeof PluginsProvidersAddIndexRoute
 }
@@ -270,6 +291,7 @@ const rootRouteChildren: RootRouteChildren = {
   DownloadIndexRoute: DownloadIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   SignUpIndexRoute: SignUpIndexRoute,
+  AdminAnalyticsIndexRoute: AdminAnalyticsIndexRoute,
   PluginsProvidersIndexRoute: PluginsProvidersIndexRoute,
   PluginsProvidersAddIndexRoute: PluginsProvidersAddIndexRoute,
 }
@@ -292,6 +314,7 @@ export const routeTree = rootRoute
         "/download/",
         "/login/",
         "/sign-up/",
+        "/admin/analytics/",
         "/plugins/providers/",
         "/plugins/providers/add/"
       ]
@@ -319,6 +342,9 @@ export const routeTree = rootRoute
     },
     "/sign-up/": {
       "filePath": "sign-up/index.tsx"
+    },
+    "/admin/analytics/": {
+      "filePath": "admin/analytics/index.tsx"
     },
     "/plugins/providers/": {
       "filePath": "plugins/providers/index.tsx"

@@ -10,8 +10,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/features/admin/components/sidebar";
-import { AdminGuard } from "@/features/auth/components/AdminGuard";
 import { AdminProviders } from "@/features/providers/components/AdminProviders";
+import { AdminGuard } from "@/features/auth/components/AdminGuard";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -41,7 +41,7 @@ function AdminDashboard() {
 
   return (
     <AdminGuard>
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden">
+      <div className="min-h-svh bg-gradient-to-b  from-gray-900 to-gray-950 relative overflow-hidden">
         <SvgBG />
         <motion.div
           initial="hidden"

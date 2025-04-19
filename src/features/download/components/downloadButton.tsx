@@ -1,10 +1,12 @@
 import { buttonVariants } from "@/components/ui/button";
+import { useTrackEvent } from "@/features/analytics/hooks/useTrackEvent";
 import { cn } from "@/utils";
 import { motion } from "framer-motion";
 import { DownloadIcon } from "lucide-react";
+import { useRef } from "react";
 
 export interface DownloadButtonProps {
-  variant:
+  variant?:
     | "default"
     | "destructive"
     | "outline"
@@ -23,9 +25,36 @@ export const DownloadButton = ({
   variant,
   label,
   icon,
-  href,
   onClick,
+  href,
 }: DownloadButtonProps) => {
+  const trackEvent = useTrackEvent();
+  const hasClicked = useRef(false);
+
+  const handleClick = () => {
+    if (onClick) onClick();
+
+    // Prevent duplicate tracking
+    if (hasClicked.current) return;
+    hasClicked.current = true;
+
+    trackEvent<{
+      label: string;
+      href?: string;
+    }>({
+      eventType: "download",
+      context: {
+        label,
+        ...(href ? { href } : {}),
+      },
+    });
+
+    // Reset after short delay if needed
+    setTimeout(() => {
+      hasClicked.current = false;
+    }, 1000);
+  };
+
   return (
     <motion.a
       whileHover={{ scale: 1.05 }}
@@ -37,7 +66,7 @@ export const DownloadButton = ({
         }),
         "h-14 text-lg flex items-center gap-3 transition-all shadow-md hover:shadow-xl focus-visible:shadow-xl backdrop-blur-sm"
       )}
-      onClick={onClick}
+      onClick={handleClick}
       href={href ?? undefined}
       target="_blank"
       rel="noopener noreferrer"
