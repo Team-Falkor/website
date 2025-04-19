@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 import type { PageView } from "../hooks/admin/useAdminPageviews";
@@ -48,8 +55,16 @@ export function PageviewsTable({ pageviews }: PageviewsTableProps) {
   ];
 
   return (
-    <div className="p-4">
-      <DataTable columns={columns} data={data} />
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Recent Events</CardTitle>
+        <CardDescription>
+          A list of recent events tracked across the application.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <DataTable columns={columns} data={data} />
+      </CardContent>
+    </Card>
   );
 }

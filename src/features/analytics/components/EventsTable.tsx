@@ -1,6 +1,13 @@
 import { DataTable } from "@/components/ui/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 import type { EventLog } from "../hooks/admin/useAdminEvents";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 
 interface EventsTableProps {
   events: EventLog[] | null | undefined;
@@ -42,8 +49,16 @@ export function EventsTable({ events }: EventsTableProps) {
   ];
 
   return (
-    <div className="p-4">
-      <DataTable columns={columns} data={data} />
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Recent Events</CardTitle>
+        <CardDescription>
+          A list of recent events tracked across the application.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <DataTable columns={columns} data={data} />
+      </CardContent>
+    </Card>
   );
 }
