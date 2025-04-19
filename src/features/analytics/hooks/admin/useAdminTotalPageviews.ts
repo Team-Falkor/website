@@ -8,7 +8,10 @@ export function useAdminTotalPageviews() {
     queryKey: ["admin", "pageviews", "total"],
     queryFn: async () => {
       const response = await fetch(
-        `${API_URL}/analytics/admin/pageviews/total`
+        `${API_URL}/analytics/admin/pageviews/total`,
+        {
+          credentials: "include",
+        }
       );
       if (!response.ok) {
         throw new Error("Failed to fetch total pageviews");
