@@ -22,6 +22,9 @@ jobs:
           ssh -i ~/.ssh/id_rsa "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" 'bash -s' << 'EOF'
             set -e
 
+            export BUN_INSTALL="$HOME/.bun"
+            export PATH="$BUN_INSTALL/bin:$PATH"
+
             APP_DIR="$HOME/apps/falkor-website"
             WEBROOT="/var/www/falkor"
 
