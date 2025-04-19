@@ -63,14 +63,12 @@ export function AdminAnalytics() {
       </div>
 
       {/* Metrics Cards */}
-      {!!metrics?.length && (
-        <MetricsCards
-          metrics={metrics}
-          period={period}
-          totalEvents={totalEvents}
-          totalPageviews={totalPageviews}
-        />
-      )}
+      <MetricsCards
+        metrics={metrics}
+        period={period}
+        totalEvents={totalEvents}
+        totalPageviews={totalPageviews}
+      />
 
       {/* Tabs for Events and Pageviews */}
       <Tabs defaultValue="events" className="w-full">

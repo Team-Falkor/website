@@ -3,7 +3,7 @@ import { BarChart3, Clock, Globe, Users } from "lucide-react";
 import { AggregateMetric } from "../hooks/admin/useAdminMetrics";
 
 interface MetricsCardsProps {
-  metrics: AggregateMetric[];
+  metrics: AggregateMetric[] | undefined | null;
   period: string;
   totalEvents: { count: number } | undefined;
   totalPageviews: { count: number } | undefined;
@@ -16,7 +16,7 @@ export function MetricsCards({
   totalPageviews,
 }: MetricsCardsProps) {
   const allMetrics = [
-    ...metrics,
+    ...(metrics?.length ? metrics : []),
     ...(totalEvents
       ? [
           {
@@ -96,33 +96,37 @@ export function MetricsCards({
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {allMetrics.map((metric) => (
-        <Card key={metric.id} className="h-full flex flex-col">
-          <CardHeader className="flex items-center justify-between pb-2 min-w-0">
-            <CardTitle className="flex-1 text-sm font-medium truncate">
-              {getMetricTitle(metric.metricType)}
-            </CardTitle>
-            {getMetricIcon(metric.metricType)}
-          </CardHeader>
+      {allMetrics?.length ? (
+        allMetrics.map((metric) => (
+          <Card key={metric.id} className="h-full flex flex-col">
+            <CardHeader className="flex items-center justify-between pb-2 min-w-0">
+              <CardTitle className="flex-1 text-sm font-medium truncate">
+                {getMetricTitle(metric.metricType)}
+              </CardTitle>
+              {getMetricIcon(metric.metricType)}
+            </CardHeader>
 
-          <CardContent className="flex-1 flex flex-col justify-between">
-            <div className="text-2xl font-bold">
-              {formatMetricValue(metric.metricType, metric.value)}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              {metric.period === "all"
-                ? "All time"
-                : period === "day"
-                  ? "Last 24 hours"
-                  : period === "week"
-                    ? "Last 7 days"
-                    : period === "month"
-                      ? "Last 30 days"
-                      : "Last 365 days"}
-            </p>
-          </CardContent>
-        </Card>
-      ))}
+            <CardContent className="flex-1 flex flex-col justify-between">
+              <div className="text-2xl font-bold">
+                {formatMetricValue(metric.metricType, metric.value)}
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">
+                {metric.period === "all"
+                  ? "All time"
+                  : period === "day"
+                    ? "Last 24 hours"
+                    : period === "week"
+                      ? "Last 7 days"
+                      : period === "month"
+                        ? "Last 30 days"
+                        : "Last 365 days"}
+              </p>
+            </CardContent>
+          </Card>
+        ))
+      ) : (
+        <div className="col-span-4">No metrics available</div>
+      )}
     </div>
   );
 }
