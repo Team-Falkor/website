@@ -5,8 +5,8 @@ import { AggregateMetric } from "../hooks/admin/useAdminMetrics";
 interface MetricsCardsProps {
   metrics: AggregateMetric[] | undefined | null;
   period: string;
-  totalEvents: { count: number } | undefined;
-  totalPageviews: { count: number } | undefined;
+  totalEvents: { data: number } | undefined;
+  totalPageviews: { data: number } | undefined;
 }
 
 export function MetricsCards({
@@ -22,7 +22,7 @@ export function MetricsCards({
           {
             id: "total-events",
             metricType: "totalEvents",
-            value: totalEvents.count,
+            value: totalEvents.data,
             period: "all",
           },
         ]
@@ -32,7 +32,7 @@ export function MetricsCards({
           {
             id: "total-pageviews",
             metricType: "totalPageviews",
-            value: totalPageviews.count,
+            value: totalPageviews.data,
             period: "all",
           },
         ]
@@ -91,7 +91,7 @@ export function MetricsCards({
       const seconds = value % 60;
       return `${minutes}:${seconds.toString().padStart(2, "0")}`;
     }
-    return value.toLocaleString();
+    return value ? value.toLocaleString() : 0;
   };
 
   return (
