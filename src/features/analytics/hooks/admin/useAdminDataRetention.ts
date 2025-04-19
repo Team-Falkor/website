@@ -12,7 +12,10 @@ export type DataRetentionPolicy = {
 export function useAdminDataRetention(skip = 0, take = 10) {
   // helper to fetch & unwrap `.data`
   const fetchJson = async <T>(url: string, init?: RequestInit): Promise<T> => {
-    const res = await fetch(url, init);
+    const res = await fetch(url, {
+      ...init,
+      credentials: "include",
+    });
     if (!res.ok) throw new Error((await res.text()) || res.statusText);
     return (await res.json()).data as T;
   };

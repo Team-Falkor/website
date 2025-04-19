@@ -19,7 +19,9 @@ export function useAdminMetrics(
   endTime?: string
 ) {
   const fetchJson = async <T>(url: string): Promise<T> => {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      credentials: "include",
+    });
     if (!res.ok) throw new Error((await res.text()) || res.statusText);
     return (await res.json()).data as T;
   };
