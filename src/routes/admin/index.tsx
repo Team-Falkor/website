@@ -4,14 +4,10 @@ import { motion } from "framer-motion";
 import SvgBG from "@/components/svgBG";
 import { DynamicBreadcrumbs } from "@/components/ui/dynamic-breadcrumbs";
 import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/features/admin/components/sidebar";
-import { AdminProviders } from "@/features/providers/components/AdminProviders";
 import { AdminGuard } from "@/features/auth/components/AdminGuard";
+import { AdminProviders } from "@/features/providers/components/AdminProviders";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
@@ -41,29 +37,38 @@ function AdminDashboard() {
 
   return (
     <AdminGuard>
-      <div className="min-h-svh bg-gradient-to-b  from-gray-900 to-gray-950 relative overflow-hidden">
+      <div className="min-h-svh bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden">
         <SvgBG />
         <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="relative z-10"
+          className="relative z-10 h-full"
         >
           <SidebarProvider>
-            <AdminSidebar className="overflow-hidden" />
-            <SidebarInset>
-              <motion.header
-                variants={itemVariants}
-                className="flex h-16 shrink-0 items-center gap-2 border-b px-4"
-              >
-                <SidebarTrigger className="-ml-1" />
-                <Separator orientation="vertical" className="mr-2 h-4" />
-                <DynamicBreadcrumbs />
-              </motion.header>
-              <motion.div variants={itemVariants}>
-                <AdminProviders />
-              </motion.div>
-            </SidebarInset>
+            <div className="flex h-svh w-full overflow-hidden">
+              <AdminSidebar className="overflow-hidden" />
+              <div className="flex-1 flex flex-col h-full overflow-auto">
+                <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 sticky top-0 bg-background z-10">
+                  <SidebarTrigger className="-ml-1" />
+                  <Separator orientation="vertical" className="mr-2 h-4" />
+                  <DynamicBreadcrumbs />
+                </header>
+                <main className="flex-1 overflow-auto p-4 md:p-6">
+                  <div className="px-4 mx-auto">
+                    <motion.h1
+                      variants={itemVariants}
+                      className="text-3xl font-bold tracking-tight mb-6"
+                    >
+                      Admin Dashboard
+                    </motion.h1>
+                    <motion.div variants={itemVariants} className="h-full">
+                      <AdminProviders />
+                    </motion.div>
+                  </div>
+                </main>
+              </div>
+            </div>
           </SidebarProvider>
         </motion.div>
       </div>
