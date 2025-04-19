@@ -5,9 +5,40 @@ import { AggregateMetric } from "../hooks/admin/useAdminMetrics";
 interface MetricsCardsProps {
   metrics: AggregateMetric[];
   period: string;
+  totalEvents: { count: number } | undefined;
+  totalPageviews: { count: number } | undefined;
 }
 
-export function MetricsCards({ metrics, period }: MetricsCardsProps) {
+export function MetricsCards({
+  metrics,
+  period,
+  totalEvents,
+  totalPageviews,
+}: MetricsCardsProps) {
+  const allMetrics = [
+    ...metrics,
+    ...(totalEvents
+      ? [
+          {
+            id: "total-events",
+            metricType: "totalEvents",
+            value: totalEvents.count,
+            period: "all",
+          },
+        ]
+      : []),
+    ...(totalPageviews
+      ? [
+          {
+            id: "total-pageviews",
+            metricType: "totalPageviews",
+            value: totalPageviews.count,
+            period: "all",
+          },
+        ]
+      : []),
+  ];
+
   const getMetricIcon = (metricType: string) => {
     switch (metricType) {
       case "totalUsers":
@@ -16,8 +47,13 @@ export function MetricsCards({ metrics, period }: MetricsCardsProps) {
           <Users className="h-4 w-4 text-muted-foreground flex-shrink-0" />
         );
       case "pageViews":
+      case "totalPageviews":
         return (
           <Globe className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+        );
+      case "totalEvents":
+        return (
+          <BarChart3 className="h-4 w-4 text-muted-foreground flex-shrink-0" />
         );
       case "avgSessionDuration":
         return (
@@ -38,6 +74,10 @@ export function MetricsCards({ metrics, period }: MetricsCardsProps) {
         return "Active Users";
       case "pageViews":
         return "Page Views";
+      case "totalPageviews":
+        return "Total Page Views";
+      case "totalEvents":
+        return "Total Events";
       case "avgSessionDuration":
         return "Avg. Session Duration";
       default:
@@ -56,7 +96,7 @@ export function MetricsCards({ metrics, period }: MetricsCardsProps) {
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {metrics.map((metric) => (
+      {allMetrics.map((metric) => (
         <Card key={metric.id} className="h-full flex flex-col">
           <CardHeader className="flex items-center justify-between pb-2 min-w-0">
             <CardTitle className="flex-1 text-sm font-medium truncate">
@@ -70,13 +110,15 @@ export function MetricsCards({ metrics, period }: MetricsCardsProps) {
               {formatMetricValue(metric.metricType, metric.value)}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
-              {period === "day"
-                ? "Last 24 hours"
-                : period === "week"
-                  ? "Last 7 days"
-                  : period === "month"
-                    ? "Last 30 days"
-                    : "Last 365 days"}
+              {metric.period === "all"
+                ? "All time"
+                : period === "day"
+                  ? "Last 24 hours"
+                  : period === "week"
+                    ? "Last 7 days"
+                    : period === "month"
+                      ? "Last 30 days"
+                      : "Last 365 days"}
             </p>
           </CardContent>
         </Card>

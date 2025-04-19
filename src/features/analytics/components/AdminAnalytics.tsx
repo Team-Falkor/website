@@ -12,6 +12,8 @@ import { useState } from "react";
 import { useAdminEvents } from "../hooks/admin/useAdminEvents";
 import { useAdminMetrics } from "../hooks/admin/useAdminMetrics";
 import { useAdminPageviews } from "../hooks/admin/useAdminPageviews";
+import { useAdminTotalEvents } from "../hooks/admin/useAdminTotalEvents";
+import { useAdminTotalPageviews } from "../hooks/admin/useAdminTotalPageviews";
 
 import { EventsTable } from "./EventsTable";
 import { MetricsCards } from "./MetricsCards";
@@ -24,8 +26,18 @@ export function AdminAnalytics() {
   const { metrics, isLoadingMetrics } = useAdminMetrics(undefined, period);
   const { events, isLoadingEvents } = useAdminEvents(0, 10);
   const { pageviews, isLoadingPageviews } = useAdminPageviews(0, 10);
+  const { data: totalEvents, isLoading: isLoadingTotalEvents } =
+    useAdminTotalEvents();
+  const { data: totalPageviews, isLoading: isLoadingTotalPageviews } =
+    useAdminTotalPageviews();
 
-  if (isLoadingMetrics || isLoadingEvents || isLoadingPageviews) {
+  if (
+    isLoadingMetrics ||
+    isLoadingEvents ||
+    isLoadingPageviews ||
+    isLoadingTotalEvents ||
+    isLoadingTotalPageviews
+  ) {
     return (
       <div className="flex items-center justify-center h-full w-full p-4">
         <Loader2 className="h-6 w-6 animate-spin" />
@@ -51,7 +63,14 @@ export function AdminAnalytics() {
       </div>
 
       {/* Metrics Cards */}
-      {!!metrics?.length && <MetricsCards metrics={metrics} period={period} />}
+      {!!metrics?.length && (
+        <MetricsCards
+          metrics={metrics}
+          period={period}
+          totalEvents={totalEvents}
+          totalPageviews={totalPageviews}
+        />
+      )}
 
       {/* Tabs for Events and Pageviews */}
       <Tabs defaultValue="events" className="w-full">
