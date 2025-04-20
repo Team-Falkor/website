@@ -10,6 +10,14 @@ export const events: Array<RoadmapEvent> = [
         completed: true,
       },
       {
+        title: "Community-created providers",
+        completed: true,
+      },
+      {
+        title: "Calendar view for upcoming releases",
+        completed: false,
+      },
+      {
         title: "Improved integrated download and torrent client",
         completed: false,
       },
@@ -27,12 +35,12 @@ export const events: Array<RoadmapEvent> = [
       },
       {
         title:
-          "Combine theme and genre into a single page called 'Filter', with filtering options",
+          "Merge theme and genre into a single 'Filter' page with filtering options",
         completed: false,
       },
       {
         title:
-          "Plugin support for extending app functionality with community-made extensions",
+          "Plugin support to extend app functionality with community-made extensions",
         completed: false,
       },
     ],
@@ -52,11 +60,11 @@ export const events: Array<RoadmapEvent> = [
       },
       {
         title:
-          "Social features such as friends, groups, messaging, and achievement sharing (always free)",
+          "Social features: friends, groups, messaging, and achievement sharing (always free)",
         completed: false,
       },
       {
-        title: "Sync game saves to the cloud",
+        title: "Cloud sync for game saves",
         completed: false,
       },
     ],
@@ -67,19 +75,19 @@ export const events: Array<RoadmapEvent> = [
     items: [
       {
         title:
-          "Auto-detect and import games (e.g., .exe) from a user-defined path and automatically add metadata",
+          "Auto-detect and import games (e.g., .exe) from a user-defined path with automatic metadata",
         completed: false,
       },
       {
-        title: "Add additional debrid service support",
+        title: "Support for additional debrid services",
         completed: false,
       },
       {
-        title: "Add more metadata sources",
+        title: "Additional metadata sources",
         completed: false,
       },
       {
-        title: "launch games on linux, with proton",
+        title: "Launch games on Linux with Proton",
         completed: false,
       },
     ],

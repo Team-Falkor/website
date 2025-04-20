@@ -9,19 +9,27 @@ const images: {
   alt: string;
 }[] = [
   {
-    src: "/app-info.webp",
+    src: "/app/home.webp",
+    alt: "App Home Screenshot",
+  },
+  {
+    src: "/app/info-1.webp",
     alt: "App Info Screenshot",
   },
   {
-    src: "/app-info-2.webp",
+    src: "/app/info-2.webp",
     alt: "App Info Screenshot",
   },
   {
-    src: "/app-info-3.webp",
+    src: "/app/info-3.webp",
     alt: "App Info Screenshot",
   },
   {
-    src: "/app-library.webp",
+    src: "/app/library.webp",
+    alt: "App Library Screenshot",
+  },
+  {
+    src: "/app/library-2.webp",
     alt: "App Library Screenshot",
   },
 ];
