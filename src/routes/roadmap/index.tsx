@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import SvgBG from "@/components/svgBG";
 import { events } from "@/data/roadmap";
 import { VerticalEventTimeline } from "@/features/roadmap/components/vertical-event";
@@ -19,6 +20,7 @@ function RouteComponent() {
           />
         )}
       </div>
+      <Footer />
     </div>
   );
 }
