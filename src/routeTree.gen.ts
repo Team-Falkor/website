@@ -21,6 +21,7 @@ import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as GithubNameImport } from './routes/github/$name'
 import { Route as DownloadPrivateImport } from './routes/download/private'
 import { Route as PluginsProvidersIndexImport } from './routes/plugins/providers/index'
+import { Route as AdminRoadmapIndexImport } from './routes/admin/roadmap/index'
 import { Route as AdminAnalyticsIndexImport } from './routes/admin/analytics/index'
 import { Route as PluginsProvidersAddIndexImport } from './routes/plugins/providers/add/index'
 
@@ -81,6 +82,12 @@ const DownloadPrivateRoute = DownloadPrivateImport.update({
 const PluginsProvidersIndexRoute = PluginsProvidersIndexImport.update({
   id: '/plugins/providers/',
   path: '/plugins/providers/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminRoadmapIndexRoute = AdminRoadmapIndexImport.update({
+  id: '/admin/roadmap/',
+  path: '/admin/roadmap/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -163,6 +170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAnalyticsIndexImport
       parentRoute: typeof rootRoute
     }
+    '/admin/roadmap/': {
+      id: '/admin/roadmap/'
+      path: '/admin/roadmap'
+      fullPath: '/admin/roadmap'
+      preLoaderRoute: typeof AdminRoadmapIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/plugins/providers/': {
       id: '/plugins/providers/'
       path: '/plugins/providers'
@@ -192,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginIndexRoute
   '/sign-up': typeof SignUpIndexRoute
   '/admin/analytics': typeof AdminAnalyticsIndexRoute
+  '/admin/roadmap': typeof AdminRoadmapIndexRoute
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
@@ -206,6 +221,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginIndexRoute
   '/sign-up': typeof SignUpIndexRoute
   '/admin/analytics': typeof AdminAnalyticsIndexRoute
+  '/admin/roadmap': typeof AdminRoadmapIndexRoute
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
@@ -221,6 +237,7 @@ export interface FileRoutesById {
   '/login/': typeof LoginIndexRoute
   '/sign-up/': typeof SignUpIndexRoute
   '/admin/analytics/': typeof AdminAnalyticsIndexRoute
+  '/admin/roadmap/': typeof AdminRoadmapIndexRoute
   '/plugins/providers/': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add/': typeof PluginsProvidersAddIndexRoute
 }
@@ -237,6 +254,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/sign-up'
     | '/admin/analytics'
+    | '/admin/roadmap'
     | '/plugins/providers'
     | '/plugins/providers/add'
   fileRoutesByTo: FileRoutesByTo
@@ -250,6 +268,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/sign-up'
     | '/admin/analytics'
+    | '/admin/roadmap'
     | '/plugins/providers'
     | '/plugins/providers/add'
   id:
@@ -263,6 +282,7 @@ export interface FileRouteTypes {
     | '/login/'
     | '/sign-up/'
     | '/admin/analytics/'
+    | '/admin/roadmap/'
     | '/plugins/providers/'
     | '/plugins/providers/add/'
   fileRoutesById: FileRoutesById
@@ -278,6 +298,7 @@ export interface RootRouteChildren {
   LoginIndexRoute: typeof LoginIndexRoute
   SignUpIndexRoute: typeof SignUpIndexRoute
   AdminAnalyticsIndexRoute: typeof AdminAnalyticsIndexRoute
+  AdminRoadmapIndexRoute: typeof AdminRoadmapIndexRoute
   PluginsProvidersIndexRoute: typeof PluginsProvidersIndexRoute
   PluginsProvidersAddIndexRoute: typeof PluginsProvidersAddIndexRoute
 }
@@ -292,6 +313,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginIndexRoute: LoginIndexRoute,
   SignUpIndexRoute: SignUpIndexRoute,
   AdminAnalyticsIndexRoute: AdminAnalyticsIndexRoute,
+  AdminRoadmapIndexRoute: AdminRoadmapIndexRoute,
   PluginsProvidersIndexRoute: PluginsProvidersIndexRoute,
   PluginsProvidersAddIndexRoute: PluginsProvidersAddIndexRoute,
 }
@@ -315,6 +337,7 @@ export const routeTree = rootRoute
         "/login/",
         "/sign-up/",
         "/admin/analytics/",
+        "/admin/roadmap/",
         "/plugins/providers/",
         "/plugins/providers/add/"
       ]
@@ -345,6 +368,9 @@ export const routeTree = rootRoute
     },
     "/admin/analytics/": {
       "filePath": "admin/analytics/index.tsx"
+    },
+    "/admin/roadmap/": {
+      "filePath": "admin/roadmap/index.tsx"
     },
     "/plugins/providers/": {
       "filePath": "plugins/providers/index.tsx"

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
 import { useAdminProviders } from "../hooks/useAdminProviders";
 import { PendingProviderCard } from "./cards/pendingProviderCard";
 
@@ -9,6 +10,10 @@ export function AdminProviders() {
     sortOrder: "desc",
   });
 
+  useEffect(() => {
+    console.log(pendingProviders);
+  }, [pendingProviders]);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-4">
@@ -17,7 +22,7 @@ export function AdminProviders() {
     );
   }
 
-  if (error) {
+  if (error || !pendingProviders) {
     return (
       <div className="p-4 text-red-500">
         Error loading pending providers. Please try again.

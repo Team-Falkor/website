@@ -13,7 +13,12 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Link } from "@tanstack/react-router";
-import { BoxesIcon, ChartArea, LayoutDashboardIcon } from "lucide-react";
+import {
+  BoxesIcon,
+  ChartArea,
+  LayoutDashboardIcon,
+  RouteIcon,
+} from "lucide-react";
 
 const data = {
   navMain: [
@@ -44,6 +49,17 @@ const data = {
         {
           title: "Overview",
           url: "/admin/analytics",
+        },
+      ],
+    },
+    {
+      title: "Roadmap",
+      url: "/admin/roadmap",
+      icon: RouteIcon,
+      items: [
+        {
+          title: "All Roadmaps",
+          url: "/admin/roadmap",
         },
       ],
     },

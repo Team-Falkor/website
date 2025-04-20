@@ -42,13 +42,15 @@ export const authApi = {
     return handleResponse<AuthResponse>(response);
   },
 
-  async signUp(data: SignUpBody): Promise<APIResponse<AuthResponse>> {
+  async signUp(
+    data: SignUpBody
+  ): Promise<APIResponse<Pick<AuthResponse, "user">>> {
     const response = await fetch(`${API_BASE_URL}/sign-up`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    return handleResponse<AuthResponse>(response);
+    return handleResponse(response);
   },
 
   async refresh(refreshToken: string): Promise<APIResponse<AuthResponse>> {

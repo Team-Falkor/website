@@ -25,26 +25,36 @@ export const useLogin = () => {
       },
       onSuccess: (res) => {
         if (!res.success) {
-          toast.error("failed to login");
+          toast.error(res.message || "Failed to login");
           return;
         }
-
         const { data } = res;
-
         if (!data) {
-          toast.error("failed to login");
+          toast.error("Login successful, but no data received.");
           return;
         }
-
-        // Store tokens with expiration timestamps
-        storeTokens({
-          accessToken: data.accessToken,
-          refreshToken: data.refreshToken,
-        });
-
-        toast.success("logged in succesfully");
-
+        toast.success(res.message || "Logged in successfully");
         navigate({ to: "/" });
+      },
+      onError: (error) => {
+        let message = "Failed to login";
+        if (typeof error === "object" && error !== null) {
+          if (
+            "response" in error &&
+            typeof error.response === "object" &&
+            error.response !== null &&
+            "data" in error.response &&
+            typeof error.response.data === "object" &&
+            error.response.data !== null &&
+            "message" in error.response.data &&
+            typeof error.response.data.message === "string"
+          ) {
+            message = error.response.data.message;
+          } else if ("message" in error && typeof error.message === "string") {
+            message = error.message;
+          }
+        }
+        toast.error(message);
       },
     }
   );

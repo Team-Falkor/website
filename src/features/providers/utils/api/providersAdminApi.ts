@@ -30,7 +30,12 @@ export const providersAdminApi = {
         credentials: "include",
       }
     );
-    return response.json();
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch providers");
+    }
+
+    return await response.json();
   },
 
   deleteProvider: async (id: string): Promise<APIResponse<PluginProvider>> => {

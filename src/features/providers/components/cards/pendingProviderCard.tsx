@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { safeJsonParse } from "@/utils/safeJsonParse";
 import { PluginProvider, PluginSetupJSON } from "@team-falkor/shared-types";
 import { format } from "date-fns";
 import { Check, Loader2, X } from "lucide-react";
@@ -30,7 +31,11 @@ export function PendingProviderCard({
     isApprovingProvider,
   } = useAdminProviders();
 
-  const setupJSON: PluginSetupJSON = JSON.parse(setupJSONString);
+  const setupJSON: PluginSetupJSON | null = safeJsonParse(setupJSONString);
+  console.log({
+    setupJSON,
+    setupJSONString,
+  });
 
   useEffect(() => {
     if (!deleteError) return;
@@ -53,6 +58,8 @@ export function PendingProviderCard({
       approveProvider(id);
     }
   };
+
+  if (!setupJSON) return;
 
   return (
     <Card className="h-full flex flex-col">
