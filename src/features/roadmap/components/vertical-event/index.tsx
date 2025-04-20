@@ -1,11 +1,11 @@
-import { RoadmapEventData } from "@team-falkor/shared-types";
+import { RoadmapEvent } from "@team-falkor/shared-types";
 import { useState } from "react";
 import { DateBadge } from "./DateBadge";
 import { EventCard } from "./EventCard";
 import { TimelineDot } from "./TimelineDot";
 
 type VerticalEventTimelineProps = {
-  events: Array<RoadmapEventData>;
+  events: Array<RoadmapEvent>;
   title?: string;
   subtitle?: string;
   initialExpandedIndex?: number | null;

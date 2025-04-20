@@ -1,10 +1,10 @@
-import { Event } from "@/@types/events";
 import { Badge } from "@/components/ui/badge";
+import { RoadmapEvent } from "@team-falkor/shared-types";
 import { motion } from "framer-motion";
 import { CalendarDays } from "lucide-react";
 
 interface DateBadgeProps {
-  phase: Event["phase"];
+  phase: RoadmapEvent["phase"];
   index: number;
 }
 
@@ -23,7 +23,7 @@ export const DateBadge = ({ phase, index }: DateBadgeProps) => (
         className="text-sm py-1 px-3 bg-primary/5 border-primary/20 capitalize"
       >
         <CalendarDays className="size-4 mr-2" />
-        {phase?.replace("-", " ")}
+        {phase?.replace("_", " ")}
       </Badge>
     </motion.div>
   </div>

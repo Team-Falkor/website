@@ -14,6 +14,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SignUpIndexImport } from './routes/sign-up/index'
+import { Route as RoadmapIndexImport } from './routes/roadmap/index'
 import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as DownloadIndexImport } from './routes/download/index'
 import { Route as DiscordIndexImport } from './routes/discord/index'
@@ -40,6 +41,12 @@ const IndexLazyRoute = IndexLazyImport.update({
 const SignUpIndexRoute = SignUpIndexImport.update({
   id: '/sign-up/',
   path: '/sign-up/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RoadmapIndexRoute = RoadmapIndexImport.update({
+  id: '/roadmap/',
+  path: '/roadmap/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -156,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginIndexImport
       parentRoute: typeof rootRoute
     }
+    '/roadmap/': {
+      id: '/roadmap/'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/sign-up/': {
       id: '/sign-up/'
       path: '/sign-up'
@@ -204,6 +218,7 @@ export interface FileRoutesByFullPath {
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
   '/login': typeof LoginIndexRoute
+  '/roadmap': typeof RoadmapIndexRoute
   '/sign-up': typeof SignUpIndexRoute
   '/admin/analytics': typeof AdminAnalyticsIndexRoute
   '/admin/roadmap': typeof AdminRoadmapIndexRoute
@@ -219,6 +234,7 @@ export interface FileRoutesByTo {
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
   '/login': typeof LoginIndexRoute
+  '/roadmap': typeof RoadmapIndexRoute
   '/sign-up': typeof SignUpIndexRoute
   '/admin/analytics': typeof AdminAnalyticsIndexRoute
   '/admin/roadmap': typeof AdminRoadmapIndexRoute
@@ -235,6 +251,7 @@ export interface FileRoutesById {
   '/discord/': typeof DiscordIndexRoute
   '/download/': typeof DownloadIndexRoute
   '/login/': typeof LoginIndexRoute
+  '/roadmap/': typeof RoadmapIndexRoute
   '/sign-up/': typeof SignUpIndexRoute
   '/admin/analytics/': typeof AdminAnalyticsIndexRoute
   '/admin/roadmap/': typeof AdminRoadmapIndexRoute
@@ -252,6 +269,7 @@ export interface FileRouteTypes {
     | '/discord'
     | '/download'
     | '/login'
+    | '/roadmap'
     | '/sign-up'
     | '/admin/analytics'
     | '/admin/roadmap'
@@ -266,6 +284,7 @@ export interface FileRouteTypes {
     | '/discord'
     | '/download'
     | '/login'
+    | '/roadmap'
     | '/sign-up'
     | '/admin/analytics'
     | '/admin/roadmap'
@@ -280,6 +299,7 @@ export interface FileRouteTypes {
     | '/discord/'
     | '/download/'
     | '/login/'
+    | '/roadmap/'
     | '/sign-up/'
     | '/admin/analytics/'
     | '/admin/roadmap/'
@@ -296,6 +316,7 @@ export interface RootRouteChildren {
   DiscordIndexRoute: typeof DiscordIndexRoute
   DownloadIndexRoute: typeof DownloadIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
+  RoadmapIndexRoute: typeof RoadmapIndexRoute
   SignUpIndexRoute: typeof SignUpIndexRoute
   AdminAnalyticsIndexRoute: typeof AdminAnalyticsIndexRoute
   AdminRoadmapIndexRoute: typeof AdminRoadmapIndexRoute
@@ -311,6 +332,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiscordIndexRoute: DiscordIndexRoute,
   DownloadIndexRoute: DownloadIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
+  RoadmapIndexRoute: RoadmapIndexRoute,
   SignUpIndexRoute: SignUpIndexRoute,
   AdminAnalyticsIndexRoute: AdminAnalyticsIndexRoute,
   AdminRoadmapIndexRoute: AdminRoadmapIndexRoute,
@@ -335,6 +357,7 @@ export const routeTree = rootRoute
         "/discord/",
         "/download/",
         "/login/",
+        "/roadmap/",
         "/sign-up/",
         "/admin/analytics/",
         "/admin/roadmap/",
@@ -362,6 +385,9 @@ export const routeTree = rootRoute
     },
     "/login/": {
       "filePath": "login/index.tsx"
+    },
+    "/roadmap/": {
+      "filePath": "roadmap/index.tsx"
     },
     "/sign-up/": {
       "filePath": "sign-up/index.tsx"

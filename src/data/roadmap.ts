@@ -1,9 +1,9 @@
-import { Event } from "@/@types/events";
+import { RoadmapEvent } from "@team-falkor/shared-types";
 
-export const events: Array<Event> = [
+export const events: Array<RoadmapEvent> = [
   {
-    phase: "launch",
-    status: "in-progress",
+    phase: "LAUNCH",
+    status: "IN_PROGRESS",
     items: [
       {
         title: "In-app updater with changelog",
@@ -38,8 +38,8 @@ export const events: Array<Event> = [
     ],
   },
   {
-    phase: "post-launch",
-    status: "planned",
+    phase: "POST_LAUNCH",
+    status: "PLANNED",
     items: [
       {
         title: "Premiumize support",
@@ -62,8 +62,8 @@ export const events: Array<Event> = [
     ],
   },
   {
-    phase: "future",
-    status: "planned",
+    phase: "FUTURE",
+    status: "PLANNED",
     items: [
       {
         title:
@@ -76,6 +76,10 @@ export const events: Array<Event> = [
       },
       {
         title: "Add more metadata sources",
+        completed: false,
+      },
+      {
+        title: "launch games on linux, with proton",
         completed: false,
       },
     ],
