@@ -1,20 +1,34 @@
-import { DataTable } from "@/components/ui/data-table";
-import { ColumnDef } from "@tanstack/react-table";
-import type { EventLog } from "../hooks/admin/useAdminEvents";
+"use client";
+
 import {
   Card,
+  CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
 } from "@/components/ui/card";
+import { DataTable } from "@/components/ui/data-table";
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  PaginationState,
+  SortingState,
+} from "@tanstack/react-table";
+import * as React from "react";
+import type { EventLog } from "../hooks/admin/useAdminEvents";
 
 interface EventsTableProps {
   events: EventLog[] | null | undefined;
+  pageCount: number;
+  onPageChange: (pageIndex: number) => void;
 }
 
-export function EventsTable({ events }: EventsTableProps) {
-  const data: EventLog[] = events ?? [];
+export function EventsTable({
+  events,
+  pageCount,
+  onPageChange,
+}: EventsTableProps) {
+  const data = events ?? [];
 
   const columns: ColumnDef<EventLog, string>[] = [
     {
@@ -48,6 +62,20 @@ export function EventsTable({ events }: EventsTableProps) {
     },
   ];
 
+  // Local state for sorting, filtering, pagination
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  React.useEffect(() => {
+    onPageChange(pagination.pageIndex);
+  }, [pagination.pageIndex, onPageChange]);
+
   return (
     <Card>
       <CardHeader>
@@ -57,7 +85,19 @@ export function EventsTable({ events }: EventsTableProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} data={data} />
+        <DataTable
+          columns={columns}
+          data={data}
+          sorting={sorting}
+          columnFilters={columnFilters}
+          pageIndex={pagination.pageIndex}
+          pageSize={pagination.pageSize}
+          onSortingChange={setSorting}
+          onColumnFiltersChange={setColumnFilters}
+          onPaginationChange={setPagination}
+          searchKey="path"
+          pageCount={pageCount}
+        />
       </CardContent>
     </Card>
   );

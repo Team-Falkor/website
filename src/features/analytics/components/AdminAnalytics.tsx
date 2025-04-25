@@ -88,7 +88,11 @@ export function AdminAnalytics() {
         </TabsList>
 
         <TabsContent value="events" className="space-y-4 mt-4">
-          <EventsTable events={events} />
+          <EventsTable
+            events={events?.data}
+            pageCount={events?.meta?.totalPages ?? 0}
+            onPageChange={setPageIndex}
+          />
         </TabsContent>
 
         <TabsContent value="pageviews" className="space-y-4 mt-4">

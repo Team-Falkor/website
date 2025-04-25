@@ -8,7 +8,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
-import { ColumnDef } from "@tanstack/react-table";
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  PaginationState,
+  SortingState,
+} from "@tanstack/react-table";
+import * as React from "react";
 import type { PageView } from "../hooks/admin/useAdminPageviews";
 
 interface PageviewsTableProps {
@@ -22,10 +28,8 @@ export function PageviewsTable({
   pageCount,
   onPageChange,
 }: PageviewsTableProps) {
-  // Ensure we always pass an array
   const data: PageView[] = pageviews ?? [];
 
-  // Define columns for DataTable with precise string types
   const columns: ColumnDef<PageView, string>[] = [
     {
       accessorKey: "path",
@@ -60,6 +64,21 @@ export function PageviewsTable({
     },
   ];
 
+  // Local state for table controls
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  // call onPageChange whenever pageIndex updates
+  React.useEffect(() => {
+    onPageChange(pagination.pageIndex);
+  }, [pagination.pageIndex, onPageChange]);
+
   return (
     <Card>
       <CardHeader>
@@ -73,7 +92,14 @@ export function PageviewsTable({
           columns={columns}
           data={data}
           pageCount={pageCount}
-          onPageChange={onPageChange}
+          pageIndex={pagination.pageIndex}
+          pageSize={pagination.pageSize}
+          sorting={sorting}
+          columnFilters={columnFilters}
+          onSortingChange={setSorting}
+          onColumnFiltersChange={setColumnFilters}
+          onPaginationChange={setPagination}
+          searchKey="path"
         />
       </CardContent>
     </Card>
