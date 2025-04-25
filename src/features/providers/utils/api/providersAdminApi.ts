@@ -1,6 +1,6 @@
 import { constants } from "@/utils";
 import {
-  APIResponse,
+  ApiResponse,
   PluginProvider,
   PluginProviderResponse,
 } from "@team-falkor/shared-types";
@@ -38,7 +38,7 @@ export const providersAdminApi = {
     return await response.json();
   },
 
-  deleteProvider: async (id: string): Promise<APIResponse<PluginProvider>> => {
+  deleteProvider: async (id: string): Promise<ApiResponse<PluginProvider>> => {
     const response = await fetch(`${API_URL}/providers/admin`, {
       method: "DELETE",
       headers: {
@@ -50,7 +50,7 @@ export const providersAdminApi = {
     return response.json();
   },
 
-  approveProvider: async (id: string): Promise<APIResponse<PluginProvider>> => {
+  approveProvider: async (id: string): Promise<ApiResponse<PluginProvider>> => {
     const response = await fetch(`${API_URL}/providers/admin/approve`, {
       method: "PATCH",
       headers: {

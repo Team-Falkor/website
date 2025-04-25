@@ -1,7 +1,7 @@
 import { constants } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type {
-  APIResponse,
+  ApiResponse,
   RoadmapEvent,
   RoadmapEventData,
 } from "@team-falkor/shared-types";
@@ -19,7 +19,7 @@ export function useCreateRoadmapEvent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(input),
       });
-      const json: APIResponse<RoadmapEventData> = await res.json();
+      const json: ApiResponse<RoadmapEventData> = await res.json();
       if (!res.ok || !json.success)
         throw new Error(json.message || "Failed to create roadmap event");
       return json.data as RoadmapEventData;

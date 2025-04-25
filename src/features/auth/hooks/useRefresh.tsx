@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { APIResponse } from "@team-falkor/shared-types";
+import { ApiResponse } from "@team-falkor/shared-types";
 import { toast } from "sonner";
 import type { AuthResponse } from "../@types";
 import { authApi } from "../utils/api/authApi";
@@ -9,7 +9,7 @@ import { clearTokens, storeTokens } from "../utils/tokenManager";
 export const useRefresh = () => {
   const navigate = useNavigate();
 
-  const mutation = useMutation<APIResponse<AuthResponse>, Error, void>({
+  const mutation = useMutation<ApiResponse<AuthResponse>, Error, void>({
     mutationFn: async () => {
       const refreshToken = localStorage.getItem("refreshToken");
       if (!refreshToken) {

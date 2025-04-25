@@ -1,6 +1,6 @@
 import { constants } from "@/utils";
 import {
-  APIResponse,
+  ApiResponse,
   PluginProvider,
   PluginSetupJSON,
 } from "@team-falkor/shared-types";
@@ -13,7 +13,7 @@ type GetProvidersParams = {
   search?: string;
 };
 
-type GetProvidersResponse = APIResponse<Array<PluginProvider>>;
+type GetProvidersResponse = ApiResponse<Array<PluginProvider>>;
 
 export const providersApi = {
   getProviders: async (
@@ -33,7 +33,7 @@ export const providersApi = {
   addProvider: async (setupData: {
     setupJSON?: PluginSetupJSON;
     setupUrl?: string;
-  }): Promise<APIResponse<PluginSetupJSON>> => {
+  }): Promise<ApiResponse<PluginSetupJSON>> => {
     const response = await fetch(`${API_URL}/providers`, {
       method: "PUT",
       headers: {
@@ -41,7 +41,7 @@ export const providersApi = {
       },
       body: JSON.stringify(setupData),
     });
-    const data: APIResponse<PluginSetupJSON> = await response.json();
+    const data: ApiResponse<PluginSetupJSON> = await response.json();
 
     return data;
   },

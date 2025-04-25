@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { APIResponse } from "@team-falkor/shared-types";
+import { ApiResponse } from "@team-falkor/shared-types";
 import { toast } from "sonner";
 import type { AuthResponse, SignUpBody } from "../@types";
 import { authApi, AuthError } from "../utils/api/authApi";
@@ -9,7 +9,7 @@ export const useSignUp = () => {
   const navigate = useNavigate();
 
   const mutation = useMutation<
-    APIResponse<Pick<AuthResponse, "user">>,
+    ApiResponse<Pick<AuthResponse, "user">>,
     AuthError | Error,
     SignUpBody
   >({

@@ -1,5 +1,5 @@
 import { constants } from "@/utils";
-import { APIResponse } from "@team-falkor/shared-types";
+import { ApiResponse } from "@team-falkor/shared-types";
 import {
   AuthResponse,
   ErrorResponse,
@@ -23,7 +23,7 @@ export class AuthError extends Error {
   }
 }
 
-async function handleResponse<T>(response: Response): Promise<APIResponse<T>> {
+async function handleResponse<T>(response: Response): Promise<ApiResponse<T>> {
   if (!response.ok) {
     const error: ErrorResponse = await response.json();
     throw new AuthError(error.message, error.code, response.status);
@@ -32,7 +32,7 @@ async function handleResponse<T>(response: Response): Promise<APIResponse<T>> {
 }
 
 export const authApi = {
-  async login(credentials: LoginBody): Promise<APIResponse<AuthResponse>> {
+  async login(credentials: LoginBody): Promise<ApiResponse<AuthResponse>> {
     const response = await fetch(`${API_BASE_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -44,7 +44,7 @@ export const authApi = {
 
   async signUp(
     data: SignUpBody
-  ): Promise<APIResponse<Pick<AuthResponse, "user">>> {
+  ): Promise<ApiResponse<Pick<AuthResponse, "user">>> {
     const response = await fetch(`${API_BASE_URL}/sign-up`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -53,7 +53,7 @@ export const authApi = {
     return handleResponse(response);
   },
 
-  async refresh(refreshToken: string): Promise<APIResponse<AuthResponse>> {
+  async refresh(refreshToken: string): Promise<ApiResponse<AuthResponse>> {
     const response = await fetch(`${API_BASE_URL}/refresh`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -63,7 +63,7 @@ export const authApi = {
     return handleResponse<AuthResponse>(response);
   },
 
-  async logout(): Promise<APIResponse<unknown>> {
+  async logout(): Promise<ApiResponse<unknown>> {
     const response = await fetch(`${API_BASE_URL}/logout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -72,7 +72,7 @@ export const authApi = {
     return handleResponse<unknown>(response);
   },
 
-  async me(token: string): Promise<APIResponse<MeResponse>> {
+  async me(token: string): Promise<ApiResponse<MeResponse>> {
     const response = await fetch(`${API_BASE_URL}/me`, {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { APIResponse } from "@team-falkor/shared-types";
+import { ApiResponse } from "@team-falkor/shared-types";
 import { toast } from "sonner";
 import type { AuthResponse, LoginBody } from "../@types";
 import { authApi } from "../utils/api/authApi";
@@ -13,7 +13,7 @@ interface LoginFormData extends LoginBody {
 export const useLogin = () => {
   const navigate = useNavigate();
 
-  const mutation = useMutation<APIResponse<AuthResponse>, Error, LoginFormData>(
+  const mutation = useMutation<ApiResponse<AuthResponse>, Error, LoginFormData>(
     {
       mutationFn: async (credentials) => {
         const { keepLoggedIn, ...loginCredentials } = credentials;

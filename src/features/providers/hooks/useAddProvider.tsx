@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { APIResponse, PluginSetupJSON } from "@team-falkor/shared-types";
+import { ApiResponse, PluginSetupJSON } from "@team-falkor/shared-types";
 import { toast } from "sonner";
 import { providersApi } from "../utils/api/providersApi";
 
@@ -8,7 +8,7 @@ type AddProviderParams = {
   setupUrl?: string;
 };
 
-type AddProviderResponse = APIResponse<PluginSetupJSON>;
+type AddProviderResponse = ApiResponse<PluginSetupJSON>;
 
 export const useAddProvider = () => {
   const mutation = useMutation<AddProviderResponse, Error, AddProviderParams>({
