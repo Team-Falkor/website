@@ -25,7 +25,13 @@ export function AdminAnalytics() {
   // In a real implementation, these hooks would be used instead of mock data
   const { metrics, isLoadingMetrics } = useAdminMetrics(undefined, period);
   const { events, isLoadingEvents } = useAdminEvents(0, 10);
-  const { pageviews, isLoadingPageviews } = useAdminPageviews(0, 10);
+  const [pageIndex, setPageIndex] = useState(0);
+  const pageSize = 10;
+  const { pageviews, isLoadingPageviews } = useAdminPageviews(
+    pageIndex * pageSize,
+    pageSize
+  );
+
   const { data: totalEvents, isLoading: isLoadingTotalEvents } =
     useAdminTotalEvents();
   const { data: totalPageviews, isLoading: isLoadingTotalPageviews } =
@@ -86,7 +92,11 @@ export function AdminAnalytics() {
         </TabsContent>
 
         <TabsContent value="pageviews" className="space-y-4 mt-4">
-          <PageviewsTable pageviews={pageviews} />
+          <PageviewsTable
+            pageviews={pageviews?.data}
+            pageCount={pageviews?.meta?.totalPages ?? 0}
+            onPageChange={setPageIndex}
+          />
         </TabsContent>
       </Tabs>
     </div>

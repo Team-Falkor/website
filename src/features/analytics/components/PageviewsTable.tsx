@@ -13,9 +13,15 @@ import type { PageView } from "../hooks/admin/useAdminPageviews";
 
 interface PageviewsTableProps {
   pageviews: PageView[] | null | undefined;
+  pageCount: number;
+  onPageChange: (pageIndex: number) => void;
 }
 
-export function PageviewsTable({ pageviews }: PageviewsTableProps) {
+export function PageviewsTable({
+  pageviews,
+  pageCount,
+  onPageChange,
+}: PageviewsTableProps) {
   // Ensure we always pass an array
   const data: PageView[] = pageviews ?? [];
 
@@ -63,7 +69,12 @@ export function PageviewsTable({ pageviews }: PageviewsTableProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} data={data} />
+        <DataTable
+          columns={columns}
+          data={data}
+          pageCount={pageCount}
+          onPageChange={onPageChange}
+        />
       </CardContent>
     </Card>
   );

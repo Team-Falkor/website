@@ -1,5 +1,6 @@
 import { constants } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
+import { ApiResponse } from "@team-falkor/shared-types";
 
 const { API_URL } = constants;
 
@@ -14,12 +15,12 @@ export type PageView = {
 };
 
 export function useAdminPageviews(skip = 0, take = 50, path?: string) {
-  const fetchJson = async <T>(url: string): Promise<T> => {
+  const fetchJson = async <T>(url: string): Promise<ApiResponse<T>> => {
     const res = await fetch(url, {
       credentials: "include",
     });
     if (!res.ok) throw new Error((await res.text()) || res.statusText);
-    return (await res.json()).data as T;
+    return (await res.json()) as ApiResponse<T>;
   };
 
   const queryKey = ["admin:pageviews", skip, take, path ?? ""];
