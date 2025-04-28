@@ -15,6 +15,11 @@ export const events: Array<RoadmapEvent> = [
       },
       {
         title:
+          "Merge theme and genre into a single 'Filter' page with filtering options",
+        completed: true,
+      },
+      {
+        title:
           "Automatically enqueue debrid downloads that aren’t cached, display a ‘Downloading via debrid’ status, and auto-start them once cached on the server",
         completed: false,
       },
@@ -38,11 +43,7 @@ export const events: Array<RoadmapEvent> = [
         title: "Extended debrid options: delete and renew key",
         completed: false,
       },
-      {
-        title:
-          "Merge theme and genre into a single 'Filter' page with filtering options",
-        completed: false,
-      },
+    
       {
         title:
           "Plugin support to extend app functionality with community-made extensions",
