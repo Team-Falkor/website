@@ -19,7 +19,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh -i ~/.ssh/id_rsa "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" 'bash -s' << 'EOF'
+          ssh -i ~/.ssh/id_rsa "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" 'bash -s' << '\''EOF
             set -e
 
             export BUN_INSTALL="$HOME/.bun"
@@ -34,20 +34,25 @@ jobs:
 
             cd "$APP_DIR" || { echo "Directory $APP_DIR not found! Exiting."; exit 1; }
 
-            echo "Pulling latest code..."
+            echo "Resetting any local changes…"
+            # Discard all uncommitted edits and untracked files:
+            git reset --hard HEAD
+            git clean -fd
+
+            echo "Pulling latest code from release branch…"
             git pull origin release
 
-            echo "Installing dependencies..."
+            echo "Installing dependencies…"
             bun i
 
-            echo "Building the app..."
+            echo "Building the app…"
             bun run build
 
-            echo "Deploying build files to $WEBROOT..."
+            echo "Deploying build files to $WEBROOT…"
             sudo rm -rf "$WEBROOT"/*
             sudo cp -r dist/* "$WEBROOT/"
 
-            echo "Reloading Nginx..."
+            echo "Reloading Nginx…"
             sudo systemctl reload nginx
 
             echo "---------------------------"
