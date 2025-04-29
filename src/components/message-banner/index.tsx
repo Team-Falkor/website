@@ -1,5 +1,5 @@
 import { constants } from "@/utils";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type JSX } from "react";
 
 // Debounce function to limit the rate of triggering
 const debounce = (fn: () => void, delay: number) => {

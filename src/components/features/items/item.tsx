@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 type FeatureItemProps = {
   title: string;
   children: string;

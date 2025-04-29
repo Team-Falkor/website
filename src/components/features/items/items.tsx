@@ -6,6 +6,7 @@ import {
   Rocket,
   Users,
 } from "lucide-react";
+import { JSX } from "react";
 
 export const featureItems: Array<{
   icon: JSX.Element;

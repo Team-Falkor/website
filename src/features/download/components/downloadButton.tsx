@@ -3,7 +3,7 @@ import { useTrackEvent } from "@/features/analytics/hooks/useTrackEvent";
 import { cn } from "@/utils";
 import { motion } from "framer-motion";
 import { DownloadIcon } from "lucide-react";
-import { useRef } from "react";
+import { JSX, useRef } from "react";
 
 export interface DownloadButtonProps {
   variant?:
