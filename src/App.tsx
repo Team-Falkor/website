@@ -6,41 +6,41 @@ import { ThemeProvider } from "./components/theme-provider";
 import { routeTree } from "./routeTree.gen";
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      retry: false,
-      staleTime: 1000 * 60 * 5, // 5 minutes
-    },
-  },
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+			refetchOnMount: false,
+			refetchOnReconnect: false,
+			retry: false,
+			staleTime: 1000 * 60 * 5, // 5 minutes
+		},
+	},
 });
 
 // Create a new router instance
 const router = createRouter({
-  routeTree,
-  context: {
-    queryClient,
-  },
+	routeTree,
+	context: {
+		queryClient,
+	},
 });
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
+	interface Register {
+		router: typeof router;
+	}
 }
 
 export const App = () => {
-  return (
-    <ThemeProvider defaultTheme="dark" storageKey="falkor-ui-theme">
-      <QueryClientProvider client={queryClient}>
-        {/* <Toaster /> */}
-        {/* <TorrentProvider> */}
-        <RouterProvider router={router} />
-        {/* </TorrentProvider> */}
-      </QueryClientProvider>
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider defaultTheme="dark" storageKey="falkor-ui-theme">
+			<QueryClientProvider client={queryClient}>
+				{/* <Toaster /> */}
+				{/* <TorrentProvider> */}
+				<RouterProvider router={router} />
+				{/* </TorrentProvider> */}
+			</QueryClientProvider>
+		</ThemeProvider>
+	);
 };

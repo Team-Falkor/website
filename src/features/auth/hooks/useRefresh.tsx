@@ -7,45 +7,45 @@ import { authApi } from "../utils/api/authApi";
 import { clearTokens, storeTokens } from "../utils/tokenManager";
 
 export const useRefresh = () => {
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const mutation = useMutation<ApiResponse<AuthResponse>, Error, void>({
-    mutationFn: async () => {
-      const refreshToken = localStorage.getItem("refreshToken");
-      if (!refreshToken) {
-        toast.error("No refresh token available");
-        throw new Error("No refresh token available");
-      }
-      return authApi.refresh(refreshToken);
-    },
-    onSuccess: (res) => {
-      if (!res.success) {
-        toast.error("failed to refresh token");
-        return;
-      }
-      const { data } = res;
+	const mutation = useMutation<ApiResponse<AuthResponse>, Error, void>({
+		mutationFn: async () => {
+			const refreshToken = localStorage.getItem("refreshToken");
+			if (!refreshToken) {
+				toast.error("No refresh token available");
+				throw new Error("No refresh token available");
+			}
+			return authApi.refresh(refreshToken);
+		},
+		onSuccess: (res) => {
+			if (!res.success) {
+				toast.error("failed to refresh token");
+				return;
+			}
+			const { data } = res;
 
-      if (!data) {
-        toast.error("failed to refresh token");
-        return;
-      }
+			if (!data) {
+				toast.error("failed to refresh token");
+				return;
+			}
 
-      storeTokens({
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken,
-      });
-    },
-    onError: () => {
-      // Clear tokens and redirect to login on refresh failure
-      clearTokens();
-      navigate({ to: "/login" });
-    },
-  });
+			storeTokens({
+				accessToken: data.accessToken,
+				refreshToken: data.refreshToken,
+			});
+		},
+		onError: () => {
+			// Clear tokens and redirect to login on refresh failure
+			clearTokens();
+			navigate({ to: "/login" });
+		},
+	});
 
-  return {
-    refresh: () => mutation.mutate(),
-    isLoading: mutation.isPending,
-    error: mutation.error,
-    isError: mutation.isError,
-  };
+	return {
+		refresh: () => mutation.mutate(),
+		isLoading: mutation.isPending,
+		error: mutation.error,
+		isError: mutation.isError,
+	};
 };
