@@ -1,10 +1,10 @@
 import {
-	CalendarDays,
-	Code2,
-	HardDrive,
-	Puzzle,
-	Rocket,
-	Users,
+  CalendarDays,
+  Code2,
+  HardDrive,
+  Puzzle,
+  Rocket,
+  Users,
 } from "lucide-react";
 import { JSX } from "react";
 
@@ -49,7 +49,7 @@ export const featureItems: Array<{
 		title: "Launcher Integration",
 		description:
 			"Launch your games directly from the app, streamlining your playtime with our integrated launcher.",
-		isAvailable: false,
+		isAvailable: true,
 	},
 	{
 		icon: <HardDrive />,
