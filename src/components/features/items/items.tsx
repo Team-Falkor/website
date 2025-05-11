@@ -27,7 +27,7 @@ export const featureItems: Array<{
 		title: "Calendar",
 		description:
 			"Stay ahead with our release calendar, marking the debut of new games so you never miss out on the latest titles.",
-		isAvailable: false,
+		isAvailable: true,
 	},
 	{
 		icon: <Code2 />,
