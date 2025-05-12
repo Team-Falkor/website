@@ -8,341 +8,341 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as AdminAnalyticsIndexImport } from "./routes/admin/analytics/index";
-import { Route as AdminIndexImport } from "./routes/admin/index";
-import { Route as AdminRoadmapIndexImport } from "./routes/admin/roadmap/index";
-import { Route as DiscordIndexImport } from "./routes/discord/index";
-import { Route as DownloadIndexImport } from "./routes/download/index";
-import { Route as DownloadPrivateImport } from "./routes/download/private";
-import { Route as GithubNameImport } from "./routes/github/$name";
-import { Route as LoginIndexImport } from "./routes/login/index";
-import { Route as PluginsProvidersAddIndexImport } from "./routes/plugins/providers/add/index";
-import { Route as PluginsProvidersIndexImport } from "./routes/plugins/providers/index";
-import { Route as RoadmapIndexImport } from "./routes/roadmap/index";
-import { Route as SignUpIndexImport } from "./routes/sign-up/index";
+import { Route as rootRoute } from './routes/__root'
+import { Route as SignUpIndexImport } from './routes/sign-up/index'
+import { Route as RoadmapIndexImport } from './routes/roadmap/index'
+import { Route as LoginIndexImport } from './routes/login/index'
+import { Route as DownloadIndexImport } from './routes/download/index'
+import { Route as DiscordIndexImport } from './routes/discord/index'
+import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as GithubNameImport } from './routes/github/$name'
+import { Route as DownloadPrivateImport } from './routes/download/private'
+import { Route as PluginsProvidersIndexImport } from './routes/plugins/providers/index'
+import { Route as AdminRoadmapIndexImport } from './routes/admin/roadmap/index'
+import { Route as AdminAnalyticsIndexImport } from './routes/admin/analytics/index'
+import { Route as PluginsProvidersAddIndexImport } from './routes/plugins/providers/add/index'
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute("/")();
+const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
 const IndexLazyRoute = IndexLazyImport.update({
-	id: "/",
-	path: "/",
-	getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/index.lazy").then((d) => d.Route));
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
 const SignUpIndexRoute = SignUpIndexImport.update({
-	id: "/sign-up/",
-	path: "/sign-up/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/sign-up/',
+  path: '/sign-up/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const RoadmapIndexRoute = RoadmapIndexImport.update({
-	id: "/roadmap/",
-	path: "/roadmap/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/roadmap/',
+  path: '/roadmap/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LoginIndexRoute = LoginIndexImport.update({
-	id: "/login/",
-	path: "/login/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/login/',
+  path: '/login/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DownloadIndexRoute = DownloadIndexImport.update({
-	id: "/download/",
-	path: "/download/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/download/',
+  path: '/download/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DiscordIndexRoute = DiscordIndexImport.update({
-	id: "/discord/",
-	path: "/discord/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/discord/',
+  path: '/discord/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AdminIndexRoute = AdminIndexImport.update({
-	id: "/admin/",
-	path: "/admin/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const GithubNameRoute = GithubNameImport.update({
-	id: "/github/$name",
-	path: "/github/$name",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/github/$name',
+  path: '/github/$name',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DownloadPrivateRoute = DownloadPrivateImport.update({
-	id: "/download/private",
-	path: "/download/private",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/download/private',
+  path: '/download/private',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const PluginsProvidersIndexRoute = PluginsProvidersIndexImport.update({
-	id: "/plugins/providers/",
-	path: "/plugins/providers/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/plugins/providers/',
+  path: '/plugins/providers/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AdminRoadmapIndexRoute = AdminRoadmapIndexImport.update({
-	id: "/admin/roadmap/",
-	path: "/admin/roadmap/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/admin/roadmap/',
+  path: '/admin/roadmap/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AdminAnalyticsIndexRoute = AdminAnalyticsIndexImport.update({
-	id: "/admin/analytics/",
-	path: "/admin/analytics/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/admin/analytics/',
+  path: '/admin/analytics/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const PluginsProvidersAddIndexRoute = PluginsProvidersAddIndexImport.update({
-	id: "/plugins/providers/add/",
-	path: "/plugins/providers/add/",
-	getParentRoute: () => rootRoute,
-} as any);
+  id: '/plugins/providers/add/',
+  path: '/plugins/providers/add/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
-	interface FileRoutesByPath {
-		"/": {
-			id: "/";
-			path: "/";
-			fullPath: "/";
-			preLoaderRoute: typeof IndexLazyImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/download/private": {
-			id: "/download/private";
-			path: "/download/private";
-			fullPath: "/download/private";
-			preLoaderRoute: typeof DownloadPrivateImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/github/$name": {
-			id: "/github/$name";
-			path: "/github/$name";
-			fullPath: "/github/$name";
-			preLoaderRoute: typeof GithubNameImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/admin/": {
-			id: "/admin/";
-			path: "/admin";
-			fullPath: "/admin";
-			preLoaderRoute: typeof AdminIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/discord/": {
-			id: "/discord/";
-			path: "/discord";
-			fullPath: "/discord";
-			preLoaderRoute: typeof DiscordIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/download/": {
-			id: "/download/";
-			path: "/download";
-			fullPath: "/download";
-			preLoaderRoute: typeof DownloadIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/login/": {
-			id: "/login/";
-			path: "/login";
-			fullPath: "/login";
-			preLoaderRoute: typeof LoginIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/roadmap/": {
-			id: "/roadmap/";
-			path: "/roadmap";
-			fullPath: "/roadmap";
-			preLoaderRoute: typeof RoadmapIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/sign-up/": {
-			id: "/sign-up/";
-			path: "/sign-up";
-			fullPath: "/sign-up";
-			preLoaderRoute: typeof SignUpIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/admin/analytics/": {
-			id: "/admin/analytics/";
-			path: "/admin/analytics";
-			fullPath: "/admin/analytics";
-			preLoaderRoute: typeof AdminAnalyticsIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/admin/roadmap/": {
-			id: "/admin/roadmap/";
-			path: "/admin/roadmap";
-			fullPath: "/admin/roadmap";
-			preLoaderRoute: typeof AdminRoadmapIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/plugins/providers/": {
-			id: "/plugins/providers/";
-			path: "/plugins/providers";
-			fullPath: "/plugins/providers";
-			preLoaderRoute: typeof PluginsProvidersIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		"/plugins/providers/add/": {
-			id: "/plugins/providers/add/";
-			path: "/plugins/providers/add";
-			fullPath: "/plugins/providers/add";
-			preLoaderRoute: typeof PluginsProvidersAddIndexImport;
-			parentRoute: typeof rootRoute;
-		};
-	}
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/download/private': {
+      id: '/download/private'
+      path: '/download/private'
+      fullPath: '/download/private'
+      preLoaderRoute: typeof DownloadPrivateImport
+      parentRoute: typeof rootRoute
+    }
+    '/github/$name': {
+      id: '/github/$name'
+      path: '/github/$name'
+      fullPath: '/github/$name'
+      preLoaderRoute: typeof GithubNameImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/discord/': {
+      id: '/discord/'
+      path: '/discord'
+      fullPath: '/discord'
+      preLoaderRoute: typeof DiscordIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/download/': {
+      id: '/download/'
+      path: '/download'
+      fullPath: '/download'
+      preLoaderRoute: typeof DownloadIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/roadmap/': {
+      id: '/roadmap/'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/sign-up/': {
+      id: '/sign-up/'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SignUpIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/analytics/': {
+      id: '/admin/analytics/'
+      path: '/admin/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/roadmap/': {
+      id: '/admin/roadmap/'
+      path: '/admin/roadmap'
+      fullPath: '/admin/roadmap'
+      preLoaderRoute: typeof AdminRoadmapIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/plugins/providers/': {
+      id: '/plugins/providers/'
+      path: '/plugins/providers'
+      fullPath: '/plugins/providers'
+      preLoaderRoute: typeof PluginsProvidersIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/plugins/providers/add/': {
+      id: '/plugins/providers/add/'
+      path: '/plugins/providers/add'
+      fullPath: '/plugins/providers/add'
+      preLoaderRoute: typeof PluginsProvidersAddIndexImport
+      parentRoute: typeof rootRoute
+    }
+  }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-	"/": typeof IndexLazyRoute;
-	"/download/private": typeof DownloadPrivateRoute;
-	"/github/$name": typeof GithubNameRoute;
-	"/admin": typeof AdminIndexRoute;
-	"/discord": typeof DiscordIndexRoute;
-	"/download": typeof DownloadIndexRoute;
-	"/login": typeof LoginIndexRoute;
-	"/roadmap": typeof RoadmapIndexRoute;
-	"/sign-up": typeof SignUpIndexRoute;
-	"/admin/analytics": typeof AdminAnalyticsIndexRoute;
-	"/admin/roadmap": typeof AdminRoadmapIndexRoute;
-	"/plugins/providers": typeof PluginsProvidersIndexRoute;
-	"/plugins/providers/add": typeof PluginsProvidersAddIndexRoute;
+  '/': typeof IndexLazyRoute
+  '/download/private': typeof DownloadPrivateRoute
+  '/github/$name': typeof GithubNameRoute
+  '/admin': typeof AdminIndexRoute
+  '/discord': typeof DiscordIndexRoute
+  '/download': typeof DownloadIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/roadmap': typeof RoadmapIndexRoute
+  '/sign-up': typeof SignUpIndexRoute
+  '/admin/analytics': typeof AdminAnalyticsIndexRoute
+  '/admin/roadmap': typeof AdminRoadmapIndexRoute
+  '/plugins/providers': typeof PluginsProvidersIndexRoute
+  '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
 
 export interface FileRoutesByTo {
-	"/": typeof IndexLazyRoute;
-	"/download/private": typeof DownloadPrivateRoute;
-	"/github/$name": typeof GithubNameRoute;
-	"/admin": typeof AdminIndexRoute;
-	"/discord": typeof DiscordIndexRoute;
-	"/download": typeof DownloadIndexRoute;
-	"/login": typeof LoginIndexRoute;
-	"/roadmap": typeof RoadmapIndexRoute;
-	"/sign-up": typeof SignUpIndexRoute;
-	"/admin/analytics": typeof AdminAnalyticsIndexRoute;
-	"/admin/roadmap": typeof AdminRoadmapIndexRoute;
-	"/plugins/providers": typeof PluginsProvidersIndexRoute;
-	"/plugins/providers/add": typeof PluginsProvidersAddIndexRoute;
+  '/': typeof IndexLazyRoute
+  '/download/private': typeof DownloadPrivateRoute
+  '/github/$name': typeof GithubNameRoute
+  '/admin': typeof AdminIndexRoute
+  '/discord': typeof DiscordIndexRoute
+  '/download': typeof DownloadIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/roadmap': typeof RoadmapIndexRoute
+  '/sign-up': typeof SignUpIndexRoute
+  '/admin/analytics': typeof AdminAnalyticsIndexRoute
+  '/admin/roadmap': typeof AdminRoadmapIndexRoute
+  '/plugins/providers': typeof PluginsProvidersIndexRoute
+  '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
 
 export interface FileRoutesById {
-	__root__: typeof rootRoute;
-	"/": typeof IndexLazyRoute;
-	"/download/private": typeof DownloadPrivateRoute;
-	"/github/$name": typeof GithubNameRoute;
-	"/admin/": typeof AdminIndexRoute;
-	"/discord/": typeof DiscordIndexRoute;
-	"/download/": typeof DownloadIndexRoute;
-	"/login/": typeof LoginIndexRoute;
-	"/roadmap/": typeof RoadmapIndexRoute;
-	"/sign-up/": typeof SignUpIndexRoute;
-	"/admin/analytics/": typeof AdminAnalyticsIndexRoute;
-	"/admin/roadmap/": typeof AdminRoadmapIndexRoute;
-	"/plugins/providers/": typeof PluginsProvidersIndexRoute;
-	"/plugins/providers/add/": typeof PluginsProvidersAddIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexLazyRoute
+  '/download/private': typeof DownloadPrivateRoute
+  '/github/$name': typeof GithubNameRoute
+  '/admin/': typeof AdminIndexRoute
+  '/discord/': typeof DiscordIndexRoute
+  '/download/': typeof DownloadIndexRoute
+  '/login/': typeof LoginIndexRoute
+  '/roadmap/': typeof RoadmapIndexRoute
+  '/sign-up/': typeof SignUpIndexRoute
+  '/admin/analytics/': typeof AdminAnalyticsIndexRoute
+  '/admin/roadmap/': typeof AdminRoadmapIndexRoute
+  '/plugins/providers/': typeof PluginsProvidersIndexRoute
+  '/plugins/providers/add/': typeof PluginsProvidersAddIndexRoute
 }
 
 export interface FileRouteTypes {
-	fileRoutesByFullPath: FileRoutesByFullPath;
-	fullPaths:
-		| "/"
-		| "/download/private"
-		| "/github/$name"
-		| "/admin"
-		| "/discord"
-		| "/download"
-		| "/login"
-		| "/roadmap"
-		| "/sign-up"
-		| "/admin/analytics"
-		| "/admin/roadmap"
-		| "/plugins/providers"
-		| "/plugins/providers/add";
-	fileRoutesByTo: FileRoutesByTo;
-	to:
-		| "/"
-		| "/download/private"
-		| "/github/$name"
-		| "/admin"
-		| "/discord"
-		| "/download"
-		| "/login"
-		| "/roadmap"
-		| "/sign-up"
-		| "/admin/analytics"
-		| "/admin/roadmap"
-		| "/plugins/providers"
-		| "/plugins/providers/add";
-	id:
-		| "__root__"
-		| "/"
-		| "/download/private"
-		| "/github/$name"
-		| "/admin/"
-		| "/discord/"
-		| "/download/"
-		| "/login/"
-		| "/roadmap/"
-		| "/sign-up/"
-		| "/admin/analytics/"
-		| "/admin/roadmap/"
-		| "/plugins/providers/"
-		| "/plugins/providers/add/";
-	fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/download/private'
+    | '/github/$name'
+    | '/admin'
+    | '/discord'
+    | '/download'
+    | '/login'
+    | '/roadmap'
+    | '/sign-up'
+    | '/admin/analytics'
+    | '/admin/roadmap'
+    | '/plugins/providers'
+    | '/plugins/providers/add'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/download/private'
+    | '/github/$name'
+    | '/admin'
+    | '/discord'
+    | '/download'
+    | '/login'
+    | '/roadmap'
+    | '/sign-up'
+    | '/admin/analytics'
+    | '/admin/roadmap'
+    | '/plugins/providers'
+    | '/plugins/providers/add'
+  id:
+    | '__root__'
+    | '/'
+    | '/download/private'
+    | '/github/$name'
+    | '/admin/'
+    | '/discord/'
+    | '/download/'
+    | '/login/'
+    | '/roadmap/'
+    | '/sign-up/'
+    | '/admin/analytics/'
+    | '/admin/roadmap/'
+    | '/plugins/providers/'
+    | '/plugins/providers/add/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-	IndexLazyRoute: typeof IndexLazyRoute;
-	DownloadPrivateRoute: typeof DownloadPrivateRoute;
-	GithubNameRoute: typeof GithubNameRoute;
-	AdminIndexRoute: typeof AdminIndexRoute;
-	DiscordIndexRoute: typeof DiscordIndexRoute;
-	DownloadIndexRoute: typeof DownloadIndexRoute;
-	LoginIndexRoute: typeof LoginIndexRoute;
-	RoadmapIndexRoute: typeof RoadmapIndexRoute;
-	SignUpIndexRoute: typeof SignUpIndexRoute;
-	AdminAnalyticsIndexRoute: typeof AdminAnalyticsIndexRoute;
-	AdminRoadmapIndexRoute: typeof AdminRoadmapIndexRoute;
-	PluginsProvidersIndexRoute: typeof PluginsProvidersIndexRoute;
-	PluginsProvidersAddIndexRoute: typeof PluginsProvidersAddIndexRoute;
+  IndexLazyRoute: typeof IndexLazyRoute
+  DownloadPrivateRoute: typeof DownloadPrivateRoute
+  GithubNameRoute: typeof GithubNameRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  DiscordIndexRoute: typeof DiscordIndexRoute
+  DownloadIndexRoute: typeof DownloadIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
+  RoadmapIndexRoute: typeof RoadmapIndexRoute
+  SignUpIndexRoute: typeof SignUpIndexRoute
+  AdminAnalyticsIndexRoute: typeof AdminAnalyticsIndexRoute
+  AdminRoadmapIndexRoute: typeof AdminRoadmapIndexRoute
+  PluginsProvidersIndexRoute: typeof PluginsProvidersIndexRoute
+  PluginsProvidersAddIndexRoute: typeof PluginsProvidersAddIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-	IndexLazyRoute: IndexLazyRoute,
-	DownloadPrivateRoute: DownloadPrivateRoute,
-	GithubNameRoute: GithubNameRoute,
-	AdminIndexRoute: AdminIndexRoute,
-	DiscordIndexRoute: DiscordIndexRoute,
-	DownloadIndexRoute: DownloadIndexRoute,
-	LoginIndexRoute: LoginIndexRoute,
-	RoadmapIndexRoute: RoadmapIndexRoute,
-	SignUpIndexRoute: SignUpIndexRoute,
-	AdminAnalyticsIndexRoute: AdminAnalyticsIndexRoute,
-	AdminRoadmapIndexRoute: AdminRoadmapIndexRoute,
-	PluginsProvidersIndexRoute: PluginsProvidersIndexRoute,
-	PluginsProvidersAddIndexRoute: PluginsProvidersAddIndexRoute,
-};
+  IndexLazyRoute: IndexLazyRoute,
+  DownloadPrivateRoute: DownloadPrivateRoute,
+  GithubNameRoute: GithubNameRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  DiscordIndexRoute: DiscordIndexRoute,
+  DownloadIndexRoute: DownloadIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
+  RoadmapIndexRoute: RoadmapIndexRoute,
+  SignUpIndexRoute: SignUpIndexRoute,
+  AdminAnalyticsIndexRoute: AdminAnalyticsIndexRoute,
+  AdminRoadmapIndexRoute: AdminRoadmapIndexRoute,
+  PluginsProvidersIndexRoute: PluginsProvidersIndexRoute,
+  PluginsProvidersAddIndexRoute: PluginsProvidersAddIndexRoute,
+}
 
 export const routeTree = rootRoute
-	._addFileChildren(rootRouteChildren)
-	._addFileTypes<FileRouteTypes>();
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {

@@ -23,12 +23,12 @@ export const events: Array<RoadmapEvent> = [
 				completed: true,
 			},
 			{
-				title:
-					"Automatically enqueue debrid downloads that aren’t cached, display a ‘Downloading via debrid’ status, and auto-start them once cached on the server",
-				completed: false,
+				title: "Improved integrated http download and torrent client",
+				completed: true,
 			},
 			{
-				title: "Improved integrated download and torrent client",
+				title:
+					"Automatically enqueue debrid downloads that aren’t cached, display a ‘Downloading via debrid’ status, and auto-start them once cached on the server",
 				completed: false,
 			},
 			{
