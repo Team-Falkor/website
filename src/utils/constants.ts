@@ -12,7 +12,7 @@ export const constants = {
 		"docs",
 		"plugin-sdk",
 	],
-	app_version: "v0.3.1-alpha",
+	app_version: "v0.3.2-alpha",
 	banner_message: "Test Build V0.0.1 W/ Achievements support",
 	example_setup_json: {
 		id: "my.awesome.plugin",
