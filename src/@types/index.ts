@@ -1,4 +1,5 @@
 export * from "./auth";
+export * from "./github";
 export * from "./mdTypes";
 
 export type Platform = "windows" | "linux";

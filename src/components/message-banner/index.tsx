@@ -1,40 +1,35 @@
 import { type JSX, useEffect, useRef, useState } from "react";
 import { constants } from "@/utils";
 
-// Debounce function to limit the rate of triggering
 const debounce = (fn: () => void, delay: number) => {
-	let timeoutId: ReturnType<typeof setTimeout>;
+	let timeoutId: ReturnType<typeof setTimeout> | undefined;
 	return () => {
-		clearTimeout(timeoutId);
+		if (timeoutId) clearTimeout(timeoutId);
 		timeoutId = setTimeout(fn, delay);
 	};
 };
 
-// Function to parse banner_message and convert **<string>** and *<string>* into bold and italic elements
 const parseFormattedMessage = (message: string) => {
 	const parts: (string | JSX.Element)[] = [];
 	let lastIndex = 0;
 	const regex = /(\*\*(.*?)\*\*|\*(.*?)\*)/g;
-	let match: RegExpExecArray | null;
+	let match: RegExpExecArray | null = regex.exec(message);
 
-	while ((match = regex.exec(message)) !== null) {
-		const beforeMatch = message.slice(lastIndex, match.index);
-		if (beforeMatch) parts.push(beforeMatch);
-
+	while (match !== null) {
+		if (match.index > lastIndex) {
+			parts.push(message.slice(lastIndex, match.index));
+		}
 		if (match[2]) {
-			// Bold text
 			parts.push(<b key={match.index}>{match[2]}</b>);
 		} else if (match[3]) {
-			// Italic text
 			parts.push(<i key={match.index}>{match[3]}</i>);
 		}
-
 		lastIndex = regex.lastIndex;
+		match = regex.exec(message);
 	}
-
-	const afterMatch = message.slice(lastIndex);
-	if (afterMatch) parts.push(afterMatch);
-
+	if (lastIndex < message.length) {
+		parts.push(message.slice(lastIndex));
+	}
 	return parts;
 };
 
@@ -45,32 +40,19 @@ const MessageBanner = () => {
 	const { banner_message } = constants;
 
 	useEffect(() => {
-		const message = localStorage.getItem("message-banner");
-
-		if (message === banner_message) return setShowBanner(false);
-
-		setShowBanner(!!banner_message);
-		if (banner_message) localStorage.setItem("message-banner", banner_message);
+		setShowBanner(Boolean(banner_message));
 	}, [banner_message]);
 
 	useEffect(() => {
 		const checkOverflow = () => {
-			const bannerEl = bannerRef.current;
-			if (bannerEl) {
-				const isTextOverflowing = bannerEl.scrollWidth > bannerEl.clientWidth;
-				setIsOverflowing(isTextOverflowing);
-			}
+			const el = bannerRef.current;
+			setIsOverflowing(Boolean(el && el.scrollWidth > el.clientWidth));
 		};
-
-		// Debounced resize handler
-		const debouncedCheckOverflow = debounce(checkOverflow, 150);
-
+		const debounced = debounce(checkOverflow, 150);
 		checkOverflow();
-
-		// Re-check on window resize with debounced function
-		window.addEventListener("resize", debouncedCheckOverflow);
-		return () => window.removeEventListener("resize", debouncedCheckOverflow);
-	}, [banner_message]);
+		window.addEventListener("resize", debounced);
+		return () => window.removeEventListener("resize", debounced);
+	}, []);
 
 	if (!showBanner) return null;
 
@@ -78,7 +60,9 @@ const MessageBanner = () => {
 		<div className="relative w-full bg-purple-800/25 flex justify-center items-center p-1 py-2 sm:py-3 text-sm sm:text-base overflow-hidden z-50">
 			<div
 				ref={bannerRef}
-				className={`whitespace-nowrap ${isOverflowing ? "animate-marquee" : ""}`}
+				className={`whitespace-nowrap transition-all duration-300 ${
+					isOverflowing ? "animate-marquee" : ""
+				}`}
 				style={{ maxWidth: "100%" }}
 			>
 				{parseFormattedMessage(banner_message)}

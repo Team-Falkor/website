@@ -1,6 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import * as React from "react";
-
+import React, { useEffect, useState } from "react";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -10,7 +9,7 @@ import {
 	BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export interface BreadcrumbItem {
+export interface BreadcrumbItemType {
 	label: string;
 	path: string;
 	isCurrentPage?: boolean;
@@ -18,9 +17,9 @@ export interface BreadcrumbItem {
 
 export function DynamicBreadcrumbs() {
 	const routerState = useRouterState();
-	const [breadcrumbs, setBreadcrumbs] = React.useState<BreadcrumbItem[]>([]);
+	const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItemType[]>([]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const path = routerState.location.pathname;
 		const pathSegments = path.split("/").filter((segment) => segment !== "");
 

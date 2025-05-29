@@ -1,4 +1,4 @@
-import { RoadmapEvent } from "@team-falkor/shared-types";
+import type { RoadmapEvent } from "@team-falkor/shared-types";
 
 export const events: Array<RoadmapEvent> = [
 	{
@@ -49,15 +49,16 @@ export const events: Array<RoadmapEvent> = [
 		phase: "POST_LAUNCH",
 		status: "PLANNED",
 		items: [
-      {
+			{
 				title:
 					"Plugin support to extend app functionality with community-made extensions",
 				completed: false,
 			},
-      {
-        title: "Theme support, to allow users to customize the app's appearance",
-        completed: false,
-      },
+			{
+				title:
+					"Theme support, to allow users to customize the app's appearance",
+				completed: false,
+			},
 			{
 				title: "Premiumize support",
 				completed: false,

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { CheckCircle2, Disc3 } from "lucide-react";
 import { Version } from "@/@types";
 import Footer from "@/components/footer";
 import SvgBG from "@/components/svgBG";
@@ -7,6 +8,7 @@ import {
 	BugReportSection,
 	DownloadSection,
 } from "@/features/download/components";
+import useGithubLatestReleases from "@/hooks/use-github-latest-releases";
 import { constants, downloadApp } from "@/utils";
 
 export const Route = createFileRoute("/download/")({
@@ -14,16 +16,31 @@ export const Route = createFileRoute("/download/")({
 });
 
 function Download() {
-	const version = constants.app_version as Version;
+	const { data: releases, isLoading } = useGithubLatestReleases(
+		"team-falkor",
+		"falkor",
+		1,
+	);
 
-	// Animation variants
+	let versionToUse: string = constants.app_version;
+	let versionSourceMessage: string | null = null;
+
+	if (releases && releases.length > 0) {
+		const latestRelease = releases[0];
+		versionToUse = latestRelease.tag_name;
+		versionSourceMessage = `Latest version: ${versionToUse}`;
+	}
+
+	const versionForProps: Version = versionToUse as Version;
+
+	const animationDelay = 0.1;
 	const containerVariants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
 			transition: {
 				staggerChildren: 0.2,
-				delayChildren: 0.3,
+				delayChildren: animationDelay,
 			},
 		},
 	};
@@ -37,33 +54,63 @@ function Download() {
 		},
 	};
 
+	const fadeInUpVariants = {
+		hidden: { opacity: 0, y: 30 },
+		visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+	};
+
+	if (isLoading) {
+		return (
+			<div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-900 to-gray-950 gap-4">
+				<div className="flex flex-col items-center gap-6 p-8 rounded-xl bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 shadow-lg">
+					<Disc3 className="animate-spin size-12 text-blue-400" />
+					<p className="text-2xl font-medium text-white">
+						Loading latest download information...
+					</p>
+					<p className="text-gray-400 text-center max-w-md">
+						We're fetching the most recent version of Falkor for you.
+					</p>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
-			<div className="relative p-2 px-4 pb-16 overflow-hidden">
+			<div className="relative overflow-hidden p-2 px-4 pb-16">
 				<SvgBG />
 
 				<motion.div
 					initial="hidden"
 					animate="visible"
 					variants={containerVariants}
-					className="px-4 pt-8 pb-6 mx-auto max-w-4xl sm:px-6 sm:pt-10 sm:pb-8"
+					className="mx-auto max-w-5xl px-4 pt-24 pb-6 sm:px-6 sm:pb-8"
 				>
 					<div className="text-center">
 						<motion.h1
 							variants={itemVariants}
-							className="mt-8 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600"
+							className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl"
 						>
-							Downloads
+							Download Falkor
 						</motion.h1>
 
 						<motion.p
 							variants={itemVariants}
-							className="mt-4 text-base leading-7 text-gray-300 sm:mt-6 sm:text-lg lg:text-xl"
+							className="mt-6 text-lg leading-7 text-gray-300 sm:text-xl max-w-2xl mx-auto"
 						>
-							Falkor is available for Windows and Linux.
-							<br />
-							For the best experience, please use the latest version available.
+							Get started with Falkor on your preferred platform. Choose from
+							the options below to download the latest version.
 						</motion.p>
+
+						<motion.div
+							variants={fadeInUpVariants}
+							className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 mt-6"
+						>
+							<CheckCircle2 className="size-4" />
+							<span className="text-sm font-medium">
+								{versionSourceMessage || `Current version: ${versionForProps}`}
+							</span>
+						</motion.div>
 					</div>
 				</motion.div>
 
@@ -71,74 +118,86 @@ function Download() {
 					initial="hidden"
 					animate="visible"
 					variants={containerVariants}
-					className="px-4 pt-12 mx-auto max-w-4xl sm:px-6 lg:max-w-6xl lg:pt-16 space-y-16"
+					className="mx-auto max-w-5xl px-4 pt-8 sm:px-6 lg:pt-12"
 				>
-					{/* LINUX DOWNLOAD SECTION */}
-					<motion.div
-						variants={itemVariants}
-						className="transform hover:scale-[1.01] transition-all duration-300"
-					>
-						<DownloadSection
-							platform="linux"
-							version={version}
-							imgSrc="/linux.png"
-							buttons={[
-								{
-									label: "AppImage",
-									variant: "secondary",
-									href: downloadApp("appimage", version),
-								},
-								{
-									label: "Debian",
-									variant: "secondary",
-									href: downloadApp("debian", version),
-								},
-								{
-									label: "Tar.gz",
-									variant: "secondary",
-									href: downloadApp("tar.gz", version),
-								},
-								{
-									label: "Pacman",
-									variant: "secondary",
-									href: downloadApp("pacman", version),
-								},
-								{
-									label: "RPM",
-									variant: "secondary",
-									href: downloadApp("rpm", version),
-								},
-							]}
-						/>
-					</motion.div>
+					<div className="flex flex-col gap-8">
+						<motion.div
+							variants={itemVariants}
+							className="transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+						>
+							<DownloadSection
+								platform="windows"
+								version={versionForProps}
+								imgSrc="/windows.png"
+								buttons={[
+									{
+										label: "Download for Windows",
+										variant: "secondary",
+										href: downloadApp("windows", versionForProps),
+									},
+								]}
+							/>
+						</motion.div>
 
-					{/* WINDOWS DOWNLOAD SECTION */}
-					<motion.div
-						variants={itemVariants}
-						className="transform hover:scale-[1.01] transition-all duration-300"
-					>
-						<DownloadSection
-							platform="windows"
-							version={version}
-							imgSrc="/windows.png"
-							buttons={[
-								{
-									label: "Download for Windows",
-									variant: "secondary",
-									href: downloadApp("windows", version),
-								},
-							]}
-						/>
-					</motion.div>
+						<motion.div
+							variants={itemVariants}
+							className="transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+						>
+							<DownloadSection
+								platform="linux"
+								version={versionForProps}
+								imgSrc="/linux.png"
+								buttons={[
+									{
+										label: "AppImage",
+										variant: "secondary",
+										href: downloadApp("appimage", versionForProps),
+									},
+									{
+										label: "Debian",
+										variant: "secondary",
+										href: downloadApp("debian", versionForProps),
+									},
+									{
+										label: "Tar.gz",
+										variant: "secondary",
+										href: downloadApp("tar.gz", versionForProps),
+									},
+									{
+										label: "Pacman",
+										variant: "secondary",
+										href: downloadApp("pacman", versionForProps),
+									},
+									{
+										label: "RPM",
+										variant: "secondary",
+										href: downloadApp("rpm", versionForProps),
+									},
+								]}
+							/>
+						</motion.div>
+					</div>
 				</motion.div>
 
 				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: 0.8, duration: 0.5 }}
-					className="pt-16"
+					variants={fadeInUpVariants}
+					initial="hidden"
+					animate="visible"
+					transition={{ delay: 0.6 }}
+					className="pt-16 mt-8"
 				>
-					<BugReportSection />
+					<div className="max-w-5xl mx-auto">
+						<div className="text-center mb-12">
+							<h2 className="text-2xl font-bold text-white sm:text-3xl mb-4">
+								Need Help?
+							</h2>
+							<p className="text-gray-400 max-w-2xl mx-auto">
+								We're here to support you with any issues or questions you might
+								have.
+							</p>
+						</div>
+						<BugReportSection />
+					</div>
 				</motion.div>
 			</div>
 

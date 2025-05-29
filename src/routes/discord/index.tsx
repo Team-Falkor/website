@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { constants } from "@/utils";
 
 export const Route = createFileRoute("/discord/")({
@@ -6,5 +7,9 @@ export const Route = createFileRoute("/discord/")({
 });
 
 function Discord() {
-	return (window.location.href = constants.discord_invite_link);
+	useEffect(() => {
+		window.location.href = constants.discord_invite_link;
+	}, []);
+
+	return null;
 }

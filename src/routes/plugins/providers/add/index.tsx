@@ -51,7 +51,7 @@ function RouteComponent() {
 		try {
 			const isValidUrl = new URL(url);
 			setIsValidUrl(isValidUrl?.href?.includes("/setup.json"));
-		} catch (e) {
+		} catch (_e) {
 			return false;
 		}
 	}, []);
