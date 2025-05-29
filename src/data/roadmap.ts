@@ -29,7 +29,7 @@ export const events: Array<RoadmapEvent> = [
 			{
 				title:
 					"Automatically enqueue debrid downloads that aren’t cached, display a ‘Downloading via debrid’ status, and auto-start them once cached on the server",
-				completed: false,
+				completed: true,
 			},
 			{
 				title: "Import achievements",
