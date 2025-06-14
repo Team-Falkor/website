@@ -1,46 +1,62 @@
-// src/hooks/use-github-latest-releases.tsx
-
 import { type UseQueryResult, useQuery } from "@tanstack/react-query";
-import { GithubRelease } from "@/@types";
+import { GithubRelease } from "@/@types"; // Assuming this type definition is correct
 
-const fetchGithubReleases = async (
+/**
+ * Fetches the latest GitHub release for a given repository.
+ * @param owner - The owner of the repository.
+ * @param repo - The name of the repository.
+ * @param signal - An optional AbortSignal to cancel the request.
+ * @returns A promise that resolves to the latest GithubRelease object.
+ */
+const fetchGithubLatestRelease = async (
 	owner: string,
 	repo: string,
-	count: number,
 	signal?: AbortSignal,
-): Promise<GithubRelease[]> => {
-	const apiUrl = `https://api.github.com/repos/${owner}/${repo}/releases?per_page=${count}`;
-	const response = await fetch(apiUrl, { signal });
+): Promise<GithubRelease> => {
+	// Use the dedicated endpoint for the latest release
+	const apiUrl = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
+	const response = await fetch(apiUrl, {
+		signal,
+		headers: {
+			Accept: "application/vnd.github.v3+json",
+		},
+	});
 
 	if (!response.ok) {
 		let errorData: { message?: string } = {};
 		try {
 			errorData = await response.json();
-		} catch (e) {
-			console.error("Error parsing GitHub API response:", e);
+		} catch {
+			// Fallback if the error response is not valid JSON
 			errorData = { message: response.statusText };
 		}
 		throw new Error(
 			`GitHub API Error: ${response.status} - ${
-				errorData.message || "Failed to fetch releases"
+				errorData.message || "Failed to fetch the latest release"
 			}`,
 		);
 	}
 	return response.json();
 };
 
-function useGithubLatestReleases(
+/**
+ * A React Query hook to get the latest GitHub release for a repository.
+ * @param owner - The owner of the repository.
+ * @param repo - The name of the repository.
+ * @returns The result of the TanStack Query operation.
+ */
+function useGithubLatestRelease(
 	owner: string,
 	repo: string,
-	count: number = 5,
-): UseQueryResult<GithubRelease[], Error> {
-	const queryKey = ["githubReleases", owner, repo, count?.toString()];
+): UseQueryResult<GithubRelease, Error> {
+	const queryKey = ["githubLatestRelease", owner, repo];
 
-	return useQuery<GithubRelease[], Error, GithubRelease[], string[]>({
+	return useQuery<GithubRelease, Error>({
 		queryKey: queryKey,
-		queryFn: ({ signal }) => fetchGithubReleases(owner, repo, count, signal),
+		queryFn: ({ signal }) => fetchGithubLatestRelease(owner, repo, signal),
+		// The query will not run until both owner and repo are provided
 		enabled: !!(owner && repo),
 	});
 }
 
-export default useGithubLatestReleases;
+export default useGithubLatestRelease;

@@ -8,7 +8,7 @@ import {
 	BugReportSection,
 	DownloadSection,
 } from "@/features/download/components";
-import useGithubLatestReleases from "@/hooks/use-github-latest-releases";
+import useGithubLatestRelease from "@/hooks/use-github-latest-releases";
 import { constants, downloadApp } from "@/utils";
 
 export const Route = createFileRoute("/download/")({
@@ -16,19 +16,17 @@ export const Route = createFileRoute("/download/")({
 });
 
 function Download() {
-	const { data: releases, isLoading } = useGithubLatestReleases(
+	const { data: release, isLoading } = useGithubLatestRelease(
 		"team-falkor",
 		"falkor",
-		1,
 	);
 
 	let versionToUse: string = constants.app_version;
 	let versionSourceMessage: string | null = null;
 
-	if (releases && releases.length > 0) {
-		const latestRelease = releases[0];
-		versionToUse = latestRelease.tag_name;
-		versionSourceMessage = `Latest version: ${versionToUse}`;
+	if (release) {
+		versionToUse = release.tag_name;
+		versionSourceMessage = `Latest version from GitHub: ${versionToUse}`;
 	}
 
 	const versionForProps: Version = versionToUse as Version;
