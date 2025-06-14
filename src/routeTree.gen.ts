@@ -21,6 +21,7 @@ import { Route as DiscordIndexImport } from './routes/discord/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as GithubNameImport } from './routes/github/$name'
 import { Route as DownloadPrivateImport } from './routes/download/private'
+import { Route as DeepLinkDeeplinkImport } from './routes/deep-link/$deep_link'
 import { Route as PluginsProvidersIndexImport } from './routes/plugins/providers/index'
 import { Route as AdminRoadmapIndexImport } from './routes/admin/roadmap/index'
 import { Route as AdminAnalyticsIndexImport } from './routes/admin/analytics/index'
@@ -86,6 +87,12 @@ const DownloadPrivateRoute = DownloadPrivateImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const DeepLinkDeeplinkRoute = DeepLinkDeeplinkImport.update({
+  id: '/deep-link/$deep_link',
+  path: '/deep-link/$deep_link',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const PluginsProvidersIndexRoute = PluginsProvidersIndexImport.update({
   id: '/plugins/providers/',
   path: '/plugins/providers/',
@@ -119,6 +126,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/deep-link/$deep_link': {
+      id: '/deep-link/$deep_link'
+      path: '/deep-link/$deep_link'
+      fullPath: '/deep-link/$deep_link'
+      preLoaderRoute: typeof DeepLinkDeeplinkImport
       parentRoute: typeof rootRoute
     }
     '/download/private': {
@@ -212,6 +226,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/deep-link/$deep_link': typeof DeepLinkDeeplinkRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
   '/admin': typeof AdminIndexRoute
@@ -228,6 +243,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
+  '/deep-link/$deep_link': typeof DeepLinkDeeplinkRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
   '/admin': typeof AdminIndexRoute
@@ -245,6 +261,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
+  '/deep-link/$deep_link': typeof DeepLinkDeeplinkRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
   '/admin/': typeof AdminIndexRoute
@@ -263,6 +280,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/deep-link/$deep_link'
     | '/download/private'
     | '/github/$name'
     | '/admin'
@@ -278,6 +296,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/deep-link/$deep_link'
     | '/download/private'
     | '/github/$name'
     | '/admin'
@@ -293,6 +312,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/deep-link/$deep_link'
     | '/download/private'
     | '/github/$name'
     | '/admin/'
@@ -310,6 +330,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  DeepLinkDeeplinkRoute: typeof DeepLinkDeeplinkRoute
   DownloadPrivateRoute: typeof DownloadPrivateRoute
   GithubNameRoute: typeof GithubNameRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -326,6 +347,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  DeepLinkDeeplinkRoute: DeepLinkDeeplinkRoute,
   DownloadPrivateRoute: DownloadPrivateRoute,
   GithubNameRoute: GithubNameRoute,
   AdminIndexRoute: AdminIndexRoute,
@@ -351,6 +373,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/deep-link/$deep_link",
         "/download/private",
         "/github/$name",
         "/admin/",
@@ -367,6 +390,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/deep-link/$deep_link": {
+      "filePath": "deep-link/$deep_link.tsx"
     },
     "/download/private": {
       "filePath": "download/private.tsx"
