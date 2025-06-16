@@ -67,7 +67,7 @@ export function RoadmapAdmin() {
 
 	return (
 		<AdminGuard>
-			<div className="min-h-svh bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden">
+			<div className="min-h-svh bg-background relative overflow-hidden">
 				<SvgBG />
 				<SidebarProvider>
 					<motion.div

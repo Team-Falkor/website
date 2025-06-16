@@ -30,7 +30,7 @@ function SignUp() {
 	};
 
 	return (
-		<div className="w-full min-h-[600px] h-screen relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-950">
+		<div className="w-full min-h-[600px] h-screen relative overflow-hidden bg-background">
 			<SvgBG />
 			<motion.div
 				initial="hidden"

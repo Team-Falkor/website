@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import Footer from "@/components/footer";
+import { GradientHeading } from "@/components/gradient-heading";
 import SvgBG from "@/components/svgBG";
 import { Button } from "@/components/ui/button";
 import { ProviderList } from "@/features/providers/components/ProviderList";
@@ -49,9 +50,7 @@ function RouteComponent() {
 	});
 
 	return (
-		<div
-			className={cn("min-h-screen bg-gradient-to-b from-gray-900 to-gray-950")}
-		>
+		<div className="min-h-screen bg-background">
 			<div className={cn("relative p-2 px-4 pb-16 overflow-hidden min-h-svh")}>
 				<SvgBG />
 
@@ -63,16 +62,8 @@ function RouteComponent() {
 						"px-4 pt-8 pb-6 mx-auto max-w-4xl sm:px-6 sm:pt-10 sm:pb-8",
 					)}
 				>
-					<div className="text-center">
-						<motion.h1
-							variants={itemVariants}
-							className={cn(
-								"mt-8 text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl",
-								"bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600",
-							)}
-						>
-							Community Providers
-						</motion.h1>
+					<div className="text-center mt-10">
+						<GradientHeading>Community Providers</GradientHeading>
 						<motion.p
 							variants={itemVariants}
 							className={cn(

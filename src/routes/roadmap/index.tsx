@@ -10,7 +10,7 @@ export const Route = createFileRoute("/roadmap/")({
 
 function RouteComponent() {
 	return (
-		<div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
+		<div className="min-h-screen bg-background">
 			<div className="relative p-4 md:p-8 pb-16 overflow-hidden min-h-svh">
 				<SvgBG />
 				{!!events.length && (

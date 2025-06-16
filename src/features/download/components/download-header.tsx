@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import { GradientHeading } from "@/components/gradient-heading";
 import {
 	containerVariants,
 	fadeInUpVariants,
@@ -19,12 +20,7 @@ export function DownloadHeader({ versionMessage }: DownloadHeaderProps) {
 			className="mx-auto max-w-5xl px-4 pt-24 pb-6 sm:px-6 sm:pb-8"
 		>
 			<div className="text-center">
-				<motion.h1
-					variants={itemVariants}
-					className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl"
-				>
-					Download Falkor
-				</motion.h1>
+				<GradientHeading>Download Falkor</GradientHeading>
 				<motion.p
 					variants={itemVariants}
 					className="mt-6 text-lg leading-7 text-muted-foreground sm:text-xl max-w-2xl mx-auto"
