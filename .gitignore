@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 .env
 ANALYTICS_API.md
+
+/help/**
+**/help/**
