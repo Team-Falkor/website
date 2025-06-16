@@ -47,8 +47,8 @@ function DownloadPage() {
 
 	return (
 		<div className="min-h-screen bg-background">
-			<div className="relative overflow-hidden p-2 px-4 pb-16">
-				<SvgBG />
+			<SvgBG />
+			<div className="relative overflow-hidden p-2 px-4 pb-16 z-10">
 				<DownloadHeader versionMessage={versionMessage} />
 				<DownloadLinks
 					version={versionToUse}

@@ -36,7 +36,7 @@ function SignUp() {
 				initial="hidden"
 				animate="visible"
 				variants={containerVariants}
-				className="flex items-center justify-center py-12 h-full"
+				className="flex items-center justify-center py-12 h-full z-10"
 			>
 				<motion.div variants={itemVariants}>
 					<div className="mx-auto grid w-[350px] gap-6">
