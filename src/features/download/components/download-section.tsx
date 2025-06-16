@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import { Platform, Version } from "@/@types";
-import { DownloadButton, DownloadButtonProps } from "./downloadButton";
-import { PlatformInfo } from "./platformInfo";
+import { staggeredButtonVariants } from "@/features/download/utils/animations";
+import { DownloadButton, DownloadButtonProps } from "./download-button";
+import { PlatformInfo } from "./platform-Info";
 
 interface DownloadSectionProps {
 	platform: Platform;
 	version: Version;
 	imgSrc: string;
 	buttons: DownloadButtonProps[];
+	onDownloadClick: (href: string) => void;
 }
 
 export const DownloadSection = ({
@@ -15,22 +17,10 @@ export const DownloadSection = ({
 	version,
 	imgSrc,
 	buttons,
+	onDownloadClick,
 }: DownloadSectionProps) => {
-	const buttonVariants = {
-		hidden: { opacity: 0, y: 20 },
-		visible: (i: number) => ({
-			opacity: 1,
-			y: 0,
-			transition: {
-				delay: 0.1 * i,
-				duration: 0.4,
-				ease: "easeOut",
-			},
-		}),
-	};
-
 	return (
-		<div className="space-y-6 bg-gray-800/30 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300">
+		<div className="space-y-6 bg-card/50 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-border hover:border-primary/20 transition-all duration-300">
 			<PlatformInfo platform={platform} version={version} imgSrc={imgSrc} />
 			<div className="flex flex-wrap gap-3 justify-center sm:justify-start p-5 pt-0">
 				{buttons.map((button, index) => (
@@ -39,9 +29,15 @@ export const DownloadSection = ({
 						custom={index}
 						initial="hidden"
 						animate="visible"
-						variants={buttonVariants}
+						variants={staggeredButtonVariants}
 					>
-						<DownloadButton {...button} />
+						<DownloadButton
+							{...button}
+							onClick={() => {
+								onDownloadClick(button.href ?? "");
+								button.onClick?.();
+							}}
+						/>
 					</motion.div>
 				))}
 			</div>

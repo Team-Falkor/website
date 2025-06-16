@@ -1,17 +1,30 @@
 import { motion } from "framer-motion";
-import { Version } from "@/@types";
+import { PackageManager, Version } from "@/@types";
 import {
 	containerVariants,
 	itemVariants,
 } from "@/features/download/utils/animations";
 import { downloadApp } from "@/utils";
-import { DownloadSection } from "./downloadSection";
+import { useFileDownloader } from "../hooks/use-file-download";
+import { DownloadSection } from "./download-section";
 
 interface DownloadLinksProps {
 	version: Version;
+	onDownloadClick: (href: string) => void;
 }
 
-export function DownloadLinks({ version }: DownloadLinksProps) {
+export function DownloadLinks({
+	version,
+	onDownloadClick,
+}: DownloadLinksProps) {
+	const { downloadFile } = useFileDownloader();
+
+	const triggerDownload = (pckgManager: PackageManager, version: Version) => {
+		const href = downloadApp(pckgManager, version);
+		if (!href) return;
+		downloadFile(href);
+	};
+
 	return (
 		<motion.div
 			initial="hidden"
@@ -29,17 +42,20 @@ export function DownloadLinks({ version }: DownloadLinksProps) {
 						platform="windows"
 						version={version}
 						imgSrc="/windows.png"
+						onDownloadClick={onDownloadClick}
 						buttons={[
 							{
 								label: "Download for Windows",
 								variant: "secondary",
 								href: downloadApp("windows", version),
+								onClick: () => {
+									triggerDownload("windows", version);
+								},
 							},
 						]}
 					/>
 				</motion.div>
 
-				{/* This motion.div handles the animation and hover effect for the Linux card */}
 				<motion.div
 					variants={itemVariants}
 					className="transform transition-all duration-300 hover:scale-[1.02]"
@@ -48,31 +64,47 @@ export function DownloadLinks({ version }: DownloadLinksProps) {
 						platform="linux"
 						version={version}
 						imgSrc="/linux.png"
+						onDownloadClick={onDownloadClick}
 						buttons={[
 							{
 								label: "AppImage",
 								variant: "secondary",
 								href: downloadApp("appimage", version),
+								onClick: () => {
+									triggerDownload("appimage", version);
+								},
 							},
 							{
 								label: "Debian",
 								variant: "secondary",
 								href: downloadApp("debian", version),
+								onClick: () => {
+									triggerDownload("debian", version);
+								},
 							},
 							{
 								label: "Tar.gz",
 								variant: "secondary",
 								href: downloadApp("tar.gz", version),
+								onClick: () => {
+									triggerDownload("tar.gz", version);
+								},
 							},
 							{
 								label: "Pacman",
 								variant: "secondary",
 								href: downloadApp("pacman", version),
+								onClick: () => {
+									triggerDownload("pacman", version);
+								},
 							},
 							{
 								label: "RPM",
 								variant: "secondary",
 								href: downloadApp("rpm", version),
+								onClick: () => {
+									triggerDownload("rpm", version);
+								},
 							},
 						]}
 					/>

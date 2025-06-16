@@ -18,5 +18,5 @@ export const formatVersion = (rawVersion: string): Version => {
 
 	// We use a type assertion here because we are programmatically
 	// guaranteeing the string now matches the `V${string}` format.
-	return `V${versionNumber}` as Version;
+	return `v${versionNumber}` as Version;
 };
