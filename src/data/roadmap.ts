@@ -32,8 +32,9 @@ export const events: Array<RoadmapEvent> = [
 				completed: true,
 			},
 			{
-				title: "Streamed ZIP Decompression for Instant File Access",
-				completed: false,
+				title: "Implemented automated un-archiving for .zip/.rar formats",
+				completed: true,
+				category: "Core Features",
 			},
 			{
 				title:
