@@ -36,11 +36,11 @@ export const EventCard = ({
 	const progressPercentage =
 		totalEvents > 0 ? (completedEvents / totalEvents) * 100 : 0;
 
-	const getProgressColor = (progressPercentage: number) => {
-		if (progressPercentage >= 80) return "bg-green-500/20";
-		if (progressPercentage >= 50) return "bg-yellow-500/20";
-		return "bg-red-500/20";
-	};
+	// const getProgressColor = (progressPercentage: number) => {
+	// 	if (progressPercentage >= 80) return "bg-green-500/20";
+	// 	if (progressPercentage >= 50) return "bg-yellow-500/20";
+	// 	return "bg-red-500/20";
+	// };
 
 	return (
 		<div
@@ -94,10 +94,7 @@ export const EventCard = ({
 										{Math.round(progressPercentage)}%
 									</span>
 								</div>
-								<Progress
-									value={progressPercentage}
-									className={cn("h-2", getProgressColor(progressPercentage))}
-								/>
+								<Progress value={progressPercentage} className={cn("h-2")} />
 							</div>
 						</div>
 
