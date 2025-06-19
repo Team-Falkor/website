@@ -42,7 +42,7 @@ export const events: Array<RoadmapEvent> = [
 			},
 			{
 				title: "Streamlined Game Importing and Metadata Fetching",
-				completed: false,
+				completed: true,
 			},
 			{
 				title: "Performance & Stability Enhancements",
