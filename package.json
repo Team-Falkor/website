@@ -1,7 +1,7 @@
 {
 	"name": "@team-falkor/website",
 	"private": true,
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"type": "module",
 	"license": "BSD-3-Clause",
 	"scripts": {
