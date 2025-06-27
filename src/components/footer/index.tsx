@@ -50,12 +50,12 @@ const Footer = () => {
 				<Link to="/roadmap" className="hover:text-purple-400 transition-colors">
 					Roadmap
 				</Link>
-				<Link to="/login" className="hover:text-purple-400 transition-colors">
+				{/* <Link to="/login" className="hover:text-purple-400 transition-colors">
 					Login
 				</Link>
 				<Link to="/sign-up" className="hover:text-purple-400 transition-colors">
 					Sign Up
-				</Link>
+				</Link> */}
 			</div>
 		</div>
 	);
