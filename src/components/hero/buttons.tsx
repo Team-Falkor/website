@@ -15,7 +15,7 @@ const HeroButtons = () => {
 				)}
 				to="/download"
 			>
-				Download Test Build
+				Download Beta
 			</Link>
 
 			<a
