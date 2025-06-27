@@ -39,7 +39,7 @@ export const events: Array<RoadmapEvent> = [
 			{
 				title:
 					"Enhanced Calendar view, with improved ui for handhelds and desktops",
-				completed: false,
+				completed: true,
 			},
 			{
 				title: "Streamlined Game Importing and Metadata Fetching",
