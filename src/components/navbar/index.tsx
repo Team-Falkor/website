@@ -1,12 +1,53 @@
 import { Link } from "@tanstack/react-router";
 import { ExternalLink, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaDiscord as Discord, FaGithub as Github } from "react-icons/fa";
 import { SiKofi } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/utils";
 import { constants } from "@/utils/constants";
+
+export type NavLink = {
+	name: string;
+	path: string;
+	isExternal: boolean;
+};
+
+type NavLinkItemProps = NavLink & {
+	onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+};
+
+const NavLinkItem = ({ name, path, isExternal, onClick }: NavLinkItemProps) => {
+	const baseClassName =
+		"text-foreground/80 hover:text-primary transition-colors duration-200";
+	const desktopClassName = "[.active]:text-primary [.active]:font-semibold";
+
+	if (isExternal) {
+		return (
+			<a
+				href={path}
+				target="_blank"
+				rel="noopener noreferrer"
+				className={cn(baseClassName, desktopClassName, "flex items-center")}
+				onClick={onClick}
+			>
+				{name}
+				<ExternalLink className="ml-1 inline-block h-3 w-3" />
+			</a>
+		);
+	}
+
+	return (
+		<Link
+			to={path}
+			className={cn(baseClassName, desktopClassName)}
+			onClick={onClick}
+		>
+			{name}
+		</Link>
+	);
+};
 
 export const Navbar = () => {
 	const pathname = window.location.pathname;
@@ -15,28 +56,25 @@ export const Navbar = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [shouldShowNavbar, setShouldShowNavbar] = useState(true);
 
-	// Handle scroll effect
 	useEffect(() => {
 		const handleScroll = () => {
-			setIsScrolled(isMobile ? true : window.scrollY > 0);
+			setIsScrolled(isMobile || window.scrollY > 0);
 		};
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, [isMobile]);
 
 	useEffect(() => {
-		const pathnameSplit = pathname.split("/");
-		if (pathnameSplit.includes("admin")) setShouldShowNavbar(false);
-		else setShouldShowNavbar(true);
+		setShouldShowNavbar(!pathname.startsWith("/admin"));
 	}, [pathname]);
 
 	const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
-	const navLinks = [
-		{ name: "Home", path: "/", openInNewTab: false },
-		{ name: "Download", path: "/download", openInNewTab: false },
-		{ name: "Plugins", path: "/plugins/providers", openInNewTab: false },
-		{ name: "Discord", path: "/discord", openInNewTab: true },
+	const navLinks: NavLink[] = [
+		{ name: "Home", path: "/", isExternal: false },
+		{ name: "Download", path: "/download", isExternal: false },
+		{ name: "Docs", path: "https://docs.falkor.moe", isExternal: true },
+		{ name: "Plugins", path: "/plugins/providers", isExternal: false },
 	];
 
 	if (!shouldShowNavbar) return null;
@@ -51,31 +89,22 @@ export const Navbar = () => {
 			)}
 		>
 			<div className="container mx-auto px-4 flex items-center justify-between">
-				{/* Logo and Brand */}
 				<Link
 					to="/"
 					className="flex items-center gap-2 font-bold text-xl text-foreground"
+					onClick={() => setIsMobileMenuOpen(false)}
 				>
 					<img src="/icon.png" alt="Falkor" className="size-14" />
 					<span className="hidden sm:inline">Falkor</span>
 				</Link>
 
-				{/* Desktop Navigation */}
 				<div className="hidden md:flex items-center gap-6">
 					{navLinks.map((link) => (
-						<Link
-							key={link.name}
-							to={link.path}
-							className="text-foreground/80 hover:text-primary transition-colors duration-200 [.active]:text-primary [.active]:font-semibold"
-						>
-							{link.name}
-						</Link>
+						<NavLinkItem key={link.name} {...link} />
 					))}
 				</div>
 
-				{/* Actions */}
 				<div className="hidden md:flex items-center gap-2">
-					{/* Social Links */}
 					<Button variant="ghost" size="icon" asChild>
 						<a
 							href={constants.ko_fi_url}
@@ -109,23 +138,6 @@ export const Navbar = () => {
 						</a>
 					</Button>
 
-					{/* Login/Sign Up */}
-					{/* <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm">
-                Account
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem asChild>
-                <Link to="/login">Login</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/sign-up">Sign Up</Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu> */}
-
 					<Button asChild>
 						<Link to="/download">
 							Download
@@ -134,7 +146,6 @@ export const Navbar = () => {
 					</Button>
 				</div>
 
-				{/* Mobile Menu Button */}
 				<div className="flex md:hidden items-center gap-2">
 					<Button
 						variant="ghost"
@@ -147,7 +158,6 @@ export const Navbar = () => {
 				</div>
 			</div>
 
-			{/* Mobile Menu */}
 			<div
 				className={cn(
 					"md:hidden fixed inset-x-0 bg-background/95 backdrop-blur-sm border-b border-border/40 transition-all duration-300 overflow-hidden",
@@ -156,17 +166,14 @@ export const Navbar = () => {
 			>
 				<div className="container mx-auto px-4 flex flex-col gap-4">
 					{navLinks.map((link) => (
-						<Link
+						<NavLinkItem
 							key={link.name}
-							to={link.path}
-							className="text-foreground/80 hover:text-primary py-2 transition-colors duration-200"
+							{...link}
 							onClick={() => setIsMobileMenuOpen(false)}
-						>
-							{link.name}
-						</Link>
+						/>
 					))}
 
-					<div className="flex flex-col gap-2 pt-2 border-t border-border/40">
+					{/* <div className="flex flex-col gap-2 pt-2 border-t border-border/40">
 						<Link
 							to="/login"
 							className="text-foreground/80 hover:text-primary py-2 transition-colors duration-200"
@@ -181,7 +188,7 @@ export const Navbar = () => {
 						>
 							Sign Up
 						</Link>
-					</div>
+					</div> */}
 
 					<div className="flex gap-4 pt-2 border-t border-border/40">
 						<a
@@ -190,6 +197,7 @@ export const Navbar = () => {
 							rel="noopener noreferrer"
 							className="text-foreground/80 hover:text-primary py-2 transition-colors duration-200 flex items-center gap-2"
 							aria-label="GitHub"
+							onClick={() => setIsMobileMenuOpen(false)}
 						>
 							<Github className="h-5 w-5" />
 							<span>GitHub</span>
@@ -200,6 +208,7 @@ export const Navbar = () => {
 							rel="noopener noreferrer"
 							className="text-foreground/80 hover:text-primary py-2 transition-colors duration-200 flex items-center gap-2"
 							aria-label="Discord"
+							onClick={() => setIsMobileMenuOpen(false)}
 						>
 							<Discord className="h-5 w-5" />
 							<span>Discord</span>
