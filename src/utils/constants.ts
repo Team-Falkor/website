@@ -3,6 +3,10 @@ export const constants = {
 	github_website_url: "https://github.com/team-falkor/website",
 	github_app_url: "https://github.com/team-falkor/app",
 	ko_fi_url: "https://ko-fi.com/prostarz",
+	docs_url: "https://docs.falkor.moe",
+	docs_api_url: "https://docs.falkor.moe/api",
+	github_docs_url: "https://github.com/team-falkor/docs",
+	github_org_url: "https://github.com/team-falkor",
 	github_repos: [
 		"app",
 		"falkor",
