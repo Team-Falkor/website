@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Loader2, Plus } from "lucide-react";
 import { useCallback, useState } from "react";
 import Footer from "@/components/footer";
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/plugins/providers/add/")({
 
 function RouteComponent() {
 	// Animation variants
-	const containerVariants = {
+	const containerVariants: Variants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
@@ -34,12 +34,12 @@ function RouteComponent() {
 		},
 	};
 
-	const itemVariants = {
+	const itemVariants: Variants = {
 		hidden: { y: 20, opacity: 0 },
 		visible: {
 			y: 0,
 			opacity: 1,
-			transition: { type: "spring", stiffness: 100 },
+			transition: { type: "spring" as const, stiffness: 100 },
 		},
 	};
 

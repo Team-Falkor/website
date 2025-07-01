@@ -1,7 +1,7 @@
-import { clsx } from "clsx";
 import { type MotionProps, motion } from "framer-motion";
 import React from "react";
 import { itemVariants } from "@/features/download/utils/animations";
+import { cn } from "@/utils";
 
 interface GradientHeadingProps extends MotionProps {
 	children: React.ReactNode;
@@ -16,7 +16,7 @@ export const GradientHeading = ({
 	return (
 		<motion.h1
 			variants={itemVariants}
-			className={clsx(
+			className={cn(
 				"bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl",
 				"pb-2",
 				className,

@@ -33,15 +33,15 @@ const FaQ = () => {
 							Is the Falkor game launcher available for download?
 						</AccordionTrigger>
 						<AccordionContent>
-							The Falkor app is currently in its beta phase. You can{" "}
-							<a
-								href={"/download"}
-								className="underline transition-all hover:opacity-70"
-							>
-								download it here
-							</a>{" "}
-							to get started.
-						</AccordionContent>
+						Yes! The Falkor app is now available for download. You can{" "}
+						<a
+							href={"/download"}
+							className="underline transition-all hover:opacity-70"
+						>
+							download it here
+						</a>{" "}
+						to get started.
+					</AccordionContent>
 					</AccordionItem>
 
 					<AccordionItem value="item-3">

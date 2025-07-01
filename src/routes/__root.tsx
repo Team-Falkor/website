@@ -18,7 +18,7 @@ export function RouteComponent() {
 
 			<Navbar />
 
-			<Toaster />
+			<Toaster richColors={true} position="top-center" />
 
 			<Outlet />
 			{/* <TanStackRouterDevtools /> */}
