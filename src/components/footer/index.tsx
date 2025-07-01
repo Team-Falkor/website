@@ -15,7 +15,11 @@ const Footer = () => {
 				</p>
 
 				<p className="text-sm text-muted-foreground">
-					Made with <span className="animate-pulse">❤️</span> by Team Falkor
+					Made with <span className="animate-pulse">💜</span> by Team Falkor
+				</p>
+
+				<p className="text-xs text-muted-foreground/70 italic mt-1">
+					✨ Remember, you matter and we believe in you! Have an amazing day! 🌟
 				</p>
 			</div>
 
