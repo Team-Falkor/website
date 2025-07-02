@@ -10,42 +10,34 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as RoadmapIndexRouteImport } from './routes/roadmap/index'
+import { Route as DownloadIndexRouteImport } from './routes/download/index'
+import { Route as DiscordIndexRouteImport } from './routes/discord/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as GithubNameRouteImport } from './routes/github/$name'
+import { Route as DownloadPrivateRouteImport } from './routes/download/private'
+import { Route as DeepLinkDeep_linkRouteImport } from './routes/deep-link/$deep_link'
+import { Route as PluginsProvidersIndexRouteImport } from './routes/plugins/providers/index'
+import { Route as AuthSignUpIndexRouteImport } from './routes/auth/sign-up/index'
+import { Route as AuthSignInIndexRouteImport } from './routes/auth/sign-in/index'
+import { Route as AdminRoadmapIndexRouteImport } from './routes/admin/roadmap/index'
+import { Route as AdminAnalyticsIndexRouteImport } from './routes/admin/analytics/index'
+import { Route as PluginsProvidersAddIndexRouteImport } from './routes/plugins/providers/add/index'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as RoadmapIndexImport } from './routes/roadmap/index'
-import { Route as DownloadIndexImport } from './routes/download/index'
-import { Route as DiscordIndexImport } from './routes/discord/index'
-import { Route as AdminIndexImport } from './routes/admin/index'
-import { Route as GithubNameImport } from './routes/github/$name'
-import { Route as DownloadPrivateImport } from './routes/download/private'
-import { Route as DeepLinkDeeplinkImport } from './routes/deep-link/$deep_link'
-import { Route as PluginsProvidersIndexImport } from './routes/plugins/providers/index'
-import { Route as AuthSignUpIndexImport } from './routes/auth/sign-up/index'
-import { Route as AuthSignInIndexImport } from './routes/auth/sign-in/index'
-import { Route as AdminRoadmapIndexImport } from './routes/admin/roadmap/index'
-import { Route as AdminAnalyticsIndexImport } from './routes/admin/analytics/index'
-import { Route as PluginsProvidersAddIndexImport } from './routes/plugins/providers/add/index'
+const IndexLazyRouteImport = createFileRoute('/')()
 
-// Create Virtual Routes
-
-const IndexLazyImport = createFileRoute('/')()
-
-// Create/Update Routes
-
-const IndexLazyRoute = IndexLazyImport.update({
+const IndexLazyRoute = IndexLazyRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
-
-const RoadmapIndexRoute = RoadmapIndexImport.update({
+const RoadmapIndexRoute = RoadmapIndexRouteImport.update({
   id: '/roadmap/',
   path: '/roadmap/',
   getParentRoute: () => rootRouteImport,
 } as any)
-
-const DownloadIndexRoute = DownloadIndexImport.update({
+const DownloadIndexRoute = DownloadIndexRouteImport.update({
   id: '/download/',
   path: '/download/',
   getParentRoute: () => rootRouteImport,
@@ -78,22 +70,19 @@ const DeepLinkDeep_linkRoute = DeepLinkDeep_linkRouteImport.update({
 const PluginsProvidersIndexRoute = PluginsProvidersIndexRouteImport.update({
   id: '/plugins/providers/',
   path: '/plugins/providers/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthSignUpIndexRoute = AuthSignUpIndexImport.update({
+const AuthSignUpIndexRoute = AuthSignUpIndexRouteImport.update({
   id: '/auth/sign-up/',
   path: '/auth/sign-up/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthSignInIndexRoute = AuthSignInIndexImport.update({
+const AuthSignInIndexRoute = AuthSignInIndexRouteImport.update({
   id: '/auth/sign-in/',
   path: '/auth/sign-in/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AdminRoadmapIndexRoute = AdminRoadmapIndexImport.update({
+const AdminRoadmapIndexRoute = AdminRoadmapIndexRouteImport.update({
   id: '/admin/roadmap/',
   path: '/admin/roadmap/',
   getParentRoute: () => rootRouteImport,
@@ -103,119 +92,12 @@ const AdminAnalyticsIndexRoute = AdminAnalyticsIndexRouteImport.update({
   path: '/admin/analytics/',
   getParentRoute: () => rootRouteImport,
 } as any)
-
-const PluginsProvidersAddIndexRoute = PluginsProvidersAddIndexImport.update({
-  id: '/plugins/providers/add/',
-  path: '/plugins/providers/add/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/deep-link/$deep_link': {
-      id: '/deep-link/$deep_link'
-      path: '/deep-link/$deep_link'
-      fullPath: '/deep-link/$deep_link'
-      preLoaderRoute: typeof DeepLinkDeeplinkImport
-      parentRoute: typeof rootRoute
-    }
-    '/download/private': {
-      id: '/download/private'
-      path: '/download/private'
-      fullPath: '/download/private'
-      preLoaderRoute: typeof DownloadPrivateImport
-      parentRoute: typeof rootRoute
-    }
-    '/github/$name': {
-      id: '/github/$name'
-      path: '/github/$name'
-      fullPath: '/github/$name'
-      preLoaderRoute: typeof GithubNameImport
-      parentRoute: typeof rootRoute
-    }
-    '/admin/': {
-      id: '/admin/'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/discord/': {
-      id: '/discord/'
-      path: '/discord'
-      fullPath: '/discord'
-      preLoaderRoute: typeof DiscordIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/download/': {
-      id: '/download/'
-      path: '/download'
-      fullPath: '/download'
-      preLoaderRoute: typeof DownloadIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/roadmap/': {
-      id: '/roadmap/'
-      path: '/roadmap'
-      fullPath: '/roadmap'
-      preLoaderRoute: typeof RoadmapIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/admin/analytics/': {
-      id: '/admin/analytics/'
-      path: '/admin/analytics'
-      fullPath: '/admin/analytics'
-      preLoaderRoute: typeof AdminAnalyticsIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/admin/roadmap/': {
-      id: '/admin/roadmap/'
-      path: '/admin/roadmap'
-      fullPath: '/admin/roadmap'
-      preLoaderRoute: typeof AdminRoadmapIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/sign-in/': {
-      id: '/auth/sign-in/'
-      path: '/auth/sign-in'
-      fullPath: '/auth/sign-in'
-      preLoaderRoute: typeof AuthSignInIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/sign-up/': {
-      id: '/auth/sign-up/'
-      path: '/auth/sign-up'
-      fullPath: '/auth/sign-up'
-      preLoaderRoute: typeof AuthSignUpIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/plugins/providers/': {
-      id: '/plugins/providers/'
-      path: '/plugins/providers'
-      fullPath: '/plugins/providers'
-      preLoaderRoute: typeof PluginsProvidersIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/plugins/providers/add/': {
-      id: '/plugins/providers/add/'
-      path: '/plugins/providers/add'
-      fullPath: '/plugins/providers/add'
-      preLoaderRoute: typeof PluginsProvidersAddIndexImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
+const PluginsProvidersAddIndexRoute =
+  PluginsProvidersAddIndexRouteImport.update({
+    id: '/plugins/providers/add/',
+    path: '/plugins/providers/add/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
@@ -343,25 +225,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sign-up/': {
-      id: '/sign-up/'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof SignUpIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/roadmap/': {
       id: '/roadmap/'
       path: '/roadmap'
       fullPath: '/roadmap'
       preLoaderRoute: typeof RoadmapIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/download/': {
@@ -413,6 +281,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PluginsProvidersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/sign-up/': {
+      id: '/auth/sign-up/'
+      path: '/auth/sign-up'
+      fullPath: '/auth/sign-up'
+      preLoaderRoute: typeof AuthSignUpIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/sign-in/': {
+      id: '/auth/sign-in/'
+      path: '/auth/sign-in'
+      fullPath: '/auth/sign-in'
+      preLoaderRoute: typeof AuthSignInIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/roadmap/': {
       id: '/admin/roadmap/'
       path: '/admin/roadmap'
@@ -456,71 +338,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/deep-link/$deep_link",
-        "/download/private",
-        "/github/$name",
-        "/admin/",
-        "/discord/",
-        "/download/",
-        "/roadmap/",
-        "/admin/analytics/",
-        "/admin/roadmap/",
-        "/auth/sign-in/",
-        "/auth/sign-up/",
-        "/plugins/providers/",
-        "/plugins/providers/add/"
-      ]
-    },
-    "/": {
-      "filePath": "index.lazy.tsx"
-    },
-    "/deep-link/$deep_link": {
-      "filePath": "deep-link/$deep_link.tsx"
-    },
-    "/download/private": {
-      "filePath": "download/private.tsx"
-    },
-    "/github/$name": {
-      "filePath": "github/$name.tsx"
-    },
-    "/admin/": {
-      "filePath": "admin/index.tsx"
-    },
-    "/discord/": {
-      "filePath": "discord/index.tsx"
-    },
-    "/download/": {
-      "filePath": "download/index.tsx"
-    },
-    "/roadmap/": {
-      "filePath": "roadmap/index.tsx"
-    },
-    "/admin/analytics/": {
-      "filePath": "admin/analytics/index.tsx"
-    },
-    "/admin/roadmap/": {
-      "filePath": "admin/roadmap/index.tsx"
-    },
-    "/auth/sign-in/": {
-      "filePath": "auth/sign-in/index.tsx"
-    },
-    "/auth/sign-up/": {
-      "filePath": "auth/sign-up/index.tsx"
-    },
-    "/plugins/providers/": {
-      "filePath": "plugins/providers/index.tsx"
-    },
-    "/plugins/providers/add/": {
-      "filePath": "plugins/providers/add/index.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
