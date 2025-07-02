@@ -43,6 +43,7 @@
 		"@team-falkor/shared-types": "^1.0.3",
 		"@tsparticles/react": "^3.0.0",
 		"babel-plugin-react-compiler": "^19.1.0-rc.1-rc-af1b7da-20250421",
+		"better-auth": "^1.2.12",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"date-fns": "^4.1.0",

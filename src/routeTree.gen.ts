@@ -13,9 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as SignUpIndexImport } from './routes/sign-up/index'
 import { Route as RoadmapIndexImport } from './routes/roadmap/index'
-import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as DownloadIndexImport } from './routes/download/index'
 import { Route as DiscordIndexImport } from './routes/discord/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
@@ -23,6 +21,8 @@ import { Route as GithubNameImport } from './routes/github/$name'
 import { Route as DownloadPrivateImport } from './routes/download/private'
 import { Route as DeepLinkDeeplinkImport } from './routes/deep-link/$deep_link'
 import { Route as PluginsProvidersIndexImport } from './routes/plugins/providers/index'
+import { Route as AuthSignUpIndexImport } from './routes/auth/sign-up/index'
+import { Route as AuthSignInIndexImport } from './routes/auth/sign-in/index'
 import { Route as AdminRoadmapIndexImport } from './routes/admin/roadmap/index'
 import { Route as AdminAnalyticsIndexImport } from './routes/admin/analytics/index'
 import { Route as PluginsProvidersAddIndexImport } from './routes/plugins/providers/add/index'
@@ -39,21 +39,9 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const SignUpIndexRoute = SignUpIndexImport.update({
-  id: '/sign-up/',
-  path: '/sign-up/',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const RoadmapIndexRoute = RoadmapIndexImport.update({
   id: '/roadmap/',
   path: '/roadmap/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LoginIndexRoute = LoginIndexImport.update({
-  id: '/login/',
-  path: '/login/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -96,6 +84,18 @@ const DeepLinkDeeplinkRoute = DeepLinkDeeplinkImport.update({
 const PluginsProvidersIndexRoute = PluginsProvidersIndexImport.update({
   id: '/plugins/providers/',
   path: '/plugins/providers/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthSignUpIndexRoute = AuthSignUpIndexImport.update({
+  id: '/auth/sign-up/',
+  path: '/auth/sign-up/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthSignInIndexRoute = AuthSignInIndexImport.update({
+  id: '/auth/sign-in/',
+  path: '/auth/sign-in/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -170,25 +170,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DownloadIndexImport
       parentRoute: typeof rootRoute
     }
-    '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexImport
-      parentRoute: typeof rootRoute
-    }
     '/roadmap/': {
       id: '/roadmap/'
       path: '/roadmap'
       fullPath: '/roadmap'
       preLoaderRoute: typeof RoadmapIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/sign-up/': {
-      id: '/sign-up/'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof SignUpIndexImport
       parentRoute: typeof rootRoute
     }
     '/admin/analytics/': {
@@ -203,6 +189,20 @@ declare module '@tanstack/react-router' {
       path: '/admin/roadmap'
       fullPath: '/admin/roadmap'
       preLoaderRoute: typeof AdminRoadmapIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/sign-in/': {
+      id: '/auth/sign-in/'
+      path: '/auth/sign-in'
+      fullPath: '/auth/sign-in'
+      preLoaderRoute: typeof AuthSignInIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/sign-up/': {
+      id: '/auth/sign-up/'
+      path: '/auth/sign-up'
+      fullPath: '/auth/sign-up'
+      preLoaderRoute: typeof AuthSignUpIndexImport
       parentRoute: typeof rootRoute
     }
     '/plugins/providers/': {
@@ -232,11 +232,11 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminIndexRoute
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
-  '/login': typeof LoginIndexRoute
   '/roadmap': typeof RoadmapIndexRoute
-  '/sign-up': typeof SignUpIndexRoute
   '/admin/analytics': typeof AdminAnalyticsIndexRoute
   '/admin/roadmap': typeof AdminRoadmapIndexRoute
+  '/auth/sign-in': typeof AuthSignInIndexRoute
+  '/auth/sign-up': typeof AuthSignUpIndexRoute
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
@@ -249,11 +249,11 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/discord': typeof DiscordIndexRoute
   '/download': typeof DownloadIndexRoute
-  '/login': typeof LoginIndexRoute
   '/roadmap': typeof RoadmapIndexRoute
-  '/sign-up': typeof SignUpIndexRoute
   '/admin/analytics': typeof AdminAnalyticsIndexRoute
   '/admin/roadmap': typeof AdminRoadmapIndexRoute
+  '/auth/sign-in': typeof AuthSignInIndexRoute
+  '/auth/sign-up': typeof AuthSignUpIndexRoute
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
@@ -267,11 +267,11 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/discord/': typeof DiscordIndexRoute
   '/download/': typeof DownloadIndexRoute
-  '/login/': typeof LoginIndexRoute
   '/roadmap/': typeof RoadmapIndexRoute
-  '/sign-up/': typeof SignUpIndexRoute
   '/admin/analytics/': typeof AdminAnalyticsIndexRoute
   '/admin/roadmap/': typeof AdminRoadmapIndexRoute
+  '/auth/sign-in/': typeof AuthSignInIndexRoute
+  '/auth/sign-up/': typeof AuthSignUpIndexRoute
   '/plugins/providers/': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add/': typeof PluginsProvidersAddIndexRoute
 }
@@ -286,11 +286,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/discord'
     | '/download'
-    | '/login'
     | '/roadmap'
-    | '/sign-up'
     | '/admin/analytics'
     | '/admin/roadmap'
+    | '/auth/sign-in'
+    | '/auth/sign-up'
     | '/plugins/providers'
     | '/plugins/providers/add'
   fileRoutesByTo: FileRoutesByTo
@@ -302,11 +302,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/discord'
     | '/download'
-    | '/login'
     | '/roadmap'
-    | '/sign-up'
     | '/admin/analytics'
     | '/admin/roadmap'
+    | '/auth/sign-in'
+    | '/auth/sign-up'
     | '/plugins/providers'
     | '/plugins/providers/add'
   id:
@@ -318,11 +318,11 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/discord/'
     | '/download/'
-    | '/login/'
     | '/roadmap/'
-    | '/sign-up/'
     | '/admin/analytics/'
     | '/admin/roadmap/'
+    | '/auth/sign-in/'
+    | '/auth/sign-up/'
     | '/plugins/providers/'
     | '/plugins/providers/add/'
   fileRoutesById: FileRoutesById
@@ -336,11 +336,11 @@ export interface RootRouteChildren {
   AdminIndexRoute: typeof AdminIndexRoute
   DiscordIndexRoute: typeof DiscordIndexRoute
   DownloadIndexRoute: typeof DownloadIndexRoute
-  LoginIndexRoute: typeof LoginIndexRoute
   RoadmapIndexRoute: typeof RoadmapIndexRoute
-  SignUpIndexRoute: typeof SignUpIndexRoute
   AdminAnalyticsIndexRoute: typeof AdminAnalyticsIndexRoute
   AdminRoadmapIndexRoute: typeof AdminRoadmapIndexRoute
+  AuthSignInIndexRoute: typeof AuthSignInIndexRoute
+  AuthSignUpIndexRoute: typeof AuthSignUpIndexRoute
   PluginsProvidersIndexRoute: typeof PluginsProvidersIndexRoute
   PluginsProvidersAddIndexRoute: typeof PluginsProvidersAddIndexRoute
 }
@@ -353,11 +353,11 @@ const rootRouteChildren: RootRouteChildren = {
   AdminIndexRoute: AdminIndexRoute,
   DiscordIndexRoute: DiscordIndexRoute,
   DownloadIndexRoute: DownloadIndexRoute,
-  LoginIndexRoute: LoginIndexRoute,
   RoadmapIndexRoute: RoadmapIndexRoute,
-  SignUpIndexRoute: SignUpIndexRoute,
   AdminAnalyticsIndexRoute: AdminAnalyticsIndexRoute,
   AdminRoadmapIndexRoute: AdminRoadmapIndexRoute,
+  AuthSignInIndexRoute: AuthSignInIndexRoute,
+  AuthSignUpIndexRoute: AuthSignUpIndexRoute,
   PluginsProvidersIndexRoute: PluginsProvidersIndexRoute,
   PluginsProvidersAddIndexRoute: PluginsProvidersAddIndexRoute,
 }
@@ -379,11 +379,11 @@ export const routeTree = rootRoute
         "/admin/",
         "/discord/",
         "/download/",
-        "/login/",
         "/roadmap/",
-        "/sign-up/",
         "/admin/analytics/",
         "/admin/roadmap/",
+        "/auth/sign-in/",
+        "/auth/sign-up/",
         "/plugins/providers/",
         "/plugins/providers/add/"
       ]
@@ -409,20 +409,20 @@ export const routeTree = rootRoute
     "/download/": {
       "filePath": "download/index.tsx"
     },
-    "/login/": {
-      "filePath": "login/index.tsx"
-    },
     "/roadmap/": {
       "filePath": "roadmap/index.tsx"
-    },
-    "/sign-up/": {
-      "filePath": "sign-up/index.tsx"
     },
     "/admin/analytics/": {
       "filePath": "admin/analytics/index.tsx"
     },
     "/admin/roadmap/": {
       "filePath": "admin/roadmap/index.tsx"
+    },
+    "/auth/sign-in/": {
+      "filePath": "auth/sign-in/index.tsx"
+    },
+    "/auth/sign-up/": {
+      "filePath": "auth/sign-up/index.tsx"
     },
     "/plugins/providers/": {
       "filePath": "plugins/providers/index.tsx"

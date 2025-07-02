@@ -5,6 +5,7 @@ export interface LoginBody {
 
 export interface SignUpBody extends LoginBody {
 	username: string;
+	name: string;
 }
 
 export interface AuthResponse {

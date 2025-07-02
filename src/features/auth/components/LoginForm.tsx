@@ -1,26 +1,51 @@
-import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Eye, EyeOff } from "lucide-react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { authClient } from "@/utils/auth-client";
 import type { LoginBody } from "../@types";
-import { useLogin } from "../hooks/useLogin";
+import { useSession } from "../hooks/useSession";
 
 export function LoginForm() {
-	const [formData, setFormData] = useState<
-		LoginBody & { keepLoggedIn: boolean }
-	>({
+	const { session } = useSession();
+	const navigate = useNavigate();
+	const [formData, setFormData] = useState<LoginBody>({
 		email: "",
 		password: "",
-		keepLoggedIn: false,
 	});
+	const [showPassword, setShowPassword] = useState(false);
 
-	const { login, isLoading } = useLogin();
+	useEffect(() => {
+		if (session) {
+			navigate({
+				to: "/",
+			});
+		}
+	}, [session, navigate]);
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const login = async () => {
+		const res = await authClient.signIn.email(formData);
+
+		if (res?.error) {
+			toast.error(res.error?.message ?? "error logging in");
+			return;
+		}
+
+		if (res?.data) {
+			toast.success("logged in");
+			navigate({
+				to: "/",
+			});
+			return;
+		}
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		login(formData);
+		await login();
 	};
 
 	return (
@@ -40,35 +65,34 @@ export function LoginForm() {
 			</div>
 			<div className="grid gap-2">
 				<Label htmlFor="password">Password</Label>
-				<Input
-					id="password"
-					type="password"
-					required
-					placeholder="********"
-					value={formData.password}
-					onChange={(e) =>
-						setFormData((prev) => ({ ...prev, password: e.target.value }))
-					}
-				/>
+				<div className="relative">
+					<Input
+						id="password"
+						type={showPassword ? "text" : "password"}
+						required
+						placeholder="********"
+						value={formData.password}
+						onChange={(e) =>
+							setFormData((prev) => ({ ...prev, password: e.target.value }))
+						}
+						className="pr-10"
+					/>
+					<button
+						type="button"
+						onClick={() => setShowPassword(!showPassword)}
+						className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+					>
+						{showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+					</button>
+				</div>
 			</div>
-			<div className="flex items-center justify-end space-x-2">
-				<Label htmlFor="keepLoggedIn" className="text-sm font-normal">
-					Keep me logged in
-				</Label>
-				<Checkbox
-					id="keepLoggedIn"
-					checked={formData.keepLoggedIn}
-					onCheckedChange={(checked: boolean) =>
-						setFormData((prev) => ({ ...prev, keepLoggedIn: checked }))
-					}
-				/>
-			</div>
-			<Button type="submit" className="w-full" disabled={isLoading}>
-				{isLoading ? "Logging in..." : "Login"}
+
+			<Button type="submit" className="w-full">
+				{"Login"}
 			</Button>
 			<div className="mt-4 text-center text-sm">
 				Don&apos;t have an account?{" "}
-				<Link to="/sign-up" className="underline">
+				<Link to="/auth/sign-up" className="underline">
 					Sign up
 				</Link>
 			</div>

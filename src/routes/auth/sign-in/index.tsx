@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import SvgBG from "@/components/svgBG";
 import { LoginForm } from "@/features/auth/components/LoginForm";
 
-export const Route = createFileRoute("/login/")({
+export const Route = createFileRoute("/auth/sign-in/")({
 	component: Login,
 });
 

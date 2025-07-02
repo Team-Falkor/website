@@ -1,22 +1,27 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo } from "react";
 import { isAdmin } from "@/utils";
-import { useMe } from "../hooks/useMe";
+import { authClient } from "@/utils/auth-client";
+
+const { useSession } = authClient;
 
 interface AdminGuardProps {
 	children: React.ReactNode;
 }
 
 export function AdminGuard({ children }: AdminGuardProps) {
-	const { user, isLoading } = useMe();
+	const { data: session, isPending } = useSession();
 	const navigate = useNavigate();
-	const isUserAAdmin = useMemo(() => isAdmin(user?.role ?? "USER"), [user]);
+	const isUserAAdmin = useMemo(
+		() => isAdmin(session?.user?.role ?? "USER"),
+		[session],
+	);
 
 	useEffect(() => {
 		// Only redirect if we're not in a loading state
-		if (!isLoading) {
-			if (!user) {
-				navigate({ to: "/login" });
+		if (!isPending) {
+			if (!session?.user) {
+				navigate({ to: "/auth/sign-in" });
 				return;
 			}
 
@@ -24,10 +29,10 @@ export function AdminGuard({ children }: AdminGuardProps) {
 				navigate({ to: "/" });
 			}
 		}
-	}, [user, isLoading, navigate, isUserAAdmin]);
+	}, [navigate, isUserAAdmin, isPending, session?.user]);
 
-	if (isLoading) {
-		return null; // Or a loading spinner
+	if (isPending) {
+		return null;
 	}
 
 	// Only render children if user is an admin
