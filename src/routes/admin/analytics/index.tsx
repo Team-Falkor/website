@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 import SvgBG from "@/components/svgBG";
 import { DynamicBreadcrumbs } from "@/components/ui/dynamic-breadcrumbs";
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/admin/analytics/")({
 });
 
 function AnalyticsDashboard() {
-	const containerVariants = {
+	const containerVariants: Variants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
@@ -25,12 +25,12 @@ function AnalyticsDashboard() {
 		},
 	};
 
-	const itemVariants = {
+	const itemVariants: Variants = {
 		hidden: { y: 20, opacity: 0 },
 		visible: {
 			y: 0,
 			opacity: 1,
-			transition: { type: "spring", stiffness: 100 },
+			transition: { type: "spring" as const, stiffness: 100 },
 		},
 	};
 

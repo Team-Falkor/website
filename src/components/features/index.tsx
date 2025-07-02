@@ -9,28 +9,40 @@ const images: {
 	alt: string;
 }[] = [
 	{
-		src: "/app/home.webp",
+		src: "/app/app-calendar.webp",
+		alt: "App Calendar Screenshot",
+	},
+	{
+		src: "/app/app-home.webp",
 		alt: "App Home Screenshot",
 	},
 	{
-		src: "/app/info-1.webp",
-		alt: "App Info Screenshot",
+		src: "/app/app-home-2.webp",
+		alt: "App Home 2 Screenshot",
 	},
 	{
-		src: "/app/info-2.webp",
-		alt: "App Info Screenshot",
+		src: "/app/app-info-1.webp",
+		alt: "App Info 1 Screenshot",
 	},
 	{
-		src: "/app/info-3.webp",
-		alt: "App Info Screenshot",
+		src: "/app/app-info-2.webp",
+		alt: "App Info 2 Screenshot",
 	},
 	{
-		src: "/app/library.webp",
+		src: "/app/app-info-3.webp",
+		alt: "App Info 3 Screenshot",
+	},
+	{
+		src: "/app/app-library.webp",
 		alt: "App Library Screenshot",
 	},
 	{
-		src: "/app/library-2.webp",
-		alt: "App Library Screenshot",
+		src: "/app/app-profile.webp",
+		alt: "App Profile Screenshot",
+	},
+	{
+		src: "/app/app-settings.webp",
+		alt: "App Settings Screenshot",
 	},
 ];
 

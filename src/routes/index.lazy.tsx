@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import FaQ from "@/components/faq";
 import Features from "@/components/features";
 import Footer from "@/components/footer";
@@ -13,7 +13,7 @@ export const Route = createLazyFileRoute("/")({
 
 function Index() {
 	// Animation variants
-	const containerVariants = {
+	const containerVariants: Variants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
@@ -24,12 +24,15 @@ function Index() {
 		},
 	};
 
-	const itemVariants = {
+	const itemVariants: Variants = {
 		hidden: { y: 20, opacity: 0 },
 		visible: {
 			y: 0,
 			opacity: 1,
-			transition: { type: "spring", stiffness: 100 },
+			transition: {
+				type: "spring",
+				stiffness: 100,
+			},
 		},
 	};
 

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { RoadmapEvent, RoadmapEventData } from "@team-falkor/shared-types";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useState } from "react";
 import SvgBG from "@/components/svgBG";
 import { Button } from "@/components/ui/button";
@@ -48,7 +48,7 @@ export function RoadmapAdmin() {
 		setShowUpdateModal(true);
 	};
 
-	const containerVariants = {
+	const containerVariants: Variants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
@@ -56,12 +56,12 @@ export function RoadmapAdmin() {
 		},
 	};
 
-	const itemVariants = {
+	const itemVariants: Variants = {
 		hidden: { y: 20, opacity: 0 },
 		visible: {
 			y: 0,
 			opacity: 1,
-			transition: { type: "spring", stiffness: 100 },
+			transition: { type: "spring" as const, stiffness: 100 },
 		},
 	};
 

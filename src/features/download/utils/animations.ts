@@ -1,4 +1,6 @@
-export const containerVariants = {
+import type { Variants } from "framer-motion";
+
+export const containerVariants: Variants = {
 	hidden: { opacity: 0 },
 	visible: {
 		opacity: 1,
@@ -9,22 +11,29 @@ export const containerVariants = {
 	},
 };
 
-export const itemVariants = {
+export const itemVariants: Variants = {
 	hidden: { y: 20, opacity: 0 },
 	visible: {
 		y: 0,
 		opacity: 1,
-		transition: { type: "spring", stiffness: 100 },
+		transition: { 
+			type: "spring" as const, 
+			stiffness: 100 
+		},
 	},
 };
 
-export const fadeInUpVariants = {
+export const fadeInUpVariants: Variants = {
 	hidden: { opacity: 0, y: 30 },
-	visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+	visible: { 
+		opacity: 1, 
+		y: 0, 
+		transition: { duration: 0.6 } 
+	},
 };
 
 // Variants for buttons inside DownloadSection
-export const staggeredButtonVariants = {
+export const staggeredButtonVariants: Variants = {
 	hidden: { opacity: 0, y: 20 },
 	visible: (i: number) => ({
 		opacity: 1,
@@ -32,7 +41,7 @@ export const staggeredButtonVariants = {
 		transition: {
 			delay: 0.1 * i,
 			duration: 0.4,
-			ease: "easeOut",
+			ease: "easeOut" as const,
 		},
 	}),
 };

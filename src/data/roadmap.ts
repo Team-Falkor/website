@@ -3,7 +3,7 @@ import type { RoadmapEvent } from "@team-falkor/shared-types";
 export const events: Array<RoadmapEvent> = [
 	{
 		phase: "LAUNCH",
-		status: "IN_PROGRESS",
+		status: "COMPLETED",
 		items: [
 			{
 				title: "In-app updater with changelog",
@@ -47,7 +47,7 @@ export const events: Array<RoadmapEvent> = [
 			},
 			{
 				title: "Performance & Stability Enhancements",
-				completed: false,
+				completed: true,
 			},
 		],
 	},

@@ -2,10 +2,9 @@ import { motion } from "framer-motion";
 import { DownloadIcon } from "lucide-react";
 import { JSX, useRef } from "react";
 import { buttonVariants } from "@/components/ui/button";
-import { useTrackEvent } from "@/features/analytics/hooks/useTrackEvent";
 import {
-	buttonHoverTap,
-	iconWiggle,
+  buttonHoverTap,
+  iconWiggle,
 } from "@/features/download/utils/animations";
 import { cn } from "@/utils";
 
@@ -33,7 +32,7 @@ export const DownloadButton = ({
 	onClick,
 	href,
 }: DownloadButtonProps) => {
-	const trackEvent = useTrackEvent();
+	// const trackEvent = useTrackEvent();
 	const hasClicked = useRef(false);
 
 	const handleClick = () => {
@@ -41,10 +40,6 @@ export const DownloadButton = ({
 
 		if (hasClicked.current) return;
 		hasClicked.current = true;
-		trackEvent<{ label: string; href?: string }>({
-			eventType: "download",
-			context: { label, ...(href ? { href } : {}) },
-		});
 		setTimeout(() => {
 			hasClicked.current = false;
 		}, 1000);

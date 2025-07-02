@@ -36,52 +36,46 @@ const IndexLazyImport = createFileRoute('/')()
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
 const RoadmapIndexRoute = RoadmapIndexImport.update({
   id: '/roadmap/',
   path: '/roadmap/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 const DownloadIndexRoute = DownloadIndexImport.update({
   id: '/download/',
   path: '/download/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const DiscordIndexRoute = DiscordIndexImport.update({
+const DiscordIndexRoute = DiscordIndexRouteImport.update({
   id: '/discord/',
   path: '/discord/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AdminIndexRoute = AdminIndexImport.update({
+const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const GithubNameRoute = GithubNameImport.update({
+const GithubNameRoute = GithubNameRouteImport.update({
   id: '/github/$name',
   path: '/github/$name',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const DownloadPrivateRoute = DownloadPrivateImport.update({
+const DownloadPrivateRoute = DownloadPrivateRouteImport.update({
   id: '/download/private',
   path: '/download/private',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const DeepLinkDeeplinkRoute = DeepLinkDeeplinkImport.update({
+const DeepLinkDeep_linkRoute = DeepLinkDeep_linkRouteImport.update({
   id: '/deep-link/$deep_link',
   path: '/deep-link/$deep_link',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const PluginsProvidersIndexRoute = PluginsProvidersIndexImport.update({
+const PluginsProvidersIndexRoute = PluginsProvidersIndexRouteImport.update({
   id: '/plugins/providers/',
   path: '/plugins/providers/',
   getParentRoute: () => rootRoute,
@@ -102,13 +96,12 @@ const AuthSignInIndexRoute = AuthSignInIndexImport.update({
 const AdminRoadmapIndexRoute = AdminRoadmapIndexImport.update({
   id: '/admin/roadmap/',
   path: '/admin/roadmap/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AdminAnalyticsIndexRoute = AdminAnalyticsIndexImport.update({
+const AdminAnalyticsIndexRoute = AdminAnalyticsIndexRouteImport.update({
   id: '/admin/analytics/',
   path: '/admin/analytics/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 const PluginsProvidersAddIndexRoute = PluginsProvidersAddIndexImport.update({
@@ -226,7 +219,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
-  '/deep-link/$deep_link': typeof DeepLinkDeeplinkRoute
+  '/deep-link/$deep_link': typeof DeepLinkDeep_linkRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
   '/admin': typeof AdminIndexRoute
@@ -240,10 +233,9 @@ export interface FileRoutesByFullPath {
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
-  '/deep-link/$deep_link': typeof DeepLinkDeeplinkRoute
+  '/deep-link/$deep_link': typeof DeepLinkDeep_linkRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
   '/admin': typeof AdminIndexRoute
@@ -257,11 +249,10 @@ export interface FileRoutesByTo {
   '/plugins/providers': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add': typeof PluginsProvidersAddIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
-  '/deep-link/$deep_link': typeof DeepLinkDeeplinkRoute
+  '/deep-link/$deep_link': typeof DeepLinkDeep_linkRoute
   '/download/private': typeof DownloadPrivateRoute
   '/github/$name': typeof GithubNameRoute
   '/admin/': typeof AdminIndexRoute
@@ -275,7 +266,6 @@ export interface FileRoutesById {
   '/plugins/providers/': typeof PluginsProvidersIndexRoute
   '/plugins/providers/add/': typeof PluginsProvidersAddIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -327,10 +317,9 @@ export interface FileRouteTypes {
     | '/plugins/providers/add/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  DeepLinkDeeplinkRoute: typeof DeepLinkDeeplinkRoute
+  DeepLinkDeep_linkRoute: typeof DeepLinkDeep_linkRoute
   DownloadPrivateRoute: typeof DownloadPrivateRoute
   GithubNameRoute: typeof GithubNameRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -345,9 +334,112 @@ export interface RootRouteChildren {
   PluginsProvidersAddIndexRoute: typeof PluginsProvidersAddIndexRoute
 }
 
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-up/': {
+      id: '/sign-up/'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SignUpIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmap/': {
+      id: '/roadmap/'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/download/': {
+      id: '/download/'
+      path: '/download'
+      fullPath: '/download'
+      preLoaderRoute: typeof DownloadIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/discord/': {
+      id: '/discord/'
+      path: '/discord'
+      fullPath: '/discord'
+      preLoaderRoute: typeof DiscordIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/github/$name': {
+      id: '/github/$name'
+      path: '/github/$name'
+      fullPath: '/github/$name'
+      preLoaderRoute: typeof GithubNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/download/private': {
+      id: '/download/private'
+      path: '/download/private'
+      fullPath: '/download/private'
+      preLoaderRoute: typeof DownloadPrivateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deep-link/$deep_link': {
+      id: '/deep-link/$deep_link'
+      path: '/deep-link/$deep_link'
+      fullPath: '/deep-link/$deep_link'
+      preLoaderRoute: typeof DeepLinkDeep_linkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plugins/providers/': {
+      id: '/plugins/providers/'
+      path: '/plugins/providers'
+      fullPath: '/plugins/providers'
+      preLoaderRoute: typeof PluginsProvidersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/roadmap/': {
+      id: '/admin/roadmap/'
+      path: '/admin/roadmap'
+      fullPath: '/admin/roadmap'
+      preLoaderRoute: typeof AdminRoadmapIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/analytics/': {
+      id: '/admin/analytics/'
+      path: '/admin/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plugins/providers/add/': {
+      id: '/plugins/providers/add/'
+      path: '/plugins/providers/add'
+      fullPath: '/plugins/providers/add'
+      preLoaderRoute: typeof PluginsProvidersAddIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
+}
+
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  DeepLinkDeeplinkRoute: DeepLinkDeeplinkRoute,
+  DeepLinkDeep_linkRoute: DeepLinkDeep_linkRoute,
   DownloadPrivateRoute: DownloadPrivateRoute,
   GithubNameRoute: GithubNameRoute,
   AdminIndexRoute: AdminIndexRoute,
@@ -361,8 +453,7 @@ const rootRouteChildren: RootRouteChildren = {
   PluginsProvidersIndexRoute: PluginsProvidersIndexRoute,
   PluginsProvidersAddIndexRoute: PluginsProvidersAddIndexRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 

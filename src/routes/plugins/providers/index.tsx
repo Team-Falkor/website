@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import Footer from "@/components/footer";
@@ -20,7 +20,7 @@ function RouteComponent() {
 	const { providers, error, isLoading } = useProviders();
 
 	// Animation variants
-	const containerVariants = {
+	const containerVariants: Variants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
@@ -31,12 +31,12 @@ function RouteComponent() {
 		},
 	};
 
-	const itemVariants = {
+	const itemVariants: Variants = {
 		hidden: { y: 20, opacity: 0 },
 		visible: {
 			y: 0,
 			opacity: 1,
-			transition: { type: "spring", stiffness: 100 },
+			transition: { type: "spring" as const, stiffness: 100 },
 		},
 	};
 
