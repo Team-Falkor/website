@@ -135,7 +135,7 @@
 
 @layer base {
 	* {
-		@apply border-border;
+		@apply border-border outline-ring/50;
 	}
 	body {
 		@apply bg-background text-foreground;
@@ -159,11 +159,50 @@
 	}
 }
 
-@layer base {
-	* {
-		@apply border-border outline-ring/50;
+@layer utilities {
+	/* Custom animations for QuickInfo components */
+	@keyframes fade-in-up {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
-	body {
-		@apply bg-background text-foreground;
+
+	.animate-fade-in-up {
+		animation: fade-in-up 0.6s ease-out forwards;
+		opacity: 0;
+	}
+
+	/* Animation delay utilities */
+	.\[animation-delay\:0ms\] {
+		animation-delay: 0ms;
+	}
+
+	.\[animation-delay\:100ms\] {
+		animation-delay: 100ms;
+	}
+
+	.\[animation-delay\:150ms\] {
+		animation-delay: 150ms;
+	}
+
+	.\[animation-delay\:200ms\] {
+		animation-delay: 200ms;
+	}
+
+	.\[animation-delay\:300ms\] {
+		animation-delay: 300ms;
+	}
+
+	.\[animation-delay\:400ms\] {
+		animation-delay: 400ms;
+	}
+
+	.\[animation-delay\:500ms\] {
+		animation-delay: 500ms;
 	}
 }

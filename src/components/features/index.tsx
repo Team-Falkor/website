@@ -57,16 +57,30 @@ const Features = () => {
 	);
 
 	return (
-		<div className="mt-24 sm:mt-40" id="features">
+		<section className="relative mt-24 sm:mt-40" id="features">
+			{/* Background decoration */}
+			<div className="absolute inset-0 -z-10">
+				<div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[500px] bg-gradient-to-r from-primary/8 via-primary/4 to-transparent rounded-full blur-3xl" />
+			</div>
+
 			<div className="px-6 mx-auto max-w-7xl lg:px-8">
-				<div className="max-w-2xl mx-auto sm:text-center">
-					<h2 className="text-base font-semibold leading-7 text-purple-400">
-						Everything you need
+				{/* Enhanced header section */}
+				<div className="max-w-4xl mx-auto text-center">
+					<div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-primary/10 border border-primary/20 rounded-full">
+						<div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+						<span className="text-sm font-medium text-primary">
+							Everything you need
+						</span>
+					</div>
+
+					<h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+						<span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+							Gaming,
+						</span>{" "}
+						Redefined!
 					</h2>
-					<p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-						Gaming, Redefined!
-					</p>
-					<p className="mt-6 text-lg leading-8 text-gray-300">
+
+					<p className="mt-6 text-xl leading-8 text-muted-foreground max-w-3xl mx-auto">
 						Dive into a universe where convenience meets innovation, with Falkor
 						providing community plugins, release calendars, and comprehensive
 						game management in one seamless platform.
@@ -90,7 +104,7 @@ const Features = () => {
 			</Carousel>
 
 			<FeaturesItems />
-		</div>
+		</section>
 	);
 };
 

@@ -1,5 +1,7 @@
-import { JSX } from "react";
 import { ExternalLink } from "lucide-react";
+import { JSX } from "react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { cn } from "@/utils";
 
 type FeatureItemProps = {
 	title: string;
@@ -16,33 +18,45 @@ const FeatureItem = ({
 	isAvailable,
 	link,
 }: FeatureItemProps) => {
-	const CardContent = (
+	const CardContentComponent = (
 		<>
-			<div className="flex items-start gap-4 mb-3">
-				<div className="flex-shrink-0 p-2 rounded-lg bg-primary/20 text-primary transition-colors group-hover:bg-primary/30 group-hover:text-primary">
-					{icon}
+			{/* Enhanced gradient overlay for visual depth */}
+			<div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-primary/3 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+			<div className="absolute inset-0 bg-gradient-to-t from-card/50 via-transparent to-transparent" />
+
+			<CardHeader className="pb-4">
+				<div className="flex items-center gap-4">
+					<div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl shadow-lg group-hover:shadow-primary/25 transition-all duration-300 group-hover:scale-110">
+						<div className="text-primary-foreground">{icon}</div>
+					</div>
+					<div className="flex-1 min-w-0">
+						<h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+							{title}
+						</h3>
+					</div>
+					{link && isAvailable && (
+						<ExternalLink className="w-5 h-5 text-primary opacity-60 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110" />
+					)}
 				</div>
-				<div className="flex-1 min-w-0">
-					<h3 className="text-lg font-semibold text-foreground leading-tight">{title}</h3>
-				</div>
-			</div>
-			<p className="grow text-muted-foreground leading-relaxed mb-4">{children}</p>
-			<div className="flex items-center justify-between mt-auto">
-				{isAvailable ? (
-					<div className="flex items-center gap-2">
-						<span className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-primary-foreground rounded-full bg-primary ring-primary/30 ring-1 ring-inset">
+			</CardHeader>
+
+			<CardContent className="pt-0 flex flex-col h-full">
+				<p className="text-muted-foreground leading-relaxed group-hover:text-foreground/90 transition-colors duration-300 flex-grow">
+					{children}
+				</p>
+
+				<div className="flex items-center justify-start mt-6">
+					{isAvailable ? (
+						<span className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-primary-foreground rounded-full bg-gradient-to-r from-primary to-primary/80 shadow-sm group-hover:shadow-md transition-all duration-300">
 							Available
 						</span>
-						{link && (
-							<ExternalLink className="w-4 h-4 text-primary opacity-60 group-hover:opacity-100 transition-opacity" />
-						)}
-					</div>
-				) : (
-					<span className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-secondary-foreground rounded-full bg-secondary ring-secondary/30 ring-1 ring-inset">
-						Coming Soon
-					</span>
-				)}
-			</div>
+					) : (
+						<span className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-muted-foreground rounded-full bg-muted border border-border">
+							Coming Soon
+						</span>
+					)}
+				</div>
+			</CardContent>
 		</>
 	);
 
@@ -52,18 +66,28 @@ const FeatureItem = ({
 				href={link}
 				target="_blank"
 				rel="noopener noreferrer"
-				className="group relative flex flex-col h-full p-6 rounded-lg border border-transparent hover:border-primary/20 hover:bg-muted/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/30"
 				aria-label={`Learn more about ${title}`}
+				className="block h-full"
 			>
-				{CardContent}
+				<Card
+					className={cn(
+						"group relative overflow-hidden h-full border-border/30 bg-card/60 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/90 hover:shadow-xl hover:shadow-primary/15 hover:-translate-y-2 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary/50 cursor-pointer",
+					)}
+				>
+					{CardContentComponent}
+				</Card>
 			</a>
 		);
 	}
 
 	return (
-		<div className="group relative flex flex-col h-full p-6 rounded-lg border border-transparent hover:border-muted-foreground/20 hover:bg-muted/50 transition-all duration-200">
-			{CardContent}
-		</div>
+		<Card
+			className={cn(
+				"group relative overflow-hidden h-full border-border/30 bg-card/60 backdrop-blur-sm transition-all duration-300 hover:border-border/60 hover:bg-card/90 hover:shadow-lg hover:-translate-y-1",
+			)}
+		>
+			{CardContentComponent}
+		</Card>
 	);
 };
 
