@@ -1,12 +1,6 @@
 "use client";
 
-import {
-	ColumnDef,
-	ColumnFiltersState,
-	PaginationState,
-	SortingState,
-} from "@tanstack/react-table";
-import * as React from "react";
+import { ColumnDef, OnChangeFn, PaginationState } from "@tanstack/react-table";
 import {
 	Card,
 	CardContent,
@@ -18,15 +12,19 @@ import { DataTable } from "@/components/ui/data-table";
 import type { PageView } from "../hooks/admin/useAdminPageviews";
 
 interface PageviewsTableProps {
-	pageviews: PageView[] | null | undefined;
+	pageviews?: PageView[] | null | undefined;
 	pageCount: number;
-	onPageChange: (pageIndex: number) => void;
+	pagination: PaginationState;
+	onPaginationChange: OnChangeFn<PaginationState>;
+	isLoading?: boolean;
 }
 
 export function PageviewsTable({
-	pageviews,
+	pageviews = [],
 	pageCount,
-	onPageChange,
+	pagination,
+	onPaginationChange,
+	isLoading = false,
 }: PageviewsTableProps) {
 	const data: PageView[] = pageviews ?? [];
 
@@ -64,42 +62,24 @@ export function PageviewsTable({
 		},
 	];
 
-	// Local state for table controls
-	const [sorting, setSorting] = React.useState<SortingState>([]);
-	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-		[],
-	);
-	const [pagination, setPagination] = React.useState<PaginationState>({
-		pageIndex: 0,
-		pageSize: 10,
-	});
-
-	// call onPageChange whenever pageIndex updates
-	React.useEffect(() => {
-		onPageChange(pagination.pageIndex);
-	}, [pagination.pageIndex, onPageChange]);
-
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Recent Events</CardTitle>
+				<CardTitle>Recent Pageviews</CardTitle>
 				<CardDescription>
-					A list of recent events tracked across the application.
+					A list of recent page visits tracked across the application.
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<DataTable
 					columns={columns}
 					data={data}
-					pageCount={pageCount}
 					pageIndex={pagination.pageIndex}
 					pageSize={pagination.pageSize}
-					sorting={sorting}
-					columnFilters={columnFilters}
-					onSortingChange={setSorting}
-					onColumnFiltersChange={setColumnFilters}
-					onPaginationChange={setPagination}
+					pageCount={pageCount}
+					onPaginationChange={onPaginationChange}
 					searchKey="path"
+					isLoading={isLoading}
 				/>
 			</CardContent>
 		</Card>

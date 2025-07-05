@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { PaginationState } from "@tanstack/react-table";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import {
@@ -10,9 +11,9 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAdminEvents } from "../hooks/admin/useAdminEvents";
+import { useAdminEventsWithPagination } from "../hooks/admin/useAdminEvents";
 import { useAdminMetrics } from "../hooks/admin/useAdminMetrics";
-import { useAdminPageviews } from "../hooks/admin/useAdminPageviews";
+import { useAdminPageviewsWithPagination } from "../hooks/admin/useAdminPageviews";
 import { useAdminTotalEvents } from "../hooks/admin/useAdminTotalEvents";
 import { useAdminTotalPageviews } from "../hooks/admin/useAdminTotalPageviews";
 
@@ -25,13 +26,27 @@ export function AdminAnalytics() {
 
 	// In a real implementation, these hooks would be used instead of mock data
 	const { metrics, isLoadingMetrics } = useAdminMetrics(undefined, period);
-	const { events, isLoadingEvents } = useAdminEvents(0, 10);
-	const [pageIndex, setPageIndex] = useState(0);
-	const pageSize = 10;
-	const { pageviews, isLoadingPageviews } = useAdminPageviews(
-		pageIndex * pageSize,
-		pageSize,
-	);
+
+	// Separate pagination state for each table - using PaginationState for React Query integration
+	const [eventsPagination, setEventsPagination] = useState<PaginationState>({
+		pageIndex: 0,
+		pageSize: 10,
+	});
+	const [pageviewsPagination, setPageviewsPagination] =
+		useState<PaginationState>({
+			pageIndex: 0,
+			pageSize: 10,
+		});
+
+	// Use enhanced hooks with pagination state integration
+	const { events, isLoadingEvents } = useAdminEventsWithPagination({
+		pagination: eventsPagination,
+	});
+	const { pageviews, isLoadingPageviews } = useAdminPageviewsWithPagination({
+		pagination: pageviewsPagination,
+	});
+
+
 
 	const { data: totalEvents, isLoading: isLoadingTotalEvents } =
 		useAdminTotalEvents();
@@ -90,17 +105,23 @@ export function AdminAnalytics() {
 
 				<TabsContent value="events" className="space-y-4 mt-4">
 					<EventsTable
+						key={`events-table-${eventsPagination.pageIndex}`}
 						events={events?.data}
 						pageCount={events?.meta?.totalPages ?? 0}
-						onPageChange={setPageIndex}
+						pagination={eventsPagination}
+						onPaginationChange={setEventsPagination}
+						isLoading={isLoadingEvents}
 					/>
 				</TabsContent>
 
 				<TabsContent value="pageviews" className="space-y-4 mt-4">
 					<PageviewsTable
+						key={`pageviews-table-${pageviewsPagination.pageIndex}`}
 						pageviews={pageviews?.data}
 						pageCount={pageviews?.meta?.totalPages ?? 0}
-						onPageChange={setPageIndex}
+						pagination={pageviewsPagination}
+						onPaginationChange={setPageviewsPagination}
+						isLoading={isLoadingPageviews}
 					/>
 				</TabsContent>
 			</Tabs>

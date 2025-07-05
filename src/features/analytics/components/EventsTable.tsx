@@ -1,12 +1,6 @@
 "use client";
 
-import {
-	ColumnDef,
-	ColumnFiltersState,
-	PaginationState,
-	SortingState,
-} from "@tanstack/react-table";
-import * as React from "react";
+import { ColumnDef, OnChangeFn, PaginationState } from "@tanstack/react-table";
 import {
 	Card,
 	CardContent,
@@ -18,15 +12,19 @@ import { DataTable } from "@/components/ui/data-table";
 import type { EventLog } from "../hooks/admin/useAdminEvents";
 
 interface EventsTableProps {
-	events: EventLog[] | null | undefined;
+	events?: EventLog[] | null | undefined;
 	pageCount: number;
-	onPageChange: (pageIndex: number) => void;
+	pagination: PaginationState;
+	onPaginationChange: OnChangeFn<PaginationState>;
+	isLoading?: boolean;
 }
 
 export function EventsTable({
-	events,
+	events = [],
 	pageCount,
-	onPageChange,
+	pagination,
+	onPaginationChange,
+	isLoading = false,
 }: EventsTableProps) {
 	const data = events ?? [];
 
@@ -62,20 +60,6 @@ export function EventsTable({
 		},
 	];
 
-	// Local state for sorting, filtering, pagination
-	const [sorting, setSorting] = React.useState<SortingState>([]);
-	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-		[],
-	);
-	const [pagination, setPagination] = React.useState<PaginationState>({
-		pageIndex: 0,
-		pageSize: 10,
-	});
-
-	React.useEffect(() => {
-		onPageChange(pagination.pageIndex);
-	}, [pagination.pageIndex, onPageChange]);
-
 	return (
 		<Card>
 			<CardHeader>
@@ -88,15 +72,12 @@ export function EventsTable({
 				<DataTable
 					columns={columns}
 					data={data}
-					sorting={sorting}
-					columnFilters={columnFilters}
 					pageIndex={pagination.pageIndex}
 					pageSize={pagination.pageSize}
-					onSortingChange={setSorting}
-					onColumnFiltersChange={setColumnFilters}
-					onPaginationChange={setPagination}
-					searchKey="path"
 					pageCount={pageCount}
+					onPaginationChange={onPaginationChange}
+					searchKey="path"
+					isLoading={isLoading}
 				/>
 			</CardContent>
 		</Card>
