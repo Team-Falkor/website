@@ -11,7 +11,7 @@ const FeaturesImg = ({ src, alt, className, ...props }: Props) => {
 	return (
 		<div className="relative pt-16 overflow-hidden">
 			{/* Enhanced background decoration */}
-			<div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-background/80 pointer-events-none" />
+			{/* <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/50 size-full pointer-events-none" /> */}
 
 			<div className="relative px-6 mx-auto overflow-hidden max-w-7xl lg:px-8">
 				<div className="relative group">

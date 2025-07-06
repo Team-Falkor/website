@@ -24,7 +24,7 @@ const FeatureItem = ({
 			<div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-primary/3 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
 			<div className="absolute inset-0 bg-gradient-to-t from-card/50 via-transparent to-transparent" />
 
-			<CardHeader className="pb-4">
+			<CardHeader>
 				<div className="flex items-center gap-4">
 					<div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl shadow-lg group-hover:shadow-primary/25 transition-all duration-300 group-hover:scale-110">
 						<div className="text-primary-foreground">{icon}</div>
@@ -44,18 +44,6 @@ const FeatureItem = ({
 				<p className="text-muted-foreground leading-relaxed group-hover:text-foreground/90 transition-colors duration-300 flex-grow">
 					{children}
 				</p>
-
-				<div className="flex items-center justify-start mt-6">
-					{isAvailable ? (
-						<span className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-primary-foreground rounded-full bg-gradient-to-r from-primary to-primary/80 shadow-sm group-hover:shadow-md transition-all duration-300">
-							Available
-						</span>
-					) : (
-						<span className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-muted-foreground rounded-full bg-muted border border-border">
-							Coming Soon
-						</span>
-					)}
-				</div>
 			</CardContent>
 		</>
 	);

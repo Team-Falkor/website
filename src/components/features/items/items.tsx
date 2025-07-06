@@ -1,4 +1,4 @@
-import { Code2, HardDrive, Puzzle, Rocket, Trophy, Users } from "lucide-react";
+import { Gamepad2, HardDrive, Puzzle, Rocket, Trophy, Users } from "lucide-react";
 import { JSX } from "react";
 
 export const featureItems: Array<{
@@ -23,12 +23,11 @@ export const featureItems: Array<{
 		isAvailable: true,
 	},
 	{
-		icon: <Code2 className="w-6 h-6" />,
-		title: "Open Source",
+		icon: <Gamepad2 className="w-6 h-6" />,
+		title: "Gamepad Navigation",
 		description:
-			"Jump into a world of shared innovation, built openly, by everyone.",
+			"Navigate seamlessly through your game library with full gamepad support.",
 		isAvailable: true,
-		link: "/github/app",
 	},
 	{
 		icon: <Puzzle className="w-6 h-6" />,
