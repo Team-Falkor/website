@@ -33,7 +33,7 @@ export const featureItems: Array<{
 		icon: <Gamepad2 className="w-6 h-6" />,
 		title: "Gamepad Navigation",
 		description:
-			"Jump into a world of shared innovation, built openly, by everyone.",
+			"Seamlessly control and browse the application using your favorite gamepad.",
 		isAvailable: true,
 	},
 	{
