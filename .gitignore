@@ -27,3 +27,6 @@ ANALYTICS_API.md
 
 /help/**
 **/help/**
+
+.tanstack/**
+**/routeTree.gen.ts

@@ -1,5 +1,6 @@
-import { XIcon } from "lucide-react";
+import { XIcon, ZoomInIcon } from "lucide-react";
 import { ImgHTMLAttributes, useEffect, useRef, useState } from "react";
+import { cn } from "@/utils";
 
 interface Props extends ImgHTMLAttributes<HTMLImageElement> {
 	onOpen?: () => void;
@@ -71,27 +72,57 @@ export const ImageModal = ({
 
 	return (
 		<div>
-			{/* Trigger Image */}
-			<div onClick={() => setIsOpen(true)} style={{ cursor: "pointer" }}>
-				<img className={className} {...props} />
+			{/* Enhanced Trigger Image */}
+			<div
+				onClick={() => setIsOpen(true)}
+				className="group cursor-pointer transition-all duration-300 hover:scale-[1.02] focus-within:outline-none focus-within:ring-2 focus-within:ring-primary/50 rounded-xl overflow-hidden"
+				tabIndex={0}
+				onKeyDown={(e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						setIsOpen(true);
+					}
+				}}
+				role="button"
+				aria-label="Open image in full screen"
+			>
+				<img
+					className={cn(
+						"transition-all duration-300 group-hover:brightness-110",
+						className,
+					)}
+					{...props}
+				/>
+				{/* Hover overlay with icon */}
+				<div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+				{/* Zoom icon overlay */}
+				<div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+					<div className="p-3 rounded-full bg-background/90 backdrop-blur-md border border-border/50 shadow-xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
+						<ZoomInIcon className="w-6 h-6 text-foreground" />
+					</div>
+				</div>
 			</div>
 
-			{/* Modal Dialog */}
+			{/* Enhanced Modal Dialog */}
 			<dialog
 				ref={dialogRef}
 				onClick={(e) => e.target === e.currentTarget && handleClose()}
-				className="w-full h-full max-w-[100svw] max-h-[100svh] p-4 bg-transparent backdrop:bg-background/80 backdrop:backdrop-blur-md transition-all duration-300 ease-in-out"
+				className="w-full h-full max-w-[100svw] max-h-[100svh] p-4 bg-transparent backdrop:bg-background/90 backdrop:backdrop-blur-xl transition-all duration-500 ease-out animate-in fade-in-0"
 			>
-				<div className="relative size-full flex justify-center items-center">
+				<div className="relative size-full flex justify-center items-center animate-in zoom-in-95 duration-500">
+					{/* Enhanced close button */}
 					<button
 						onClick={handleClose}
-						className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/20 backdrop-blur-sm transition-all duration-200 hover:bg-background/30 focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-visible:ring-2 outline-none [&_svg]:size-5 [&_svg]:shrink-0 cursor-pointer shadow-lg"
+						className="absolute top-4 right-4 z-10 p-3 rounded-full bg-card/80 backdrop-blur-md border border-border/50 transition-all duration-200 hover:bg-card hover:border-border hover:scale-110 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-visible:ring-2 outline-none cursor-pointer shadow-xl hover:shadow-2xl group"
+						aria-label="Close modal"
 					>
-						<XIcon className="text-white" />
+						<XIcon className="w-5 h-5 text-foreground transition-transform duration-200 group-hover:rotate-90" />
 					</button>
+
+					{/* Enhanced modal image */}
 					<img
 						{...props}
-						className="max-w-full max-h-full object-contain rounded-xl shadow-2xl ring-1 ring-white/10"
+						className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl ring-1 ring-border/20 transition-all duration-300 hover:ring-primary/30"
 					/>
 				</div>
 			</dialog>

@@ -21,9 +21,24 @@ export function DownloadHeader({ versionMessage }: DownloadHeaderProps) {
 		>
 			<div className="text-center">
 				<GradientHeading>Download Falkor</GradientHeading>
+				
+				{/* Thank You Message - Prominent Position */}
+				<motion.div
+					variants={fadeInUpVariants}
+					className="mt-8 mx-auto max-w-4xl px-6 py-4 rounded-xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/20 backdrop-blur-sm"
+				>
+					<motion.p
+						variants={itemVariants}
+						className="text-lg leading-7 text-foreground sm:text-xl font-semibold"
+					>
+						💜 Thank you from Team Falkor for sticking with the project! If you're new and just trying the project, 
+						<span className="text-primary font-bold">THANK YOU</span> for taking time out of your day to try our app. It means more than anything to me.
+					</motion.p>
+				</motion.div>
+
 				<motion.p
 					variants={itemVariants}
-					className="mt-6 text-lg leading-7 text-muted-foreground sm:text-xl max-w-2xl mx-auto"
+					className="mt-8 text-lg leading-7 text-muted-foreground sm:text-xl max-w-2xl mx-auto"
 				>
 					Get started with Falkor on your preferred platform. Choose from the
 					options below to download the latest version.

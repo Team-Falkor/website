@@ -1,11 +1,4 @@
-import {
-	CalendarDays,
-	Code2,
-	HardDrive,
-	Puzzle,
-	Rocket,
-	Users,
-} from "lucide-react";
+import { Gamepad2, HardDrive, Puzzle, Rocket, Trophy, Users } from "lucide-react";
 import { JSX } from "react";
 
 export const featureItems: Array<{
@@ -16,45 +9,44 @@ export const featureItems: Array<{
 	link?: string;
 }> = [
 	{
-		icon: <Users />,
+		icon: <Users className="w-6 h-6" />,
 		title: "Plugins by Community",
 		description:
-			"Enhance your gaming experience with plugins created by our community, tailored to your preferences.",
+			"Discover game-changing plugins, crafted by the community, just for you.",
 		isAvailable: true,
 	},
 	{
-		icon: <CalendarDays />,
-		title: "Calendar",
+		icon: <Trophy className="w-6 h-6" />,
+		title: "Achievements",
 		description:
-			"Stay ahead with our release calendar, marking the debut of new games so you never miss out on the latest titles.",
+			"Unlock bragging rights and keep the motivation high with our achievement system.",
 		isAvailable: true,
 	},
 	{
-		icon: <Code2 />,
-		title: "Open Source",
+		icon: <Gamepad2 className="w-6 h-6" />,
+		title: "Gamepad Navigation",
 		description:
-			"Dive into a platform that thrives on collaboration and innovation, powered by an open-source ethos.",
+			"Navigate seamlessly through your game library with full gamepad support.",
 		isAvailable: true,
-		link: "/github/app",
 	},
 	{
-		icon: <Puzzle />,
+		icon: <Puzzle className="w-6 h-6" />,
 		title: "Game Library Management",
 		description:
-			"Organize and manage your installed games effortlessly with our game library management tools.",
+			"Effortlessly wrangle your game collection into perfect order.",
 		isAvailable: true,
 	},
 	{
-		icon: <Rocket />,
+		icon: <Rocket className="w-6 h-6" />,
 		title: "Launcher Integration",
 		description:
-			"Launch your games directly from the app, streamlining your playtime with our integrated launcher.",
+			"Launch right into the action, no detours, with seamless integration.",
 		isAvailable: true,
 	},
 	{
-		icon: <HardDrive />,
+		icon: <HardDrive className="w-6 h-6" />,
 		title: "Inbuilt Torrent Client",
-		description: `Experience seamless file sharing with our integrated torrent client, designed for fast and secure transfers.`,
+		description: `Blazing fast, secure file downloading built right in, making life easier.`,
 		isAvailable: true,
 	},
 ];

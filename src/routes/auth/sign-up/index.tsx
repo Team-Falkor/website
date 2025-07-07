@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import SvgBG from "@/components/svgBG";
 import { SignUpForm } from "@/features/auth/components/SignUpForm";
 
-export const Route = createFileRoute("/sign-up/")({
+export const Route = createFileRoute("/auth/sign-up/")({
 	component: SignUp,
 });
 
 function SignUp() {
 	// Animation variants
-	const containerVariants = {
+	const containerVariants: Variants = {
 		hidden: { opacity: 0 },
 		visible: {
 			opacity: 1,
@@ -20,12 +20,12 @@ function SignUp() {
 		},
 	};
 
-	const itemVariants = {
+	const itemVariants: Variants = {
 		hidden: { y: 20, opacity: 0 },
 		visible: {
 			y: 0,
 			opacity: 1,
-			transition: { type: "spring", stiffness: 100 },
+			transition: { type: "spring" as const, stiffness: 100 },
 		},
 	};
 
