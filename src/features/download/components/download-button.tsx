@@ -3,8 +3,8 @@ import { DownloadIcon } from "lucide-react";
 import { JSX, useRef } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import {
-  buttonHoverTap,
-  iconWiggle,
+	buttonHoverTap,
+	iconWiggle,
 } from "@/features/download/utils/animations";
 import { cn } from "@/utils";
 

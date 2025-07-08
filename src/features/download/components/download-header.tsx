@@ -21,7 +21,7 @@ export function DownloadHeader({ versionMessage }: DownloadHeaderProps) {
 		>
 			<div className="text-center">
 				<GradientHeading>Download Falkor</GradientHeading>
-				
+
 				{/* Thank You Message - Prominent Position */}
 				<motion.div
 					variants={fadeInUpVariants}
@@ -31,8 +31,11 @@ export function DownloadHeader({ versionMessage }: DownloadHeaderProps) {
 						variants={itemVariants}
 						className="text-lg leading-7 text-foreground sm:text-xl font-semibold"
 					>
-						💜 Thank you from Team Falkor for sticking with the project! If you're new and just trying the project, 
-						<span className="text-primary font-bold">THANK YOU</span> for taking time out of your day to try our app. It means more than anything to me.
+						💜 Thank you from Team Falkor for sticking with the project! If
+						you're new and just trying the project,
+						<span className="text-primary font-bold">THANK YOU</span> for taking
+						time out of your day to try our app. It means more than anything to
+						me.
 					</motion.p>
 				</motion.div>
 

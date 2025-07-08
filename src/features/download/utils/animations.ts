@@ -16,19 +16,19 @@ export const itemVariants: Variants = {
 	visible: {
 		y: 0,
 		opacity: 1,
-		transition: { 
-			type: "spring" as const, 
-			stiffness: 100 
+		transition: {
+			type: "spring" as const,
+			stiffness: 100,
 		},
 	},
 };
 
 export const fadeInUpVariants: Variants = {
 	hidden: { opacity: 0, y: 30 },
-	visible: { 
-		opacity: 1, 
-		y: 0, 
-		transition: { duration: 0.6 } 
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.6 },
 	},
 };
 

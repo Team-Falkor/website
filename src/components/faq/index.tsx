@@ -1,8 +1,8 @@
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
 } from "@/components/ui/accordion";
 import { constants } from "@/utils/constants";
 
@@ -27,26 +27,27 @@ const FaQ = () => {
 							the app's capabilities.
 						</AccordionContent>
 					</AccordionItem>
-          
+
 					<AccordionItem value="item-2">
 						<AccordionTrigger>
 							Why choose Falkor over other game launchers?
 						</AccordionTrigger>
 						<AccordionContent>
 							We believe Falkor stands out for several key reasons: First and
-							foremost, we deeply care about your privacy - your data stays yours,
-							with no unnecessary tracking or data collection. We're committed to
-							building a top-quality application that simply works, focusing on
-							performance, reliability, and user experience above all else. As an
-							open-source project, Falkor offers complete transparency and
-							community-driven development, ensuring the launcher evolves based on
-							real user needs. Everything that Falkor does will and will always be
-							open source software, including our API, guaranteeing full
-							transparency and community ownership of the entire ecosystem. Plus,
-							with our extensible provider system, you get the flexibility to
-							customize your gaming experience exactly how you want it, all while
-							supporting a passionate team that genuinely cares about creating
-							something special for the gaming community.
+							foremost, we deeply care about your privacy - your data stays
+							yours, with no unnecessary tracking or data collection. We're
+							committed to building a top-quality application that simply works,
+							focusing on performance, reliability, and user experience above
+							all else. As an open-source project, Falkor offers complete
+							transparency and community-driven development, ensuring the
+							launcher evolves based on real user needs. Everything that Falkor
+							does will and will always be open source software, including our
+							API, guaranteeing full transparency and community ownership of the
+							entire ecosystem. Plus, with our extensible provider system, you
+							get the flexibility to customize your gaming experience exactly
+							how you want it, all while supporting a passionate team that
+							genuinely cares about creating something special for the gaming
+							community.
 						</AccordionContent>
 					</AccordionItem>
 
@@ -55,15 +56,15 @@ const FaQ = () => {
 							Is the Falkor game launcher available for download?
 						</AccordionTrigger>
 						<AccordionContent>
-						Yes! The Falkor app is now available for download. You can{" "}
-						<a
-							href={"/download"}
-							className="underline transition-all hover:opacity-70"
-						>
-							download it here
-						</a>{" "}
-						to get started.
-					</AccordionContent>
+							Yes! The Falkor app is now available for download. You can{" "}
+							<a
+								href={"/download"}
+								className="underline transition-all hover:opacity-70"
+							>
+								download it here
+							</a>{" "}
+							to get started.
+						</AccordionContent>
 					</AccordionItem>
 
 					<AccordionItem value="item-4">
@@ -155,7 +156,6 @@ const FaQ = () => {
 							open-source nature to create their own plugins and extensions.
 						</AccordionContent>
 					</AccordionItem>
-
 				</Accordion>
 			</div>
 		</div>

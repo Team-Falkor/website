@@ -46,8 +46,6 @@ export function AdminAnalytics() {
 		pagination: pageviewsPagination,
 	});
 
-
-
 	const { data: totalEvents, isLoading: isLoadingTotalEvents } =
 		useAdminTotalEvents();
 	const { data: totalPageviews, isLoading: isLoadingTotalPageviews } =
