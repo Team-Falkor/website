@@ -103,50 +103,55 @@ function RouteComponent() {
 				initial="hidden"
 				animate="visible"
 				variants={containerVariants}
-				className="container mx-auto px-4 py-16 sm:py-24 lg:py-32"
+				className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16 md:py-24 lg:py-32"
 			>
 				{/* Header Section */}
-				<motion.div variants={itemVariants} className="text-center mb-12">
-					<div className="flex items-center justify-center gap-3 mb-6">
-						<div className="p-3 rounded-full bg-primary/10 border border-primary/20">
-							<Plus className="h-8 w-8 text-primary" />
+				<motion.div
+					variants={itemVariants}
+					className="text-center mb-8 sm:mb-12"
+				>
+					<div className="flex items-center justify-center gap-3 mb-4 sm:mb-6">
+						<div className="p-2 sm:p-3 rounded-full bg-primary/10 border border-primary/20">
+							<Plus className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
 						</div>
 					</div>
-					<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6 px-4">
 						<span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-purple-600">
 							Submit Provider
 						</span>
 					</h1>
-					<p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
+					<p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4">
 						Contribute to the Falkor community by submitting your custom
 						provider. Your submission will be reviewed by our team before being
 						made available to all users.
 					</p>
 
 					{/* Submission Process Steps */}
-					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 max-w-4xl mx-auto">
-						<div className="flex items-center gap-3 text-sm">
-							<div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-semibold text-xs">
+					<div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 md:gap-8 max-w-4xl mx-auto px-4">
+						<div className="flex items-center gap-2 sm:gap-3 text-sm">
+							<div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary text-primary-foreground font-semibold text-xs">
 								1
 							</div>
-							<span className="text-muted-foreground">Submit Provider</span>
+							<span className="text-muted-foreground text-xs sm:text-sm">
+								Submit Provider
+							</span>
 						</div>
-						<div className="hidden sm:block w-8 h-px bg-border"></div>
-						<div className="flex items-center gap-3 text-sm">
-							<div className="flex items-center justify-center w-8 h-8 rounded-full bg-muted text-muted-foreground font-semibold text-xs">
+						<div className="hidden sm:block w-6 md:w-8 h-px bg-border"></div>
+						<div className="flex items-center gap-2 sm:gap-3 text-sm">
+							<div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-muted text-muted-foreground font-semibold text-xs">
 								2
 							</div>
-							<span className="text-muted-foreground flex items-center gap-1">
+							<span className="text-muted-foreground flex items-center gap-1 text-xs sm:text-sm">
 								<Clock className="h-3 w-3" />
 								Team Review
 							</span>
 						</div>
-						<div className="hidden sm:block w-8 h-px bg-border"></div>
-						<div className="flex items-center gap-3 text-sm">
-							<div className="flex items-center justify-center w-8 h-8 rounded-full bg-muted text-muted-foreground font-semibold text-xs">
+						<div className="hidden sm:block w-6 md:w-8 h-px bg-border"></div>
+						<div className="flex items-center gap-2 sm:gap-3 text-sm">
+							<div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-muted text-muted-foreground font-semibold text-xs">
 								3
 							</div>
-							<span className="text-muted-foreground flex items-center gap-1">
+							<span className="text-muted-foreground flex items-center gap-1 text-xs sm:text-sm">
 								<Users className="h-3 w-3" />
 								Public Access
 							</span>
@@ -155,21 +160,23 @@ function RouteComponent() {
 				</motion.div>
 
 				{/* Main Content */}
-				<div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12">
+				<div className="max-w-6xl mx-auto space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-12">
 					{/* Input Section */}
 					<motion.div variants={itemVariants}>
 						<Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/20 transition-all duration-300">
-							<CardHeader className="pb-6">
-								<div className="flex items-center gap-3">
-									<Globe className="h-6 w-6 text-primary" />
-									<CardTitle className="text-2xl">Provider URL</CardTitle>
+							<CardHeader className="pb-4 sm:pb-6">
+								<div className="flex items-center gap-2 sm:gap-3">
+									<Globe className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+									<CardTitle className="text-xl sm:text-2xl">
+										Provider URL
+									</CardTitle>
 								</div>
-								<CardDescription className="text-base">
+								<CardDescription className="text-sm sm:text-base">
 									Enter the complete URL to your provider's setup.json
 									configuration file
 								</CardDescription>
 							</CardHeader>
-							<CardContent className="space-y-6">
+							<CardContent className="space-y-4 sm:space-y-6">
 								<div className="space-y-3">
 									<Input
 										placeholder="https://example.com/setup.json"
@@ -180,7 +187,7 @@ function RouteComponent() {
 										}}
 										type="url"
 										className={cn(
-											"h-12 text-base transition-all duration-200",
+											"h-10 sm:h-12 text-sm sm:text-base transition-all duration-200",
 											urlError &&
 												"border-destructive focus-visible:ring-destructive",
 											isValidUrl &&
@@ -211,7 +218,7 @@ function RouteComponent() {
 								{/* Action Button */}
 								<Button
 									size="lg"
-									className="w-full h-12 text-base font-semibold"
+									className="w-full h-10 sm:h-12 text-sm sm:text-base font-semibold"
 									disabled={!isValidUrl || isAddingProviderLoading || isLoading}
 									onClick={() => {
 										addProvider({
@@ -222,12 +229,15 @@ function RouteComponent() {
 								>
 									{isAddingProviderLoading ? (
 										<>
-											<Loader2 className="h-5 w-5 animate-spin mr-2" />
-											Submitting Provider...
+											<Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin mr-2" />
+											<span className="hidden sm:inline">
+												Submitting Provider...
+											</span>
+											<span className="sm:hidden">Submitting...</span>
 										</>
 									) : (
 										<>
-											<Plus className="h-5 w-5 mr-2" />
+											<Plus className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
 											Submit for Review
 										</>
 									)}
@@ -259,27 +269,27 @@ function RouteComponent() {
 					{/* Preview Section */}
 					<motion.div variants={itemVariants}>
 						<Card className="bg-card/50 backdrop-blur-sm border-border/50 h-full">
-							<CardHeader className="pb-6">
-								<div className="flex items-center justify-between">
-									<div className="flex items-center gap-3">
-										<div className="p-2 rounded-lg bg-muted">
-											<code className="text-sm font-mono">JSON</code>
+							<CardHeader className="pb-4 sm:pb-6">
+								<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+									<div className="flex items-center gap-2 sm:gap-3">
+										<div className="p-1.5 sm:p-2 rounded-lg bg-muted">
+											<code className="text-xs sm:text-sm font-mono">JSON</code>
 										</div>
-										<CardTitle className="text-2xl">
+										<CardTitle className="text-lg sm:text-xl lg:text-2xl">
 											Configuration Preview
 										</CardTitle>
 									</div>
 									{data && (
 										<Badge
 											variant="secondary"
-											className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+											className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 self-start sm:self-center"
 										>
 											<CheckCircle2 className="h-3 w-3 mr-1" />
 											Loaded
 										</Badge>
 									)}
 								</div>
-								<CardDescription className="text-base">
+								<CardDescription className="text-sm sm:text-base">
 									Preview of the provider configuration that will be added to
 									Falkor
 								</CardDescription>
@@ -288,9 +298,9 @@ function RouteComponent() {
 								<div className="relative rounded-lg border bg-muted/30 overflow-hidden">
 									{isLoading && (
 										<div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-10">
-											<div className="flex items-center gap-3">
-												<Loader2 className="h-6 w-6 animate-spin text-primary" />
-												<span className="text-sm font-medium">
+											<div className="flex items-center gap-2 sm:gap-3">
+												<Loader2 className="h-5 w-5 sm:h-6 sm:w-6 animate-spin text-primary" />
+												<span className="text-xs sm:text-sm font-medium">
 													Loading configuration...
 												</span>
 											</div>
@@ -298,12 +308,12 @@ function RouteComponent() {
 									)}
 
 									{error && (
-										<div className="p-6 text-center">
-											<AlertCircle className="h-12 w-12 text-destructive mx-auto mb-3" />
-											<h3 className="font-semibold text-destructive mb-2">
+										<div className="p-4 sm:p-6 text-center">
+											<AlertCircle className="h-10 w-10 sm:h-12 sm:w-12 text-destructive mx-auto mb-2 sm:mb-3" />
+											<h3 className="font-semibold text-destructive mb-2 text-sm sm:text-base">
 												Failed to Load Configuration
 											</h3>
-											<p className="text-sm text-muted-foreground">
+											<p className="text-xs sm:text-sm text-muted-foreground">
 												{error.message ||
 													"Unable to fetch the provider configuration. Please check the URL and try again."}
 											</p>
@@ -311,7 +321,7 @@ function RouteComponent() {
 									)}
 
 									{!error && (
-										<pre className="overflow-auto max-h-[500px] p-4 text-sm font-mono leading-relaxed">
+										<pre className="overflow-auto max-h-[300px] sm:max-h-[400px] lg:max-h-[500px] p-3 sm:p-4 text-xs sm:text-sm font-mono leading-relaxed">
 											<code className="text-foreground">
 												{JSON.stringify(
 													data ?? constants.example_setup_json,
@@ -328,53 +338,59 @@ function RouteComponent() {
 				</div>
 
 				{/* Requirements Section */}
-				<motion.div variants={itemVariants} className="mt-8">
+				<motion.div variants={itemVariants} className="mt-6 sm:mt-8">
 					<Card className="bg-card/50 backdrop-blur-sm border-border/50">
-						<CardHeader className="pb-6">
-							<div className="flex items-center gap-3">
-								<FileText className="h-6 w-6 text-primary" />
-								<CardTitle className="text-2xl">
+						<CardHeader className="pb-4 sm:pb-6">
+							<div className="flex items-center gap-2 sm:gap-3">
+								<FileText className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+								<CardTitle className="text-xl sm:text-2xl">
 									Submission Requirements
 								</CardTitle>
 							</div>
-							<CardDescription className="text-base">
+							<CardDescription className="text-sm sm:text-base">
 								Please ensure your provider meets all requirements before
 								submission
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<div className="grid md:grid-cols-3 gap-6">
-								<div className="flex items-start gap-3">
-									<div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/20">
-										<CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+							<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+								<div className="flex items-start gap-2 sm:gap-3">
+									<div className="p-1.5 sm:p-2 rounded-lg bg-green-100 dark:bg-green-900/20 flex-shrink-0">
+										<CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 dark:text-green-400" />
 									</div>
-									<div>
-										<h3 className="font-semibold mb-2">Open Source</h3>
-										<p className="text-sm text-muted-foreground">
+									<div className="min-w-0">
+										<h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">
+											Open Source
+										</h3>
+										<p className="text-xs sm:text-sm text-muted-foreground">
 											Your provider must be open source and publicly available
 											for review and contribution.
 										</p>
 									</div>
 								</div>
-								<div className="flex items-start gap-3">
-									<div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/20">
-										<Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+								<div className="flex items-start gap-2 sm:gap-3">
+									<div className="p-1.5 sm:p-2 rounded-lg bg-blue-100 dark:bg-blue-900/20 flex-shrink-0">
+										<Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-blue-400" />
 									</div>
-									<div>
-										<h3 className="font-semibold mb-2">Free to Use</h3>
-										<p className="text-sm text-muted-foreground">
+									<div className="min-w-0">
+										<h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">
+											Free to Use
+										</h3>
+										<p className="text-xs sm:text-sm text-muted-foreground">
 											The provider must be completely free for all users without
 											any usage fees or restrictions.
 										</p>
 									</div>
 								</div>
-								<div className="flex items-start gap-3">
-									<div className="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/20">
-										<Shield className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+								<div className="flex items-start gap-2 sm:gap-3">
+									<div className="p-1.5 sm:p-2 rounded-lg bg-purple-100 dark:bg-purple-900/20 flex-shrink-0">
+										<Shield className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 dark:text-purple-400" />
 									</div>
-									<div>
-										<h3 className="font-semibold mb-2">No Monetization</h3>
-										<p className="text-sm text-muted-foreground">
+									<div className="min-w-0">
+										<h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">
+											No Monetization
+										</h3>
+										<p className="text-xs sm:text-sm text-muted-foreground">
 											Providers cannot charge money, require payments, or
 											include any form of monetization.
 										</p>
