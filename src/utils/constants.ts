@@ -7,6 +7,7 @@ export const constants = {
 	docs_api_url: "https://docs.falkor.moe/api",
 	github_docs_url: "https://github.com/team-falkor/docs",
 	github_org_url: "https://github.com/team-falkor",
+	hiddenNavbarRoutes: ["/admin"],
 	github_repos: [
 		"app",
 		"falkor",

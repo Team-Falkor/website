@@ -25,7 +25,10 @@ export const Navbar = () => {
 	}, [isMobile]);
 
 	useEffect(() => {
-		setShouldShowNavbar(!location.pathname.startsWith("/admin"));
+		const shouldHideNavbar = constants.hiddenNavbarRoutes.some((route) =>
+			location.pathname.startsWith(route),
+		);
+		setShouldShowNavbar(!shouldHideNavbar);
 		// Close mobile menu when navigating to a new page
 		setIsMobileMenuOpen(false);
 	}, [location.pathname]);
