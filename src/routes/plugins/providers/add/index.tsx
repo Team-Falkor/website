@@ -117,13 +117,13 @@ function RouteComponent() {
 					</div>
 					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6 px-4">
 						<span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-purple-600">
-							Submit Provider
+							Share Your Provider
 						</span>
 					</h1>
 					<p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4">
-						Contribute to the Falkor community by submitting your custom
-						provider. Your submission will be reviewed by our team before being
-						made available to all users.
+						Help grow the Falkor community by sharing your custom provider!
+						Every contribution makes Falkor better for everyone. Our team will
+						review your submission to ensure it meets our quality standards.
 					</p>
 
 					{/* Submission Process Steps */}
@@ -133,7 +133,7 @@ function RouteComponent() {
 								1
 							</div>
 							<span className="text-muted-foreground text-xs sm:text-sm">
-								Submit Provider
+								Share Your Work
 							</span>
 						</div>
 						<div className="hidden sm:block w-6 md:w-8 h-px bg-border"></div>
@@ -143,7 +143,7 @@ function RouteComponent() {
 							</div>
 							<span className="text-muted-foreground flex items-center gap-1 text-xs sm:text-sm">
 								<Clock className="h-3 w-3" />
-								Team Review
+								Quality Check
 							</span>
 						</div>
 						<div className="hidden sm:block w-6 md:w-8 h-px bg-border"></div>
@@ -153,7 +153,7 @@ function RouteComponent() {
 							</div>
 							<span className="text-muted-foreground flex items-center gap-1 text-xs sm:text-sm">
 								<Users className="h-3 w-3" />
-								Public Access
+								Community Access
 							</span>
 						</div>
 					</div>
@@ -172,8 +172,8 @@ function RouteComponent() {
 									</CardTitle>
 								</div>
 								<CardDescription className="text-sm sm:text-base">
-									Enter the complete URL to your provider's setup.json
-									configuration file
+									Paste the URL to your provider's setup.json file and let's get
+									started!
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="space-y-4 sm:space-y-6">
@@ -231,14 +231,14 @@ function RouteComponent() {
 										<>
 											<Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin mr-2" />
 											<span className="hidden sm:inline">
-												Submitting Provider...
+												Sharing with Community...
 											</span>
-											<span className="sm:hidden">Submitting...</span>
+											<span className="sm:hidden">Sharing...</span>
 										</>
 									) : (
 										<>
 											<Plus className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-											Submit for Review
+											Share with Community
 										</>
 									)}
 								</Button>
@@ -247,9 +247,9 @@ function RouteComponent() {
 								<Alert className="border-blue-200 bg-blue-50/50 dark:border-blue-800 dark:bg-blue-950/20">
 									<Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
 									<AlertDescription className="text-blue-800 dark:text-blue-200">
-										<strong>Review Process:</strong> Your provider will be
-										reviewed by our team for security and quality before being
-										made publicly available
+										<strong>What happens next:</strong> Our team will review
+										your provider to ensure it meets our quality standards, then
+										make it available for the entire community to enjoy!
 									</AlertDescription>
 								</Alert>
 
@@ -257,9 +257,9 @@ function RouteComponent() {
 								<Alert className="border-amber-200 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-950/20">
 									<Shield className="h-4 w-4 text-amber-600 dark:text-amber-400" />
 									<AlertDescription className="text-amber-800 dark:text-amber-200">
-										<strong>Security Notice:</strong> Only submit providers from
-										trusted sources. All submissions undergo security review to
-										protect the community.
+										<strong>Keep everyone safe:</strong> Please only share
+										providers from trusted sources. We review all submissions to
+										keep our community secure and happy!
 									</AlertDescription>
 								</Alert>
 							</CardContent>
@@ -290,8 +290,7 @@ function RouteComponent() {
 									)}
 								</div>
 								<CardDescription className="text-sm sm:text-base">
-									Preview of the provider configuration that will be added to
-									Falkor
+									Here's what your provider will look like in Falkor!
 								</CardDescription>
 							</CardHeader>
 							<CardContent>
@@ -301,7 +300,7 @@ function RouteComponent() {
 											<div className="flex items-center gap-2 sm:gap-3">
 												<Loader2 className="h-5 w-5 sm:h-6 sm:w-6 animate-spin text-primary" />
 												<span className="text-xs sm:text-sm font-medium">
-													Loading configuration...
+													Checking out your provider...
 												</span>
 											</div>
 										</div>
@@ -344,12 +343,12 @@ function RouteComponent() {
 							<div className="flex items-center gap-2 sm:gap-3">
 								<FileText className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
 								<CardTitle className="text-xl sm:text-2xl">
-									Submission Requirements
+									What We're Looking For
 								</CardTitle>
 							</div>
 							<CardDescription className="text-sm sm:text-base">
-								Please ensure your provider meets all requirements before
-								submission
+								To keep Falkor awesome for everyone, here's what makes a great
+								provider
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
@@ -363,8 +362,8 @@ function RouteComponent() {
 											Open Source
 										</h3>
 										<p className="text-xs sm:text-sm text-muted-foreground">
-											Your provider must be open source and publicly available
-											for review and contribution.
+											Open source means everyone can learn from and improve your
+											work together!
 										</p>
 									</div>
 								</div>
@@ -377,8 +376,8 @@ function RouteComponent() {
 											Free to Use
 										</h3>
 										<p className="text-xs sm:text-sm text-muted-foreground">
-											The provider must be completely free for all users without
-											any usage fees or restrictions.
+											Keeping things free ensures everyone in our community can
+											enjoy your provider!
 										</p>
 									</div>
 								</div>
@@ -391,8 +390,8 @@ function RouteComponent() {
 											No Monetization
 										</h3>
 										<p className="text-xs sm:text-sm text-muted-foreground">
-											Providers cannot charge money, require payments, or
-											include any form of monetization.
+											We keep Falkor completely free, and that includes all
+											community providers too!
 										</p>
 									</div>
 								</div>
