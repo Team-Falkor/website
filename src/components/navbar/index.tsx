@@ -1,56 +1,16 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { ExternalLink, Menu, X } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaDiscord as Discord, FaGithub as Github } from "react-icons/fa";
 import { SiKofi } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/utils";
 import { constants } from "@/utils/constants";
-
-export type NavLink = {
-	name: string;
-	path: string;
-	isExternal: boolean;
-};
-
-type NavLinkItemProps = NavLink & {
-	onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
-};
-
-const NavLinkItem = ({ name, path, isExternal, onClick }: NavLinkItemProps) => {
-	const baseClassName =
-		"text-foreground/80 hover:text-primary transition-colors duration-200";
-	const desktopClassName = "[.active]:text-primary [.active]:font-semibold";
-
-	if (isExternal) {
-		return (
-			<a
-				href={path}
-				target="_blank"
-				rel="noopener noreferrer"
-				className={cn(baseClassName, desktopClassName, "flex items-center")}
-				onClick={onClick}
-			>
-				{name}
-				<ExternalLink className="ml-1 inline-block h-3 w-3" />
-			</a>
-		);
-	}
-
-	return (
-		<Link
-			to={path}
-			className={cn(baseClassName, desktopClassName)}
-			onClick={onClick}
-		>
-			{name}
-		</Link>
-	);
-};
+import { type NavLink, NavLinkItem } from "./nav-link-item";
 
 export const Navbar = () => {
-	const pathname = window.location.pathname;
+	const location = useLocation();
 	const [isScrolled, setIsScrolled] = useState(false);
 	const isMobile = useIsMobile();
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -65,8 +25,10 @@ export const Navbar = () => {
 	}, [isMobile]);
 
 	useEffect(() => {
-		setShouldShowNavbar(!pathname.startsWith("/admin"));
-	}, [pathname]);
+		setShouldShowNavbar(!location.pathname.startsWith("/admin"));
+		// Close mobile menu when navigating to a new page
+		setIsMobileMenuOpen(false);
+	}, [location.pathname]);
 
 	const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
