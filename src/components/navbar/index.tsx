@@ -39,7 +39,6 @@ export const Navbar = () => {
 		{ name: "Home", path: "/", isExternal: false },
 		{ name: "Download", path: "/download", isExternal: false },
 		{ name: "Docs", path: "https://docs.falkor.moe", isExternal: true },
-		{ name: "Plugins", path: "/plugins/providers", isExternal: false },
 	];
 
 	if (!shouldShowNavbar) return null;
