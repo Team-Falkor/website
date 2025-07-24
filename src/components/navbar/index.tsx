@@ -2,7 +2,6 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { ExternalLink, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FaDiscord as Discord, FaGithub as Github } from "react-icons/fa";
-import { SiKofi } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/utils";
@@ -69,17 +68,6 @@ export const Navbar = () => {
 				</div>
 
 				<div className="hidden md:flex items-center gap-2">
-					<Button variant="ghost" size="icon" asChild>
-						<a
-							href={constants.ko_fi_url}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Ko-Fi"
-						>
-							<SiKofi />
-						</a>
-					</Button>
-
 					<Button variant="ghost" size="icon" asChild>
 						<a
 							href={constants.github_app_url}

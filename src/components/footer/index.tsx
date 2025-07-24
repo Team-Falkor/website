@@ -2,11 +2,8 @@
 
 import { Link } from "@tanstack/react-router";
 import { FaDiscord, FaGithub } from "react-icons/fa6";
-import { SiKofi } from "react-icons/si";
-import { constants } from "@/utils";
 
 const Footer = () => {
-	const { ko_fi_url } = constants;
 	return (
 		<div className="flex flex-col items-center justify-between gap-5 p-5 mt-5 text-center bg-muted/30 px-14 sm:flex-row sm:gap-1 sm:text-left relative z-[1]">
 			<div className="flex flex-col gap-1.5">
@@ -38,14 +35,6 @@ const Footer = () => {
 					href={"/discord"}
 				>
 					<FaDiscord className="size-full" />
-				</a>
-
-				<a
-					className="transition-all size-5 hover:text-purple-400"
-					target="_blank"
-					href={ko_fi_url}
-				>
-					<SiKofi className="size-full" />
 				</a>
 			</div>
 
